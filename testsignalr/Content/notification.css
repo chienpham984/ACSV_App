@@ -1,0 +1,609 @@
+﻿/* sangtaosacviet.com - code 1 */
+.dl-horizontal dt{
+        width:30% !important ;
+        text-align:left ;
+    }
+.dl-horizontal {
+        width:70% !important;
+        text-align:left ;
+    }
+.vi-header {
+    border-bottom: solid 1px #0056a8;
+    margin-bottom:20px;
+}
+.vi-left-title {
+    width: auto;
+    background: #0056a8;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 18px;
+    position: relative;
+    margin: 0;
+}
+.pull-left {
+    float: left;
+}
+.pull-left {
+    margin-left: 0 !important;
+}
+.vi-left-title a {
+    color: #fff;
+}
+.vi-left-title:after {
+    border: 17px solid transparent;
+    border-left-color: #0056a8;
+    border-bottom-color: #0056a8;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    content: "";
+}
+.pull-right {
+    float: right;
+}
+.pull-right {
+    margin-right: 0 !important;
+}
+.vi-right-link a:first-child {
+    margin-left: 0;
+}
+.vi-right-link a {
+    color: #555;
+    font-size: 14px;
+    margin-left: 15px;
+}
+.vi-right-link a.vi-more, .vi-right-link a:hover {
+    color: #0056a8;
+}
+.vi-right-link a.vi-more:after {
+    content: "\f101";
+    font-family: FontAwesome;
+    margin-left: 4px;
+}
+
+/* sangtaosacviet.com - code 2 */
+.vi-left-title-1:after {
+    border: 17px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    content: "";
+}
+.vi-left-title-1 {
+    width: auto;
+    background: #0056a8;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 18px;
+    position: relative;
+    margin: 0;
+}
+.vi-left-title-1 a {
+    color: #fff;
+}
+
+/* sangtaosacviet.com - code 3 */
+#stsv-02 h3.tde {    text-align: center;    margin: 45px 0;    font-size: 16px;    line-height: 20px;    text-transform: uppercase;}
+#stsv-02 h3.tde span {    background: #8CC63F;    height: 50px;    line-height: 50px;    padding: 0px 20px;    color: white;    position: relative;    display: inline-block;    margin: 0;    z-index: 45;    border-radius: 10px 10px 0px 0px;    border: 1px solid #8bb54b;}
+#stsv-02 h3.tde :before,#stsv-02 h3.tde :after {    content: "";    background: url(https://sangtaosacviet.com/wp-content/uploads/2017/09/hd-stsv.png);    width: 87px;    height: 50px;    position: absolute;    top: 19px;    z-index: -1;}
+#stsv-02 h3.tde :before {    left: -44px;    }
+#stsv-02 h3.tde :after {    transform: rotateY(180deg);    right: -44px !important;}
+
+
+/* sangtaosacviet.com - code 4 */
+.vi-left-title-2:after {
+    border: 17px solid transparent;
+	border-left-color: #0056a8;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    content: "";
+}
+.vi-left-title-2 {
+    width: auto;
+    background: #0056a8;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 18px;
+    position: relative;
+    margin: 0;
+}
+.vi-left-title-2 a {
+    color: #fff;
+}
+
+
+/* sangtaosacviet.com - code 5 */
+
+.box-title-new {    position: relative;    margin: 50px 0; text-align: center;}
+.box-title-new .box-title-name-new {    font-size: 24px;    font-weight: 900;    text-transform: uppercase;    color: #fff; background: #00AA46;    display: inline-block;    vertical-align: top;    position: relative;    z-index: 1;    padding: 10px 20px; marrgin-bottom: 20px; border-radius: 15px;}
+.box-title-new .box-title-name-new:before {    content: "";    position: absolute;    border-top: 10px solid #00aa46;    border-left: 15px solid transparent;    border-bottom: 7px solid transparent;    border-right: 15px solid transparent;   left: calc(50% - 40px);
+    bottom: -25px;
+    width: 50px;}
+.box-title-new .box-title-name-new:after {    content: "";    position: absolute;    z-index: 2;    bottom: -18px;    height: 9px;    width: 200px;    left: calc(50% - 100px);    border-top: 2px solid #00aa46;}
+
+
+/* sangtaosacviet.com - code new */
+div#nz-div {
+    border-bottom: 2px solid #0056a8;
+    margin-bottom: 20px;
+    margin-top:10px;
+    display: block;
+}
+
+#nz-div h3.tde {
+    margin: 0;
+    font-size: 14px;
+    line-height: 18px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+#nz-div h3.tde :after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 36px solid transparent;
+    border-left: 20px solid #0056a8;
+    border-bottom: 0px solid transparent;
+    border-right: 0 solid transparent;
+    position: absolute;
+    top: 0px;
+    right: -20px;
+}
+
+#nz-div h3.tde span {
+    background: #0056a8;
+    padding: 10px 20px 8px 20px;
+    color: white;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
+
+.sub-cat {
+    display: inline-block;
+    margin: 0;
+    line-height: 45px;
+    margin-left: 100px;
+    float: right;
+}
+
+/* 2  ========================= */
+
+#nz-div-2 h3.tde :after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-left: 15px solid #EA3A3C;
+    border-bottom: 19px solid transparent;
+    border-right: 0 solid transparent;
+    position: absolute;
+    top: 0px;
+    right: -15px;
+}
+
+#nz-div-2 h3.tde span {
+    background: #EA3A3C;
+    padding: 10px 20px 8px 20px;
+    color: white;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
+
+#nz-div-2 h3.tde {
+    margin: 15px 0;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+
+#nz-div-2 hr {
+    margin: -34px 0px 54px 0px;
+    border: 1px solid red;
+}
+
+/* 3  ========================= */
+
+#nz-div-3 h3.tde span {
+    background: #EA3A3C;
+    padding: 10px 20px 8px 20px;
+    color: white;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    border-radius: 23px 23px 0px 0px;
+}
+
+#nz-div-3 h3.tde {
+    margin: 15px 0;
+    border-bottom: 2px solid #ea3a3c;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+
+/* 4  ========================= */
+
+#nz-div-4 h3.tde :after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 40px solid transparent;
+    border-left: 20px solid #EA3A3C;
+    border-bottom: 0px solid transparent;
+    border-right: 0 solid transparent;
+    position: absolute;
+    top: 0px;
+    right: -20px;
+}
+
+
+#nz-div-4 h3.tde :before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 40px 20px 0px 0px;
+    border-style: solid;
+    border-color: transparent;
+    border-right-color: #EA3A3C;
+    position: absolute;  
+    top: 0px;
+    left: -20px;
+}
+
+#nz-div-4 h3.tde span {
+    background: #EA3A3C;
+    padding: 10px 20px 8px 20px;
+    color: white;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+  
+}
+
+#nz-div-4 h3.tde {
+    text-align: center;
+    margin: 45px 0;
+    border-bottom: 2px solid #ea3a3c;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+
+/* 5  ========================= */
+
+#nz-div-5 {
+  text-align: center;
+}
+
+#nz-div-5 h3.tde {
+    display: inline-block;
+    background: #ea3a3c;
+    color: white;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+  width: auto;
+}
+  
+#nz-div-5 h3.tde span:before {
+    content: '';
+    background: url(http://web.ncnncn.com/wp-content/uploads/2017/06/bgh1l.png);
+    width: 80px;
+    height: 70px;
+    z-index: -1; 
+}
+
+/* ======================================= */
+.title-comm {
+    color: #fff;
+    font-size: 18px;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    background-color: #fff;
+    text-align: center;
+}
+
+h3.title-comm:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    border-top: 2px solid #d0d2d3;
+    z-index: 1;
+    display: block;
+}
+
+.title-comm .title-holder {
+    min-width: 350px;
+    height: 45px;
+    background-color: #56bbe7;
+    height: auto;
+    line-height: 45px;
+    padding: 0px 20px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: inline-block;
+    min-width: 280px;
+}
+
+.title-holder:before {
+    content: "";
+    position: absolute;
+    right: -15px;
+    border-width: 0px;
+    bottom: 0px;
+    border-style: solid;
+    border-color: #5c9efe transparent;
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 23px solid transparent;
+    border-bottom: 22px solid transparent;
+    border-left: 15px solid #56bbe7;
+}
+
+.title-holder:after {
+    content: "";
+    position: absolute;
+    left: -15px;
+    border-width: 0px;
+    bottom: 0px;
+    border-style: solid;
+    border-color: #5c9efe transparent;
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 23px solid transparent;
+    border-bottom: 22px solid transparent;
+    border-right: 15px solid #56bbe7;
+}
+.imgAvatar {
+    width:40px; 
+    height:40px; 
+    border:1px solid blue;
+    border-radius: 50%;
+    float:left;
+}
+.nameAvatar {
+float:left; 
+padding-left:10px;
+ color:#00bfff;
+  font-weight:bold;
+}
+.timeAvatar {
+float:left;
+ margin-left:15px;
+}
+.btnSendMessage {
+    float:right; 
+    margin-right:5px;
+    margin-bottom:5px;
+}
+.MessageItem {
+    padding-top:15px;
+    display:block;
+}
+.DivFrame {
+width:100%; 
+min-height:500px;
+}
+@media only screen and (max-width: 960px) {
+    .dl-horizontal dt{
+        width:30% !important;
+        text-align:left;
+    }
+.dl-horizontal {
+        width:70% !important ;
+        text-align:left;
+    }
+}
+@media only screen and (max-width: 768px) {
+    body {
+   font-size:12px;
+    }
+
+    div#nz-div {
+    border-bottom: 1px solid #0056a8;
+    margin-bottom: 10px;
+    margin-top:5px;
+    display: block;
+}
+
+#nz-div h3.tde {
+    margin: 0;
+    font-size: 12px;
+    line-height: 14px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+#nz-div h3.tde :after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-left: 20px solid #0056a8;
+    border-bottom: 0px solid transparent;
+    border-right: 0 solid transparent;
+    position: absolute;
+    top: 0px;
+    right: -20px;
+}
+
+#nz-div h3.tde span {
+    background: #0056a8;
+    padding: 5px 15px 5px 10px;
+    color: white;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
+
+   .dl-horizontal dt {
+      display:block; !important;
+        text-align:left !important;
+    }
+   .dl-horizontal dd {
+       width:200px;
+        width:100% !important;
+        text-align:left !important;
+    }
+    .panel-body {
+    padding-left:5px !important;
+    padding-right:5px !important;
+    padding-top:5px !important;
+    padding-bottom:5px !important;
+    }
+
+    .imgAvatar {
+    width:30px; 
+    height:30px; 
+    border:1px solid blue;
+    border-radius: 50%;
+    float:left;
+}
+    .btnSendMessage {
+     font-size:12px;
+     width:50px;
+     height:20px;
+    float:right; 
+    margin-right:5px;
+    margin-bottom:5px;
+    line-height: 0.5;
+    vertical-align:central;
+}
+    hr {
+    margin:5px;
+    }
+
+    .nameAvatar {
+float:left; 
+padding-left:8px;
+ color:#00bfff;
+  font-weight:bold;
+}
+.timeAvatar {
+float:left;
+ margin-left:5px;
+}
+
+.MessageItem {
+    padding-top:10px;
+    display:block;
+}
+.DivFrame {
+width:100%; 
+min-height:300px;
+}
+}
+@media only screen and (max-width: 320px) {
+    body {
+        font-size: 12px;
+    }
+
+    div#nz-div {
+        border-bottom: 1px solid #0056a8;
+        margin-bottom: 10px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    textarea {
+    height:auto !important;
+    }
+}
+#nz-div h3.tde {
+    margin: 0;
+    font-size: 12px;
+    line-height: 14px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+#nz-div h3.tde :after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 25px solid transparent;
+    border-left: 20px solid #0056a8;
+    border-bottom: 0px solid transparent;
+    border-right: 0 solid transparent;
+    position: absolute;
+    top: 0px;
+    right: -20px;
+}
+
+#nz-div h3.tde span {
+    background: #0056a8;
+    padding: 5px 15px 5px 10px;
+    color: white;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
+
+   .dl-horizontal dt {
+       width:100% !important;
+        text-align:left !important;
+    }
+   .dl-horizontal dd {
+        width:100% !important;
+        text-align:left !important;
+    }
+    .panel-body {
+    padding-left:5px !important;
+    padding-right:5px !important;
+    padding-top:5px !important;
+    padding-bottom:5px !important;
+    }
+
+    .imgAvatar {
+    width:30px; 
+    height:30px; 
+    border:1px solid blue;
+    border-radius: 50%;
+    float:left;
+}
+    .btnSendMessage {
+     font-size:12px;
+     width:50px;
+     height:20px;
+    float:right; 
+    margin-right:5px;
+    margin-bottom:5px;
+    line-height: 0.5;
+    vertical-align:central;
+}
+    hr {
+    margin:5px;
+    }
+
+    .nameAvatar {
+float:left; 
+padding-left:8px;
+ color:#00bfff;
+  font-weight:bold;
+}
+.timeAvatar {
+float:left;
+ margin-left:5px;
+}
+
+.MessageItem {
+    padding-top:10px;
+    display:block;
+}
+.DivFrame {
+width:100%; 
+min-height:300px;
+}
+}

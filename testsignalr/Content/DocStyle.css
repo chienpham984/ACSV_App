@@ -1,0 +1,143 @@
+﻿.ViewDocument {
+    height: 100%;
+    width: 100%;
+}
+
+.folder-explorer {
+    height: 100%;
+    width: 100%;
+}
+
+.folder {
+    display: block;
+    width: 60px;
+    height: 70px;
+    margin: 10px;
+    overflow: hidden;
+    float: left;
+}
+
+    .folder .folder-icon {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .folder .folder-name {
+        text-align: center;
+        justify-content: center;
+    }
+
+.file {
+    display: block;
+    width: 80px;
+    height: 70px;
+    margin: 10px;
+    overflow: hidden;
+    float: left;
+    display: block;
+}
+
+    .file .file-icon {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .file .file-name {
+        text-align: center;
+        height: auto;
+        width: auto;
+    }
+
+    .file :hover .fileImage {
+        width: 30px;
+        height: 35px;
+    }
+
+.folder-name {
+    width: 60px;
+    height: auto;
+}
+
+.file-name {
+    width: 60px;
+    height: auto;
+    text-align: center;
+    justify-content: center;
+}
+
+.folder-explorer ul li {
+    list-style: none;
+}
+
+.docIcon {
+    color: orange;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+#contextNew {
+    padding: 10px 5px;
+}
+
+
+    #contextNew a {
+        color: black;
+    }
+
+        #contextNew a:hover {
+            color: orange;
+            font-weight: bold;
+        }
+
+#contextFolder {
+    padding: 10px 5px;
+}
+
+    #contextFolder a {
+        color: black;
+    }
+
+        #contextFolder a:hover {
+            color: orange;
+            font-weight: bold;
+        }
+
+#contextFile {
+    padding: 10px 5px;
+}
+    #contextFile a {
+        color: black;
+    }
+
+        #contextFile a:hover {
+            color: orange;
+            font-weight: bold;
+        }
+/*ul li :hover {
+    color: white;
+    background-color: #2677b6;
+}
+ul li {
+    padding:0px;
+    list-style:none;
+}
+ul {
+    padding:5px;
+    width:150px;
+}*/
+.imgBtnPrev {
+    cursor: pointer;
+}
+
+fieldset {
+    margin-top: 20px;
+    border: 1px solid #000;
+    width: 100%;
+    border-radius: 5px;
+    height: calc(100vh - 150px) !important;
+}
+
+legend {
+    width: auto;
+    margin-left: 20px;
+}

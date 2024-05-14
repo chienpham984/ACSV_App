@@ -1,0 +1,158 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Document management system for Admin</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/Content/img/favicon.ico" type="image/x-icon" />
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link href="~/css/mainStyle.css" rel="stylesheet" />
+    <link href="~/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/ionicons.min.css" rel="stylesheet" />
+
+    <link href="~/css/iconkit.min.css" rel="stylesheet" />
+    <link href="~/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="~/css/weather-icons.min.css" rel="stylesheet" />
+    <link href="~/css/theme.min.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/swiper.min.css" rel="stylesheet" />
+    <link href="~/Content/layout.min.css" rel="stylesheet" />
+    <link href="~/Content/commonStyle.css" rel="stylesheet" />
+    <link href="~/Content/MessageStyle.css" rel="stylesheet" />
+
+    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+    <script src="~/css/popper.min.js"></script>
+    <script src="~/css/perfect-scrollbar.min.js"></script>
+    <script src="~/css/screenfull.js"></script>
+    <script src="~/css/theme.min.js"></script>
+    <link href="~/css/datatables.css" rel="stylesheet" />
+    <script src="~/css/datatables.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="~/Scripts/mainJquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/assets/DataTables/datatables.min.css" />
+    <script type="text/javascript" src="~/assets/DataTables/datatables.min.js"></script>
+
+</head>
+<body>
+    <div class="mainwrapper">
+        <header class="header-top" header-theme="light">
+            <div class="container-fluid headerPage">
+                <div style="display:flex; justify-content:space-between; padding-top:10px;">
+                    <div>
+                        <div class="input-group searchArea" id="CompanyName">
+                        </div>
+                    </div>
+                    <div class="menuIcon">
+                        <i class="fas fa-bars menubaricon"></i>
+                    </div>
+                    <div class="user-profile">
+                        <span id="totalAlert"></span> <i class="fa-solid fa-bell chuong"></i>
+                        <img src="~/Content/img/user.jpg" class="rounded-circle" id="imgavatar" alt="Cinque Terre" width="30" height="30" style="border: solid 2px #2677b6; background-color: #2677b6; ">
+                        <div class="profile-options" id="profile-options">
+                            <ul>
+                                <li><i class="fas fa-user"></i><a href="/QuanLyNguoiDung/ThongTinNguoiDung/">Thông tin tài khoản</a></li>
+                                <li><i class="fas fa-unlock-alt"></i><a href="/QuanLyNguoiDung/CapNhatMatKhau/">Đổi mật khẩu</a></li>
+                                <li><a href="/QuanLyNguoiDung/DangXuat/"><i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span></a> </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </header>
+
+        <div class="page-wrap">
+            <div class="sidebar" style="overflow:auto;">
+                <div class="sidebar-header1" style="padding-top:10px; padding-left:5px;">
+                    <a class="header-brand" href="#" style="text-decoration:none;">
+                        <span class="text" style=" color: #2677b6; font-weight:bold; font-size:20px;">PHẠM VĂN CHIẾN</span>
+                    </a>
+                    <button type="button" class="menu-nav-toggle" style="position: absolute; right: 5px; border-radius: 12px; border: solid 2px #2677b6; background-color: #2677b6;"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon" style="font-size: 18px; color: white;"></i></button>
+                </div>
+
+                <div class="sidebar-content1">
+                    <div class="companyLogo" style="text-align:center; display:block; margin-bottom:20px; margin-top:20px;">
+                        <img src="~/Content/img/user.jpg" class="rounded-circle" alt="Cinque Terre" width="100" height="100" style="border: solid 2px #2677b6; background-color: #2677b6; ">
+                    </div>
+
+                    <nav class="main-menu">
+                        <ul>
+                            <li><a href="/ThongBao/DanhSachHetHan/"><i class="fas fa-bell"></i>Thông báo</a></li>
+                            <li class="has-submenu">
+                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Quản lý nhân sự +</a>
+                                <ul class="submenu">
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách nhân sự</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục công ty</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục Phòng ban</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục Chức vụ</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Loại hợp đồng</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Danh mục đào tạo +</a>
+                                <ul class="submenu">
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục chứng chỉ</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Nhóm chứng chỉ theo chức vụ</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách giáo viên</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Quản lý đào tạo +</a>
+                                <ul class="submenu">
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Quản lý chứng chỉ</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Mở lớp đào tạo</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp đang mở</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp hoàn thành</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Hồ sơ cá nhân +</a>
+                                <ul class="submenu">
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Thông tin cá nhân</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Đổi mật khẩu</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/Administrator/Login/Logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="nav-container">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+
+    <img id="loading" src="~/Content/Image/loading.gif" style="display:none; position:fixed; top:50%; left:50%;" />
+</body>
+</html>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //get img va so luong
+        $(".toggle").click(function () {
+            $(this).toggleClass("active").next(".submenu").slideToggle("fast");
+        });
+    });
+
+</script>

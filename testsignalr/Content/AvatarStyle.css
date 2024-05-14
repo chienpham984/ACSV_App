@@ -1,0 +1,68 @@
+﻿*{  
+  font-family: 'Hepta Slab', serif;
+    font-size: 14px;
+}
+body {
+    padding-top: 0px;
+    background-color:rgba(118, 158, 213, 0.92);
+    background-image: url('../image/background.jpg');
+    background-repeat:repeat;
+    background-size:cover;
+
+}
+.container {
+background-color:rgba(255, 255, 255, 0.9)!important;
+}
+.navbar {
+    background-color: rgba(118, 158, 213, 0.92) !important;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+li span {
+    margin-left: 20px;
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+    text-shadow: -4px 2px 13px white;
+}
+
+li img {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+li a {
+    text-decoration: none;
+}
+
+img.avatar,
+div.avatar {
+  border: 1px solid #eee;
+  width: 200px;
+  height: 200px;
+  border-radius:50%
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

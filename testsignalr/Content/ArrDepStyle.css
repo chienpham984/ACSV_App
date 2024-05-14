@@ -1,0 +1,13 @@
+﻿body {
+}
+.vien {
+ border:solid 1px #0026ff;
+}
+.header {
+    width:80%;
+    margin:0px auto;
+}
+#historyContent
+{
+    font-size:13px;
+}

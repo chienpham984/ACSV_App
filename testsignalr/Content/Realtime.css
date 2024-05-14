@@ -1,0 +1,251 @@
+﻿body {
+    margin-top: 80px;
+    font-size:13px;
+}
+
+.Header {
+    display: inline-flex;
+    flex-direction: row;
+    padding:5px 20px;
+}
+.Header_logo {
+    padding: 5px 5px;
+    object-fit:contain;
+}
+    .Header_logo img {
+        border-radius:5px;
+        width:100px;
+        height:60px;
+    }
+    .Header_title {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        color: blue;
+        font-weight:bold;
+    }
+.Header_search {
+    float: right;
+    width: 350px;
+    height: 35px;
+    border-radius: 4px;
+    display: flex;
+    position: relative;
+        top: 20px;
+    background-color: white;
+    align-items: center;
+}
+.Header_search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: black;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+.Header_search-select {
+    border-left:1px solid #ccc;
+    padding-left:16px;
+    position:relative;
+}
+    .Header_search-select-label {
+        font-size: 1rem;
+        color: red;
+    }
+.Header_search-select:hover .Header_search-option {
+    display: block !important;
+}
+.Header_search-option {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    width: 180px;
+    list-style: none;
+    box-shadow: 0 0;
+    display: none
+}
+.Header_search-option-item {
+    background-color: white;
+    border-radius: 3px;
+/*    padding: 8px 8px 20px 20px;*/
+    padding-top:8px;
+    padding-bottom:8px;
+    padding-right:15px;
+    padding-left:20px;
+}
+    .Header_search-option-item:hover{
+        background-color:#808080;
+    }
+.Header_search-option--actived i {
+    display: inline-block !important;
+}
+.Header_search-option-item span {
+    /* font-size:1.4rem;*/
+}
+
+.Header_search-option-item i {
+    /* font-size:1.2rem;*/
+    color: red;
+    float: right;
+    display: none;
+}
+
+    .Header_search-buttom {
+        border-left: 1px solid #ccc;
+        padding-left: 5px;
+    }
+
+.Header_search-buttom-input {
+    width: 45px;
+    border-radius: 4px;
+    background-color: orangered;
+    align-items: center;
+    cursor: pointer;
+    height: 28px;
+   /* margin-right: 5px;*/
+    text-align:center;
+    justify-content: center;
+}
+    .Header_search-buttom-input i {
+        color: white;
+        justify-content: center;
+        position:relative;
+        top:4px;
+    }
+
+    .Header_search-select-icon-down {
+        font-size: 1rem;
+        color: #4A4A4A;
+        margin: 5px 16px;
+        position: relative;
+        color: blue;
+        top: 2px;
+    }
+.content {
+    overflow: auto;
+    border: solid 1px #808080;
+    width: 100%;
+    height: 900px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+th {
+    padding: 5px;
+    border: solid 1px #808080;
+    background-color:#0026ff;
+    color:white;
+    position:sticky;
+    top:0px;
+    z-index:1000;
+}
+td {
+    width: 80px;
+    min-width: 60px;
+    padding: 5px;
+    border: solid 1px #808080;
+}
+tr {
+    min-height:35px;
+}
+.No {
+    width:10px;
+}
+.FlightNo {
+    min-width: 120px !important;
+}
+.btnFlightNo {
+    cursor: pointer;
+    padding: 5px 5px 5px 5px;
+    background-color: #0026ff;
+    border-radius: 4px;
+    color: white;
+    min-width: 100px ;
+}
+.RouteFlight {
+    min-width: 120px !important;
+}
+
+.Status {
+}
+
+.APARK {
+}
+
+.DPARK {
+}
+
+.Belt {
+}
+
+.ELDT {
+}
+
+.ALDT {
+}
+
+.TOBT {
+}
+
+.TSAT {
+}
+
+.TTOT {
+}
+.CNX {
+    color:red;
+    font-weight:bold;
+}
+.content th:nth-child(1),
+.content td:nth-child(1) {
+    position: sticky;
+    left: 0px;
+    background-color: #0026ff;
+}
+.content th:nth-child(2),
+.content td:nth-child(2) {
+    position: sticky;
+    left: 50px;
+    background-color: #0026ff;
+}
+.content td:nth-child(1),
+.content td:nth-child(2) {
+    background: #ffd800;
+}
+.content th:nth-child(1),
+.content th:nth-child(2) {
+    z-index:10000;
+}
+
+@keyframes changeColor {
+    0% {
+        background-color: #FC6E47;
+    }
+
+    100% {
+        background-color: #FC6E47;
+    }
+}
+
+.Header {
+    height: 80px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: #E8F0FB;
+    z-index:9999999;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .content {
+        overflow: auto;
+        border: solid 1px #808080;
+        width: 100%;
+        height: 900px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}

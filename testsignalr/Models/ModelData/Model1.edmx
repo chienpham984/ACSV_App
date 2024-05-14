@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HumanManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChiTietTaiLieu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLoaiTaiLieu" Type="int" />
+          <Property Name="IdNhanVien" Type="int" />
+          <Property Name="DuongDan" Type="nvarchar" MaxLength="500" />
+          <Property Name="LoaiFile" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="DanhMucChucVu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPhongBan" Type="int" />
+          <Property Name="TenChucVu" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DanhMucCongTy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaCongTy" Type="varchar" MaxLength="20" />
+          <Property Name="TenCongTy" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="DanhMucPhongBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCongTy" Type="int" />
+          <Property Name="TenPhong" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HumanManagement.dbo.LoaiTaiLieu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LoaiTaiLieu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoaiTaiLieu" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="200" />
+          <Property Name="NgaySinh" Type="datetime" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="DiaChiThuongTru" Type="nvarchar" MaxLength="500" />
+          <Property Name="QueQuan" Type="nvarchar" MaxLength="500" />
+          <Property Name="HonNhan" Type="bit" />
+          <Property Name="NgayVaoCongTy" Type="datetime" />
+          <Property Name="SoDienThoai" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="NgayVaoDang" Type="datetime" />
+          <Property Name="MaNhanVien" Type="varchar" MaxLength="50" />
+          <Property Name="CCCD" Type="varchar" MaxLength="50" />
+          <Property Name="NgayCap" Type="datetime" />
+          <Property Name="NoiCap" Type="nvarchar" MaxLength="500" />
+          <Property Name="NoiSinh" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityContainer Name="HumanManagementModelStoreContainer">
+          <EntitySet Name="ChiTietTaiLieu" EntityType="Self.ChiTietTaiLieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhMucChucVu" EntityType="Self.DanhMucChucVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhMucCongTy" EntityType="Self.DanhMucCongTy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhMucPhongBan" EntityType="Self.DanhMucPhongBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiTaiLieu" EntityType="Self.LoaiTaiLieu" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LoaiTaiLieu].[Id] AS [Id], 
+    [LoaiTaiLieu].[TenLoaiTaiLieu] AS [TenLoaiTaiLieu]
+    FROM [dbo].[LoaiTaiLieu] AS [LoaiTaiLieu]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HumanManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChiTietTaiLieu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLoaiTaiLieu" Type="Int32" />
+          <Property Name="IdNhanVien" Type="Int32" />
+          <Property Name="DuongDan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiFile" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DanhMucChucVu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPhongBan" Type="Int32" />
+          <Property Name="TenChucVu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DanhMucCongTy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaCongTy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TenCongTy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DanhMucPhongBan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCongTy" Type="Int32" />
+          <Property Name="TenPhong" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="3" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="DiaChiThuongTru" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="QueQuan" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HonNhan" Type="Boolean" />
+          <Property Name="NgayVaoCongTy" Type="DateTime" Precision="3" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NgayVaoDang" Type="DateTime" Precision="3" />
+          <Property Name="MaNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CCCD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NgayCap" Type="DateTime" Precision="3" />
+          <Property Name="NoiCap" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NoiSinh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LoaiTaiLieu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiTaiLieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="HumanManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChiTietTaiLieux" EntityType="Self.ChiTietTaiLieu" />
+          <EntitySet Name="DanhMucChucVus" EntityType="Self.DanhMucChucVu" />
+          <EntitySet Name="DanhMucCongTies" EntityType="Self.DanhMucCongTy" />
+          <EntitySet Name="DanhMucPhongBans" EntityType="Self.DanhMucPhongBan" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="LoaiTaiLieux" EntityType="Self.LoaiTaiLieu" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HumanManagementModelStoreContainer" CdmEntityContainer="HumanManagementEntities">
+          <EntitySetMapping Name="ChiTietTaiLieux">
+            <EntityTypeMapping TypeName="HumanManagementModel.ChiTietTaiLieu">
+              <MappingFragment StoreEntitySet="ChiTietTaiLieu">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdLoaiTaiLieu" ColumnName="IdLoaiTaiLieu" />
+                <ScalarProperty Name="IdNhanVien" ColumnName="IdNhanVien" />
+                <ScalarProperty Name="DuongDan" ColumnName="DuongDan" />
+                <ScalarProperty Name="LoaiFile" ColumnName="LoaiFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhMucChucVus">
+            <EntityTypeMapping TypeName="HumanManagementModel.DanhMucChucVu">
+              <MappingFragment StoreEntitySet="DanhMucChucVu">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPhongBan" ColumnName="IdPhongBan" />
+                <ScalarProperty Name="TenChucVu" ColumnName="TenChucVu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhMucCongTies">
+            <EntityTypeMapping TypeName="HumanManagementModel.DanhMucCongTy">
+              <MappingFragment StoreEntitySet="DanhMucCongTy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaCongTy" ColumnName="MaCongTy" />
+                <ScalarProperty Name="TenCongTy" ColumnName="TenCongTy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhMucPhongBans">
+            <EntityTypeMapping TypeName="HumanManagementModel.DanhMucPhongBan">
+              <MappingFragment StoreEntitySet="DanhMucPhongBan">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCongTy" ColumnName="IdCongTy" />
+                <ScalarProperty Name="TenPhong" ColumnName="TenPhong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="HumanManagementModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChiThuongTru" ColumnName="DiaChiThuongTru" />
+                <ScalarProperty Name="QueQuan" ColumnName="QueQuan" />
+                <ScalarProperty Name="HonNhan" ColumnName="HonNhan" />
+                <ScalarProperty Name="NgayVaoCongTy" ColumnName="NgayVaoCongTy" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NgayVaoDang" ColumnName="NgayVaoDang" />
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+                <ScalarProperty Name="NoiCap" ColumnName="NoiCap" />
+                <ScalarProperty Name="NoiSinh" ColumnName="NoiSinh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiTaiLieux">
+            <EntityTypeMapping TypeName="HumanManagementModel.LoaiTaiLieu">
+              <MappingFragment StoreEntitySet="LoaiTaiLieu">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenLoaiTaiLieu" ColumnName="TenLoaiTaiLieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

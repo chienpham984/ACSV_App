@@ -1,0 +1,179 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Document management system</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/Content/img/favicon.ico" type="image/x-icon" />
+
+    @*<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">*@
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link href="~/css/mainStyle.css" rel="stylesheet" />
+    <link href="~/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/ionicons.min.css" rel="stylesheet" />
+
+    <link href="~/css/iconkit.min.css" rel="stylesheet" />
+    <link href="~/css/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="~/css/weather-icons.min.css" rel="stylesheet" />
+    <link href="~/css/theme.min.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/swiper.min.css" rel="stylesheet" />
+    <link href="~/Content/layout.min.css" rel="stylesheet" />
+    <link href="~/Content/commonStyle.css" rel="stylesheet" />
+    <link href="~/Content/MessageStyle.css" rel="stylesheet" />
+
+    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+    <script src="~/css/popper.min.js"></script>
+    <script src="~/css/perfect-scrollbar.min.js"></script>
+    <script src="~/css/screenfull.js"></script>
+    <script src="~/css/theme.min.js"></script>
+    <link href="~/css/datatables.css" rel="stylesheet" />
+    <script src="~/css/datatables.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script src="~/Scripts/mainJquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/assets/DataTables/datatables.min.css" />
+    <script type="text/javascript" src="~/assets/DataTables/datatables.min.js"></script>
+
+</head>
+<body>
+    <div class="mainwrapper">
+        <header class="header-top" header-theme="light">
+            <div class="container-fluid headerPage">
+                <div style="display:flex; justify-content:space-between; padding-top:10px;">
+                    <div style="width:70%;">
+                        <div class="input-group searchArea" id="CompanyName" style="display: flex; justify-content: center; align-items: center;">
+                            <span class="ContentTitle"> @ViewBag.FlightTitle</span>
+                        </div>
+                    </div>
+                    <div class="menuIcon">
+                        <i class="fas fa-bars menubaricon"></i>
+                    </div>
+                    <div class="user-profile">
+                        <span id="totalAlert"></span> <i class="fa-solid fa-bell chuong"></i>
+                        @if (Session["Avatar"]==null || Session["Avatar"].ToString() == "")
+                        {
+                            <img src="~/Content/img/user.jpg" class="rounded-circle" id="imgavatar" alt="Cinque Terre" width="30" height="30" style="border: solid 2px #2677b6; background-color: #2677b6; ">
+                        }
+                        else
+                        {
+                            <img src="@Session["Avatar"].ToString()" class="rounded-circle" id="imgavatar" alt="Cinque Terre" width="30" height="30" style="border: solid 2px #2677b6; background-color: #2677b6; ">
+                        }
+                        <div class="profile-options" id="profile-options">
+                            <ul>
+                                <li><i class="fas fa-user"></i><a href="/User/ViewProfile/">User Information</a></li>
+                                <li><i class="fas fa-unlock-alt"></i><a href="/User/ChangePassword">Change password</a></li>
+                                <li><a href="/LoginDocumenManagement/Logout/"><i class="fas fa-sign-out-alt"></i> <span>Sign out</span></a> </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </header>
+
+        <div class="page-wrap">
+            <div class="sidebar" style="overflow:auto;">
+                <div class="sidebar-header1" style="padding-top:10px; padding-left:5px;">
+                    <a class="header-brand" href="#" style="text-decoration:none;">
+                        @*<span class="text" style=" color: #2677b6; font-weight:bold; font-size:20px;">@Session["FullName"].ToString().ToUpper()</span>*@
+                    </a>
+                    <button type="button" class="menu-nav-toggle" style="position: absolute; right: 5px; border-radius: 12px; border: solid 2px #2677b6; background-color: #2677b6;"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon" style="font-size: 18px; color: white;"></i></button>
+                </div>
+
+                <div class="sidebar-content1">
+                    <div class="companyLogo" style="text-align:center; display:block; margin-bottom:20px; margin-top:20px;">
+                        @*@if (Session["Avatar"].ToString() != "")
+                        {
+                            <img src="@Session["Avatar"].ToString()" class="rounded-circle" alt="Cinque Terre">
+                        }
+                        else
+                        {*@
+                            <img src="~/Content/img/user.jpg" class="rounded-circle" alt="Cinque Terre" width="150" height="150" style="border: solid 2px #2677b6; background-color: #2677b6; ">
+                        @*}*@
+                    </div>
+
+                    <nav class="main-menu">
+                        <ul>
+                            <li class="has-submenu">
+                                <a class="hyperlinkSubmenu" href="#"><i class="fa-solid fa-paper-plane"></i> FLIGHT INFORMATION</a>
+                                <ul class="submenu">
+
+                                    <li><a href="/DocumentManagement/ChangeFlightDate"><i class="fa-solid fa-calendar-check"></i>Change flight date</a></li>
+
+                                    <li><a href="/Administrator/Department/ShowAllDepartment"><i class="fa-solid fa-chart-simple"></i>Flight report</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu">
+                                <a class="hyperlinkSubmenu" href="#"><i class="fas fa-cogs"></i> USER INFORMATION</a>
+                                <ul class="submenu">
+                                    <li><a href="/User/ViewProfile"><i class="fa-solid fa-address-card"></i>Profile</a></li>
+                                    <li><a href="/User/ChangePassword"><i class="fa-solid fa-unlock-keyhole"></i>Change password</a></li>
+                                    <li><a href="/User/ChangeAvatar"><i class="fa-solid fa-camera-retro"></i>Change Avatar</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/LoginDocumenManagement/Logout/"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="nav-container">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                @RenderBody()
+            </div>
+
+
+
+            @*<footer class="footer">
+                    <div class="w-100 clearfix">
+                        <span class="text-center text-sm-left d-md-inline-block">Copyright © 2018 ThemeKit v2.0. All Rights Reserved.</span>
+                        <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://www.hgs.vn/" class="text-dark" style="font-weight:bold;" target="_blank">Phạm Văn Chiến - IT HGS</a></span>
+                    </div>
+                </footer>*@
+        </div>
+    </div>
+
+    <img id="loading" src="~/Content/Image/loading.gif" style="display:none; position:fixed; top:50%; left:50%;" />
+</body>
+</html>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //get img va so luong
+        $.ajax({
+            type: 'GET',
+            url: "/Main/getInformation",
+            data: {},
+            async: false,
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'json',
+            success: function (Data) {
+                if (Data.filePath != "")
+                    $("#imgavatar").attr("src", Data.filePath);
+                if (Data.totalAlert != "")
+                    $("#totalAlert").html(Data.totalAlert);
+
+                $("#CompanyName").html("Chào mừng bạn đến với " + Data.companyName);
+            },
+            error: function () {
+
+            }
+        });
+    });
+
+</script>

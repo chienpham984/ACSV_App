@@ -1,0 +1,868 @@
+﻿* {
+    font-family: 'Hepta Slab', serif;
+    font-size: 14px;
+}
+
+body {
+    padding-top: 0px;
+     background-color: #F5FFFA;
+    /*background-color: #f8f8ff;
+    background-image: url('../image/background.jpg');
+    background-repeat: repeat-x;*/
+}
+
+.navbar {
+    background-color: rgba(118, 158, 213, 0.92) !important;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.btn-calendar {
+    border-radius: 100px;
+    padding: 2px 10px;
+}
+
+    .btn-calendar:hover {
+        border-color: blue;
+        transform: translateY(-2px);
+        background-color: #9AD9F8 !important;
+        color: white;
+    }
+
+    .btn-calendar:focus, li button:focus, li input:focus {
+        outline: none;
+        text-decoration: none;
+    }
+
+li button {
+    text-decoration: none;
+    border-radius: 100px;
+}
+
+li .btn-modify {
+    margin-right: 30px;
+}
+
+li span {
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+    text-shadow: -4px 2px 13px white;
+}
+.nav-item{
+    margin-left: 20px;
+}
+li img {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+li a {
+    text-decoration: none;
+}
+
+li button:hover, .btn-rock:hover {
+    border-color: blue;
+    transform: translateY(-2px);
+    background: url('../image/btn-hover.png') no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+li button, .btn-rock {
+    background: url('../image/btn.png') no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+#collapseOne {
+   background-color: rgba(118, 158, 213, 0.92);
+    margin: 10px 0px 10px 20px;
+    border-radius: 15px 0px 0px 15px;
+    -webkit-box-shadow: -1px 1px 10px 2px rgba(0,0,0,0.97);
+    -moz-box-shadow: -1px 1px 10px 2px rgba(0,0,0,0.97);
+    box-shadow: -1px 1px 10px 2px rgba(0,0,0,0.97);
+    padding: 15px 15px 15px 15px;
+}
+    #collapseOne table{
+        background-color: whitesmoke;
+    }
+
+    #collapseOne table tr:hover {
+        background-color: #1E90FF;
+        color: white;
+    }
+
+.CloseModify {
+    float: right;
+    background-image: url('../Image/close.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+}
+
+#editheader span {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#editheader input {
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+.panel-body {
+    overflow-y: scroll;
+    max-height: 250px;
+    font-size: 13px;
+}
+
+.inputinf1 {
+    font-size: 13px;
+    font-weight: bold;
+    width: 50px;
+    border-radius: 5px;
+    border-color: blue;
+    border-width: 1px;
+}
+
+.inputinf2 {
+    font-size: 13px;
+    font-weight: bold;
+    width: 80px;
+    border-radius: 5px;
+    border-color: blue;
+    border-width: 1px;
+}
+
+.inputdate {
+    font-size: 13px;
+    font-weight: bold;
+    width: 100px;
+    border-radius: 5px;
+    border-color: blue;
+    border-width: 1px;
+}
+
+.inputroute {
+    font-size: 13px;
+    font-weight: bold;
+    width: 130px;
+    border-radius: 5px;
+    border-color: blue;
+    border-width: 1px;
+}
+
+.inputgate {
+    font-size: 13px;
+    font-weight: bold;
+    width: 40px;
+    border-radius: 5px;
+    border-color: blue;
+    border-width: 1px;
+}
+
+.content-data {
+    margin: 10px 0px 10px 20px;
+}
+
+.subLine {
+    clear: left;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 5px 0px 5px 0px;
+    border: 1px solid #ff0000;
+    border: 0px outset #1C6EA4;
+    border-radius: 15px 0px 0px 15px;
+    background-color: ghostwhite;
+    font-size: 13px;
+    -webkit-box-shadow: -1px 1px 17px 4px rgba(0,0,0,0.97);
+    -moz-box-shadow: -1px 1px 17px 4px rgba(0,0,0,0.97);
+    box-shadow: -1px 1px 17px 4px rgba(0,0,0,0.97);
+    height:60px;
+}
+
+.subline-item {
+    display: block;
+    clear: both;
+}
+
+.subLine img {
+    width: 30px;
+    height: 30px;
+}
+
+.flightno {
+    font-size: 13px;
+    height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: -5px;
+}
+
+.item-left {
+    float: left;
+    width: 12%;
+}
+
+.item {
+    margin-right: 30px;
+    float: left;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.item-right {
+    float: left;
+    width: 86%;
+}
+
+.subInfor {
+    clear: both;
+    padding-left: 90px;
+    font-size: 14px;
+}
+
+    .subInfor span {
+        font-size: 14px;
+    }
+
+.zone {
+    float:left; 
+    margin-right:30px;
+}
+  .bag {
+    float:left; 
+}
+@media only screen and (max-width: 1200px) {
+    body {
+        font-family: Arial, Verdana, sans-serif;
+        font-size: 12px;
+    }
+
+    .navbar-brand img {
+        height: 38px;
+    }
+
+    .btn-calendar {
+        font-size: 13px;
+        width: 150px;
+    }
+
+    .navbar-nav button {
+        font-size: 13px;
+        width: 100px;
+    }
+        .nav-item{
+    margin-left: 15px;
+    } 
+    .userinfpanel img {
+        height: 35px;
+    }
+
+    .subLine {
+        clear: left;
+        margin-bottom: 10px;
+        padding: 5px 0px 5px 0px;
+        border: 1px solid #ff0000;
+        border-radius: 10px;
+        background-color: ghostwhite;
+    }
+
+    .subline-item {
+        display: block;
+        clear: both;
+    }
+
+    .item {
+        margin-right: 20px;
+        float: left;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .item-left {
+        float: left;
+        width: 15%;
+    }
+
+    .item-right {
+        float: left;
+        width: 83%;
+    }
+
+    .subInfor {
+        clear: both;
+        padding-left: 20px;
+    }
+
+        .subInfor span {
+            font-size: 12px;
+        }
+
+    .inputinf1 {
+        font-size: 12px;
+        width: 45px;
+    }
+
+    .inputinf2 {
+        font-size: 12px;
+        width: 70px;
+    }
+
+    .inputdate {
+        font-size: 12px;
+        width: 80px;
+    }
+
+    .inputroute {
+        font-size: 12px;
+        width: 130px;
+    }
+
+    .inputgate {
+        font-size: 12px;
+        width: 30px;
+    }
+
+    .subLine {
+        margin-bottom: 5px;
+        height:60px
+    }
+
+        .subLine img {
+            width: 20px;
+            height: 20px;
+        }
+
+    .flightno {
+        font-size: 12px;
+        height: 30px;
+    }
+        .zone {
+    float:left; 
+    margin-right:30px;
+}
+  .bag {
+    float:left; 
+}
+}
+
+@media only screen and (max-width: 960px) {
+    body {
+        font-family: Arial, Verdana, sans-serif;
+        font-size: 11px;
+    }
+
+    .navbar-brand img {
+        height: 35px;
+    }
+
+    .btn-calendar {
+        font-size: 13px;
+        width: 150px;
+    }
+
+    .navbar-nav button {
+        font-size: 13px;
+        width: 100px;
+    }
+
+    .nav-item{
+    margin-left: 15px;
+    } 
+            li span {
+        font-weight: bold;
+        color: white;
+        font-size: 14px;
+        text-shadow: -2px 1px 10px white;
+    }
+    .userinfpanel img {
+        height: 35px;
+    }
+
+    .subLine {
+        clear: left;
+        margin-bottom: 10px;
+        padding: 5px 0px 5px 0px;
+        border: 1px solid #ff0000;
+        border-radius: 10px;
+        background-color: ghostwhite;
+    }
+
+    .subline-item {
+        display: block;
+        clear: both;
+    }
+
+    .item {
+        margin-right: 20px;
+        float: left;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .item-left {
+        float: left;
+        width: 15%;
+    }
+
+    .item-right {
+        float: left;
+        width: 83%;
+    }
+
+    .subInfor {
+        clear: both;
+        padding-left: 20px;
+    }
+
+        .subInfor span {
+            font-size: 11px;
+        }
+
+    .inputinf1 {
+        font-size: 11px;
+        width: 45px;
+    }
+
+    .inputinf2 {
+        font-size: 11px;
+        width: 70px;
+    }
+
+    .inputdate {
+        font-size: 11px;
+        width: 80px;
+    }
+
+    .inputroute {
+        font-size: 11px;
+        width: 130px;
+    }
+
+    .inputgate {
+        font-size: 11px;
+        width: 30px;
+    }
+
+    .subLine {
+        margin-bottom: 5px;
+        height:80px;
+    }
+
+        .subLine img {
+            width: 20px;
+            height: 20px;
+        }
+
+    .flightno {
+        font-size: 12px;
+        height: 30px;
+    }
+        .zone {
+    float:left; 
+    margin-right:30px;
+}
+  .bag {
+    float:left; 
+}
+}
+
+@media only screen and (max-width: 768px) {
+    body {
+        font-family: Arial, Verdana, sans-serif;
+        font-size: 10px;
+    }
+
+    .navbar-brand img {
+        height: 33px;
+    }
+
+    .btn-calendar {
+        font-size: 13px;
+        width: 150px;
+    }
+
+    .navbar-nav button {
+        font-size: 13px;
+    }
+    .nav-item{
+    margin-left: 10px;
+    } 
+        li span {
+        font-weight: bold;
+        color: white;
+        font-size: 13px;
+        text-shadow: -2px 1px 10px white;
+    }
+
+    .userinfpanel img {
+        height: 35px;
+    }
+
+    .subLine {
+        clear: left;
+        margin-bottom: 10px;
+        padding: 5px 0px 5px 0px;
+        border: 1px solid #ff0000;
+        border-radius: 10px;
+        background-color: ghostwhite;
+    }
+
+    .subline-item {
+        display: block;
+        clear: both;
+    }
+
+    .item {
+        margin-right: 5px;
+        float: left;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .item-left {
+        float: left;
+        width: 20%;
+    }
+
+    .item-right {
+        /*margin-right:10px;*/
+        float: left;
+        width: 78%;
+    }
+
+    .item-lable {
+        display: none;
+    }
+
+    .subInfor {
+        clear: both;
+        padding-left: 20px;
+    }
+
+        .subInfor span {
+            font-size: 11px;
+        }
+
+    .inputinf1 {
+        font-size: 11px;
+        width: 45px;
+    }
+
+    .inputinf2 {
+        font-size: 11px;
+        width: 70px;
+    }
+
+    .inputdate {
+        font-size: 11px;
+        width: 90px;
+    }
+
+    .inputroute {
+        font-size: 11px;
+        width: 130px;
+    }
+
+    .inputgate {
+        font-size: 11px;
+        width: 30px;
+    }
+
+    .subLine {
+        margin-bottom: 5px;
+    }
+
+        .subLine img {
+            width: 20px;
+            height: 20px;
+        }
+
+    .flightno {
+        font-size: 12px;
+        height: 25px;
+    }
+
+    #editheader button {
+        width: 120px;
+    }
+        .zone {
+    float:left; 
+    margin-right:30px;
+}
+  .bag {
+    float:left; 
+}
+}
+
+@media only screen and (max-width: 640px) {
+        body {
+            font-family: Arial, Verdana, sans-serif;
+            font-size: 10px;
+        }
+
+        .navbar-brand img {
+            height: 30px;
+        }
+            li span {
+        font-weight: bold;
+        color: white;
+        font-size: 13px;
+        text-shadow: -2px 1px 10px white;
+    }
+        .btn-calendar {
+            font-size: 13px;
+            width: 150px;
+        }
+
+        .navbar-nav button {
+            font-size: 13px;
+        }
+
+        .userinfpanel img {
+            height: 35px;
+        }
+        .nav-item{
+    margin-left: 10px;
+    } 
+        .subLine {
+            clear: left;
+            margin-bottom: 10px;
+            padding: 5px 0px 5px 0px;
+            border: 1px solid #ff0000;
+            border-radius: 10px;
+            background-color: ghostwhite;
+            height: 70px;
+        }
+
+        .subline-item {
+            display: block;
+            clear: both;
+        }
+
+        .item {
+            margin-right: 5px;
+            float: left;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .item-left {
+            float: left;
+            width: 100%;
+        }
+
+        .item-right {
+            /*margin-right:10px;*/
+            float: left;
+            width: 100%;
+        }
+
+        .item-lable {
+            display: none;
+        }
+
+        .subInfor {
+            clear: both;
+            padding-left: 20px;
+        }
+
+            .subInfor span {
+                font-size: 11px;
+            }
+
+        .inputinf1 {
+            font-size: 11px;
+            width: 45px;
+        }
+
+        .inputinf2 {
+            font-size: 11px;
+            width: 70px;
+        }
+
+        .inputdate {
+            font-size: 11px;
+            width: 90px;
+        }
+
+        .inputroute {
+            font-size: 11px;
+            width: 130px;
+        }
+
+        .inputgate {
+            font-size: 11px;
+            width: 30px;
+        }
+
+        .subLine {
+            margin-bottom: 5px;
+        }
+
+            .subLine img {
+                width: 20px;
+                height: 20px;
+            }
+
+        .flightno {
+            font-size: 12px;
+            height: 25px;
+        }
+
+        #editheader button {
+            width: 120px;
+        }
+     .zone {
+    float:left; 
+    margin-right:30px;
+}
+  .bag {
+    float:left; 
+}
+    }
+
+
+@media only screen and (max-width: 480px) {
+    body {
+        font-family: Arial, Verdana, sans-serif;
+        font-size: 10px;
+    }
+
+    .navbar-brand img {
+        height: 25px;
+    }
+    .nav-item{
+    margin-left: 5px;
+    }
+    li span {
+        font-weight: bold;
+        color: white;
+        font-size: 12px;
+        text-shadow: -2px 1px 10px white;
+    }
+       
+    .btn-calendar {
+        font-size: 10px;
+        width: 130px;
+    }
+
+    .navbar-nav button {
+        font-size: 11px;
+    }
+
+    .userinfpanel img {
+        height: 30px;
+    }
+
+    .content-data {
+        margin: 5px 0px 5px 10px;
+    }
+
+    .subLine {
+        clear: left;
+        /*margin-bottom: 10px;*/
+        /*padding: 5px 0px 5px 0px;*/
+        border: 1px solid #ff0000;
+        border-radius: 10px 0px 0px 10px;
+        background-color: ghostwhite;
+        height: 80px;
+        -webkit-box-shadow: -1px 1px 10px 2px rgba(0,0,0,0.97);
+        -moz-box-shadow: -1px 1px 10px 2px rgba(0,0,0,0.97);
+        box-shadow: -1px 1px 10px 2px rgba(0,0,0,0.97);
+    }
+
+    .subline-item {
+        display: block;
+        clear: both;
+    }
+
+    .item {
+        margin-right: 5px;
+        float: left;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .item-left {
+        float: left;
+        width: 100%;
+    }
+
+    .item-right {
+        float: left;
+        width: 100%;
+    }
+
+    .item-lable {
+        display: none;
+    }
+
+    .subInfor {
+        clear: both;
+        padding-left: 20px;
+        font-size: 11px;
+    }
+
+        .subInfor span {
+            font-size: 11px;
+        }
+
+    .inputinf1 {
+        font-size: 11px;
+        width: 40px;
+    }
+
+    .inputinf2 {
+        font-size: 11px;
+        width: 50px;
+    }
+
+    .inputdate {
+        font-size: 11px;
+        width: 90px;
+    }
+
+    .inputroute {
+        font-size: 11px;
+        width: 120px;
+    }
+
+    .inputgate {
+        font-size: 11px;
+        width: 30px;
+    }
+
+    .subLine {
+        margin-bottom: 5px;
+    }
+
+        .subLine img {
+            width: 30px;
+            height: 30px;
+        }
+
+    .flightno {
+        font-size: 12px !important;
+        height: 25px;
+        vertical-align: central;
+        text-align: center;
+        /*margin-top: 10px;*/
+    }
+    #editheader button {
+       width:100px;
+    }
+    .zone {
+    float:left; 
+    margin-right:0px;
+}
+  .bag {
+    float:left; 
+}
+}

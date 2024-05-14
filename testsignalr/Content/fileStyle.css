@@ -1,0 +1,87 @@
+﻿body {
+}
+.PDF {
+    width: 22px;
+    height: 26px;
+    background-image: url('../Content/img/pdf.png');
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.IMAGE {
+    width: 22px;
+    height: 26px;
+    background-image: url('../Content/img/img.png');
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.WORD {
+    width: 22px;
+    height: 26px;
+    background-image:url('../Content/img/wordfile.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+    margin-right:5px;
+}
+.EXCEL {
+    width: 22px;
+    height: 26px;
+    background-image: url('../Content/img/excel.png');
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-top:0px;
+}
+.POWERPOINT {
+    width: 22px;
+    height: 26px;
+    background-image: url('../Content/img/PowerPoint.png');
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.TEXT {
+    width: 22px;
+    height: 26px;
+    background-image: url('../Content/img/txt.png');
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.VIDEO {
+    width: 22px;
+    height: 26px;
+    background-image: url('../Content/img/video.png');
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.WINRAR {
+    width: 22px;
+    height: 26px;
+    background-image: url('../Content/img/winrar.png');
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@keyframes showHide {
+    0% {
+        opacity: 1;
+    }
+    /* Hiển thị ở độ mờ 100% */
+    90% {
+        opacity: 1;
+    }
+    /* Giữ nguyên trong 90% thời gian */
+    100% {
+        opacity: 0;
+    }
+    /* Ẩn với độ mờ 0% */
+}
+
+/* Áp dụng animation */
+.show-for-10s {
+    animation: showHide 10s linear; /* Thực hiện animation trong 10 giây */
+}
