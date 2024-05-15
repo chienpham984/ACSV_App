@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HumanManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HumanManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietTaiLieu">
           <Key>
             <PropertyRef Name="Id" />
@@ -15,6 +15,17 @@
           <Property Name="DuongDan" Type="nvarchar" MaxLength="500" />
           <Property Name="LoaiFile" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="ChungChiNhanVien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdNhanVien" Type="int" />
+          <Property Name="IdChungChi" Type="int" />
+          <Property Name="NgayCap" Type="datetime" />
+          <Property Name="NgayHetHan" Type="datetime" />
+          <Property Name="IdKhoaHoc" Type="int" />
+        </EntityType>
         <EntityType Name="DanhMucChucVu">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,6 +33,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdPhongBan" Type="int" />
           <Property Name="TenChucVu" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="DanhMucChungChi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenChungChi" Type="nvarchar" MaxLength="500" />
+          <Property Name="MaChungChi" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DanhMucCongTy">
           <Key>
@@ -38,6 +57,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdCongTy" Type="int" />
           <Property Name="TenPhong" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="LoaiChungChi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenLoaiChungChi" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HumanManagement.dbo.LoaiTaiLieu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -68,13 +94,30 @@ warning 6002: The table/view 'HumanManagement.dbo.LoaiTaiLieu' does not have a p
           <Property Name="NgayCap" Type="datetime" />
           <Property Name="NoiCap" Type="nvarchar" MaxLength="500" />
           <Property Name="NoiSinh" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdCongTy" Type="int" />
+          <Property Name="IdPhongBan" Type="int" />
+          <Property Name="IdChucVu" Type="int" />
+          <Property Name="NgayNghiViec" Type="datetime" />
+        </EntityType>
+        <EntityType Name="NhomCCTheoChucVu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMaChucVu" Type="int" />
+          <Property Name="IdChungChi" Type="int" />
+          <Property Name="BatBuoc" Type="bit" />
         </EntityType>
         <EntityContainer Name="HumanManagementModelStoreContainer">
           <EntitySet Name="ChiTietTaiLieu" EntityType="Self.ChiTietTaiLieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChungChiNhanVien" EntityType="Self.ChungChiNhanVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhMucChucVu" EntityType="Self.DanhMucChucVu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DanhMucChungChi" EntityType="Self.DanhMucChungChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhMucCongTy" EntityType="Self.DanhMucCongTy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhMucPhongBan" EntityType="Self.DanhMucPhongBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiChungChi" EntityType="Self.LoaiChungChi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhomCCTheoChucVu" EntityType="Self.NhomCCTheoChucVu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoaiTaiLieu" EntityType="Self.LoaiTaiLieu" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [LoaiTaiLieu].[Id] AS [Id], 
@@ -82,8 +125,7 @@ warning 6002: The table/view 'HumanManagement.dbo.LoaiTaiLieu' does not have a p
     FROM [dbo].[LoaiTaiLieu] AS [LoaiTaiLieu]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HumanManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -121,6 +163,51 @@ warning 6002: The table/view 'HumanManagement.dbo.LoaiTaiLieu' does not have a p
           <Property Name="IdCongTy" Type="Int32" />
           <Property Name="TenPhong" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="LoaiTaiLieu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiTaiLieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="HumanManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChiTietTaiLieux" EntityType="Self.ChiTietTaiLieu" />
+          <EntitySet Name="DanhMucChucVus" EntityType="Self.DanhMucChucVu" />
+          <EntitySet Name="DanhMucCongTies" EntityType="Self.DanhMucCongTy" />
+          <EntitySet Name="DanhMucPhongBans" EntityType="Self.DanhMucPhongBan" />
+          <EntitySet Name="LoaiTaiLieux" EntityType="Self.LoaiTaiLieu" />
+          <EntitySet Name="ChungChiNhanViens" EntityType="HumanManagementModel.ChungChiNhanVien" />
+          <EntitySet Name="DanhMucChungChis" EntityType="HumanManagementModel.DanhMucChungChi" />
+          <EntitySet Name="LoaiChungChis" EntityType="HumanManagementModel.LoaiChungChi" />
+          <EntitySet Name="NhanViens" EntityType="HumanManagementModel.NhanVien" />
+          <EntitySet Name="NhomCCTheoChucVus" EntityType="HumanManagementModel.NhomCCTheoChucVu" />
+        </EntityContainer>
+        <EntityType Name="ChungChiNhanVien">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdNhanVien" Type="Int32" />
+          <Property Name="IdChungChi" Type="Int32" />
+          <Property Name="NgayCap" Type="DateTime" Precision="3" />
+          <Property Name="NgayHetHan" Type="DateTime" Precision="3" />
+          <Property Name="IdKhoaHoc" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DanhMucChungChi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenChungChi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MaChungChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LoaiChungChi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenLoaiChungChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="NhanVien">
           <Key>
             <PropertyRef Name="Id" />
@@ -141,22 +228,20 @@ warning 6002: The table/view 'HumanManagement.dbo.LoaiTaiLieu' does not have a p
           <Property Name="NgayCap" Type="DateTime" Precision="3" />
           <Property Name="NoiCap" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="NoiSinh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdCongTy" Type="Int32" />
+          <Property Name="IdPhongBan" Type="Int32" />
+          <Property Name="IdChucVu" Type="Int32" />
+          <Property Name="NgayNghiViec" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="LoaiTaiLieu">
+        <EntityType Name="NhomCCTheoChucVu">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenLoaiTaiLieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdMaChucVu" Type="Int32" />
+          <Property Name="IdChungChi" Type="Int32" />
+          <Property Name="BatBuoc" Type="Boolean" />
         </EntityType>
-        <EntityContainer Name="HumanManagementEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ChiTietTaiLieux" EntityType="Self.ChiTietTaiLieu" />
-          <EntitySet Name="DanhMucChucVus" EntityType="Self.DanhMucChucVu" />
-          <EntitySet Name="DanhMucCongTies" EntityType="Self.DanhMucCongTy" />
-          <EntitySet Name="DanhMucPhongBans" EntityType="Self.DanhMucPhongBan" />
-          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
-          <EntitySet Name="LoaiTaiLieux" EntityType="Self.LoaiTaiLieu" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -201,33 +286,76 @@ warning 6002: The table/view 'HumanManagement.dbo.LoaiTaiLieu' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NhanViens">
-            <EntityTypeMapping TypeName="HumanManagementModel.NhanVien">
-              <MappingFragment StoreEntitySet="NhanVien">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
-                <ScalarProperty Name="DiaChiThuongTru" ColumnName="DiaChiThuongTru" />
-                <ScalarProperty Name="QueQuan" ColumnName="QueQuan" />
-                <ScalarProperty Name="HonNhan" ColumnName="HonNhan" />
-                <ScalarProperty Name="NgayVaoCongTy" ColumnName="NgayVaoCongTy" />
-                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="NgayVaoDang" ColumnName="NgayVaoDang" />
-                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
-                <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
-                <ScalarProperty Name="NoiCap" ColumnName="NoiCap" />
-                <ScalarProperty Name="NoiSinh" ColumnName="NoiSinh" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LoaiTaiLieux">
             <EntityTypeMapping TypeName="HumanManagementModel.LoaiTaiLieu">
               <MappingFragment StoreEntitySet="LoaiTaiLieu">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TenLoaiTaiLieu" ColumnName="TenLoaiTaiLieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChungChiNhanViens">
+            <EntityTypeMapping TypeName="HumanManagementModel.ChungChiNhanVien">
+              <MappingFragment StoreEntitySet="ChungChiNhanVien">
+                <ScalarProperty Name="IdKhoaHoc" ColumnName="IdKhoaHoc" />
+                <ScalarProperty Name="NgayHetHan" ColumnName="NgayHetHan" />
+                <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+                <ScalarProperty Name="IdChungChi" ColumnName="IdChungChi" />
+                <ScalarProperty Name="IdNhanVien" ColumnName="IdNhanVien" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhMucChungChis">
+            <EntityTypeMapping TypeName="HumanManagementModel.DanhMucChungChi">
+              <MappingFragment StoreEntitySet="DanhMucChungChi">
+                <ScalarProperty Name="MaChungChi" ColumnName="MaChungChi" />
+                <ScalarProperty Name="TenChungChi" ColumnName="TenChungChi" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiChungChis">
+            <EntityTypeMapping TypeName="HumanManagementModel.LoaiChungChi">
+              <MappingFragment StoreEntitySet="LoaiChungChi">
+                <ScalarProperty Name="TenLoaiChungChi" ColumnName="TenLoaiChungChi" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="HumanManagementModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="NgayNghiViec" ColumnName="NgayNghiViec" />
+                <ScalarProperty Name="IdChucVu" ColumnName="IdChucVu" />
+                <ScalarProperty Name="IdPhongBan" ColumnName="IdPhongBan" />
+                <ScalarProperty Name="IdCongTy" ColumnName="IdCongTy" />
+                <ScalarProperty Name="NoiSinh" ColumnName="NoiSinh" />
+                <ScalarProperty Name="NoiCap" ColumnName="NoiCap" />
+                <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="NgayVaoDang" ColumnName="NgayVaoDang" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="NgayVaoCongTy" ColumnName="NgayVaoCongTy" />
+                <ScalarProperty Name="HonNhan" ColumnName="HonNhan" />
+                <ScalarProperty Name="QueQuan" ColumnName="QueQuan" />
+                <ScalarProperty Name="DiaChiThuongTru" ColumnName="DiaChiThuongTru" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhomCCTheoChucVus">
+            <EntityTypeMapping TypeName="HumanManagementModel.NhomCCTheoChucVu">
+              <MappingFragment StoreEntitySet="NhomCCTheoChucVu">
+                <ScalarProperty Name="BatBuoc" ColumnName="BatBuoc" />
+                <ScalarProperty Name="IdChungChi" ColumnName="IdChungChi" />
+                <ScalarProperty Name="IdMaChucVu" ColumnName="IdMaChucVu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

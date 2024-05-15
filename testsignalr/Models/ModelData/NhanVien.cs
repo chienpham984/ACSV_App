@@ -30,5 +30,9 @@ namespace testsignalr.Models.ModelData
         public Nullable<System.DateTime> NgayCap { get; set; }
         public string NoiCap { get; set; }
         public string NoiSinh { get; set; }
+        public Nullable<int> IdCongTy { get; set; }
+        public Nullable<int> IdPhongBan { get; set; }
+        public Nullable<int> IdChucVu { get; set; }
+        public Nullable<System.DateTime> NgayNghiViec { get; set; }
     }
 }

@@ -29,7 +29,11 @@ namespace testsignalr.Models.ModelData
         public virtual DbSet<DanhMucChucVu> DanhMucChucVus { get; set; }
         public virtual DbSet<DanhMucCongTy> DanhMucCongTies { get; set; }
         public virtual DbSet<DanhMucPhongBan> DanhMucPhongBans { get; set; }
-        public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<LoaiTaiLieu> LoaiTaiLieux { get; set; }
+        public virtual DbSet<ChungChiNhanVien> ChungChiNhanViens { get; set; }
+        public virtual DbSet<DanhMucChungChi> DanhMucChungChis { get; set; }
+        public virtual DbSet<LoaiChungChi> LoaiChungChis { get; set; }
+        public virtual DbSet<NhanVien> NhanViens { get; set; }
+        public virtual DbSet<NhomCCTheoChucVu> NhomCCTheoChucVus { get; set; }
     }
 }

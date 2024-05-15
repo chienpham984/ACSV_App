@@ -1,0 +1,68 @@
+﻿@model IEnumerable<testsignalr.Models.ModelView.ChucVuItem>
+@{
+    ViewBag.Title = "NhomChungChiTheoChucVu";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int stt = 0;
+}
+
+<h2>NhomChungChiTheoChucVu</h2>
+<select id="myCompany"></select>
+<Div class="col-12">
+    <Div class="col-6">
+        <table class="table">
+            <tr>
+                <th>STT</th>
+                <th>Tên chức vụ</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                stt = stt + 1;
+                <tr class="@item.IdChucVu">
+                    <td>
+                        @stt.ToString()
+                    </td>
+                    <td >
+                        @item.TenChucVu.Trim()
+                    </td>
+                </tr>
+            }
+        </table>
+    </Div>
+    <Div class="col-6">
+
+    </Div>
+</Div>
+    <script>
+
+$(document).ready(function(){
+    // Lấy danh sách từ ViewBag
+    var dataList = @Html.Raw(Json.Encode(ViewBag.dsCongTy));
+
+    // Đảm bảo danh sách có dữ liệu trước khi xử lý
+    if(dataList.length > 0) {
+        // Duyệt qua mỗi đối tượng trong danh sách và thêm vào dropdown
+        $.each(dataList, function(index, item) {
+            $('#myCompany').append($('<option>', {
+                value: item.Id,
+                text: item.MaCongTy
+            }));
+        });
+    } else {
+        // Trường hợp không có dữ liệu
+        $('#myCompany').append($('<option>', {
+            value: '',
+            text: 'Không có dữ liệu'
+        }));
+    }
+    $('table tbody tr').dblclick(function () {
+        // Lấy giá trị của class
+        var classValue = $(this).attr('class');
+
+        // In ra giá trị của class
+        alert("Class value: " + classValue);
+
+        // Hoặc bạn có thể thực hiện các thao tác khác dựa trên giá trị của class ở đây
+    });
+
+});
+    </script>
