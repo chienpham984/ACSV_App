@@ -4,12 +4,12 @@
     Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
     int stt = 0;
 }
-
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
 <h2>NhomChungChiTheoChucVu</h2>
 <select id="myCompany"></select>
 <Div class="col-12">
     <Div class="col-6">
-        <table class="table">
+        <table class="table mytable">
             <tr>
                 <th>STT</th>
                 <th>Tên chức vụ</th>
@@ -28,24 +28,27 @@
             }
         </table>
     </Div>
-    <Div class="col-6">
+    <Div class="col-6 tracertDiv">
 
     </Div>
 </Div>
-    <script>
+<script>
 
 $(document).ready(function(){
     // Lấy danh sách từ ViewBag
     var dataList = @Html.Raw(Json.Encode(ViewBag.dsCongTy));
-
-    // Đảm bảo danh sách có dữ liệu trước khi xử lý
+    var idcongty = @ViewBag.IdCongTy;
     if(dataList.length > 0) {
         // Duyệt qua mỗi đối tượng trong danh sách và thêm vào dropdown
         $.each(dataList, function(index, item) {
-            $('#myCompany').append($('<option>', {
+            var option = $('<option>', {
                 value: item.Id,
                 text: item.MaCongTy
-            }));
+            });
+            if (item.Id == idcongty) {
+                option.prop('selected', true);
+            }
+            $('#myCompany').append(option);
         });
     } else {
         // Trường hợp không có dữ liệu
@@ -54,15 +57,32 @@ $(document).ready(function(){
             text: 'Không có dữ liệu'
         }));
     }
-    $('table tbody tr').dblclick(function () {
+    $('.mytable tbody tr').dblclick(function () {
         // Lấy giá trị của class
         var classValue = $(this).attr('class');
-
+        $('.mytable tbody tr').removeClass("Active");
+        $(this).addClass("Active");
         // In ra giá trị của class
-        alert("Class value: " + classValue);
+        gettracert(classValue);
 
-        // Hoặc bạn có thể thực hiện các thao tác khác dựa trên giá trị của class ở đây
     });
-
+    $("#myCompany").change(function () {
+        var selectedOption = $(this).val();
+        window.location = '/Administrator/ChungChi/NhomChungChiTheoChucVu?IdCongTy=' + selectedOption;
+        // Thực hiện các hành động khác dựa trên sự lựa chọn ở đây
+    });
 });
-    </script>
+    function gettracert(idchucvu) {
+        $.ajax({
+            url: '/Administrator/ChungChi/getListTracert',
+            type: 'GET',
+            data: { tracertId: idchucvu },
+            success: function (data) {
+                $(".tracertDiv").html(data);
+            },
+            error: function (xhr, status, error) {
+                window.location = '/Login/Signin';
+            }
+        });
+    }
+</script>

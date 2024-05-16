@@ -1,0 +1,27 @@
+﻿@model IEnumerable<testsignalr.Models.ModelView.TracertItem>
+@{
+    int stt = 0;
+}
+<table>
+    <tr>
+        <th></th>
+        <th>Mã Chứng chỉ</th>
+        <th>Tên Chứng chỉ</th>
+        <th>Bắt buộc</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        stt = stt + 1;
+        <tr>
+            <td>
+               @stt.ToString()
+            </td>
+            <td>
+                @item.MaChungChi.Trim()
+            </td>
+            <td>
+                @item.TenChungChi.Trim()
+            </td>
+        </tr>
+    }
+</table>

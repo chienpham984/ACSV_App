@@ -31,11 +31,42 @@ namespace testsignalr.Areas.Administrator.Controllers
                     IdCongTy = dsCongTy[0].Id;
                 dsChucVu = db.Database.SqlQuery<ChucVuItem>("exec SPGetListJob " + IdCongTy.ToString()).ToList();
             }
-           
+            ViewBag.IdCongTy = IdCongTy;
             ViewBag.dsCongTy = dsCongTy;
             return View(dsChucVu);
         }
-        
+
+        public ActionResult getListTracert(int tracertId)
+        {
+            List<TracertItem> dsChungChi = new List<TracertItem>();
+            using (var db = new HumanManagementEntities())
+            {
+                dsChungChi = db.Database.SqlQuery<TracertItem>("exec SPGetListTracert " + tracertId.ToString()).ToList();
+            }
+            if (dsChungChi.Count == 0)
+                return Json("Data empty", JsonRequestBehavior.AllowGet);
+            return PartialView("~/Areas/Administrator/Views/ChungChi/_NhomChungChiTheoChucVu.cshtml", dsChungChi);
         }
+
+        public ActionResult getEmployeeTracert()
+        {
+            List<DanhMucCongTy> dsCongTy = new List<DanhMucCongTy>();
+            using (var db = new HumanManagementEntities())
+            {
+                dsCongTy = db.DanhMucCongTies.OrderBy(c => c.MaCongTy).ToList();
+            }
+            return View(dsCongTy);
+        }
+        public ActionResult getDetailEmployeeTracert(string MaCongTy)
+        {
+           List<EmpTracertItem> dsTracert = new List<EmpTracertItem>();
+           using (var db = new HumanManagementEntities())
+            {
+                dsTracert = db.Database.SqlQuery<EmpTracertItem>("exec SPGetListEmployeeTracert '" + MaCongTy.ToString() + "'").ToList();
+            }
+            return Json(dsTracert, JsonRequestBehavior.AllowGet);
+        }
+
+    }
 
 }
