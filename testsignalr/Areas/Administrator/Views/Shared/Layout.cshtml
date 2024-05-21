@@ -15,10 +15,11 @@
 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">*@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <link href="~/css/mainStyle.css" rel="stylesheet" />
     <link href="~/css/all.min.css" rel="stylesheet" />
     <link href="~/css/ionicons.min.css" rel="stylesheet" />
@@ -42,8 +43,12 @@
     <script src="~/css/datatables.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <script src="~/Scripts/mainJquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="~/assets/DataTables/datatables.min.css" />
-    <script type="text/javascript" src="~/assets/DataTables/datatables.min.js"></script>
+    <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.js"></script>
+
 
 </head>
 <body>
@@ -91,37 +96,46 @@
 
                     <nav class="main-menu">
                         <ul>
-                            <li><a href="/ThongBao/DanhSachHetHan/"><i class="fas fa-bell"></i>Thông báo</a></li>
+                            <li><a href="@Url.Action("ThongBao", "Common")"><i class="fas fa-bell"></i>Thông báo</a></li>
                             <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Quản lý nhân sự +</a>
+                                <a href="#" class="toggle"><i class="fas fa-user"></i> Thông tin nhân sự <i class="fas fa-caret-down"></i></a>
                                 <ul class="submenu">
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách nhân sự</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục công ty</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục Phòng ban</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục Chức vụ</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Loại hợp đồng</a></li>
+                                    <li><a href='@Url.Action("Index", "NhanViens")'><i class="fas fa-caret-right"></i>Hồ sơ cá nhân</a></li>
+                                    <li><a href='@Url.Action("Index", "NhanViens")'><i class="fas fa-caret-right"></i>Hợp đồng lao động</a></li>
+                                    
                                 </ul>
                             </li>
                             <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Chứng chỉ +</a>
+                                <a href="#" class="toggle"><i class="fas fa-certificate"></i> Chứng chỉ <i class="fas fa-caret-down"></i></a>
                                 <ul class="submenu">
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên</a></li>
-                                    <li><a href="/Administrator/ChungChi/DanhsachChungChi"><i class="fas fa-caret-right"></i>Danh mục chứng chỉ</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Nhóm chứng chỉ theo chức vụ</a></li>
+                                    <li><a href="/Administrator/ChungChi/getEmployeeTracertSimple"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên</a></li>
+                                    <li><a href="/Administrator/ChungChi/getEmployeeTracert"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên bản đủ</a></li>
+                                    <li><a href="/Administrator/ChungChi/getEmployeeTracert"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên ngoài</a></li>
+                                    <li><a href="/Administrator/ChungChi/getEmployeeTracert"><i class="fas fa-caret-right"></i>Danh sách nhân viên ngoài</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="#" class="toggle"><i class="fas fa-graduation-cap"></i> Quản lý đào tạo <i class="fas fa-caret-down"></i></a>
+                                <ul class="submenu">
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Mở lớp đào tạo</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp đang mở</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp hoàn thành</a></li>
                                     <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách giáo viên</a></li>
                                 </ul>
                             </li>
                             <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Quản lý đào tạo +</a>
+                                <a href="#" class="toggle"><i class="fas fa-graduation-cap"></i> Danh mục <i class="fas fa-caret-down"></i></a>
                                 <ul class="submenu">
-                                   
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Mở lớp đào tạo</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp đang mở</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp hoàn thành</a></li>
+                                    <li><a href="@Url.Action("Index", "DanhMucCongTies")"><i class="fas fa-caret-right"></i>Danh mục công ty</a></li>
+                                    <li><a href="@Url.Action("Index", "DanhMucPhongBans")"><i class="fas fa-caret-right"></i>Danh mục Phòng ban</a></li>
+                                    <li><a href="@Url.Action("Index", "DanhMucChucVus")"><i class="fas fa-caret-right"></i>Danh mục Chức vụ</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục hợp đồng</a></li>
+                                    <li><a href="/Administrator/ChungChi/DanhsachChungChi"><i class="fas fa-caret-right"></i>Danh mục chứng chỉ</a></li>
+                                    <li><a href="/Administrator/ChungChi/NhomChungChiTheoChucVu"><i class="fas fa-caret-right"></i>Nhóm chứng chỉ</a></li>
                                 </ul>
                             </li>
                             <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Hồ sơ cá nhân +</a>
+                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Hồ sơ cá nhân <i class="fas fa-caret-down"></i></a>
                                 <ul class="submenu">
                                     <li><a href="#"><i class="fas fa-caret-right"></i>Thông tin cá nhân</a></li>
                                     <li><a href="#"><i class="fas fa-caret-right"></i>Đổi mật khẩu</a></li>

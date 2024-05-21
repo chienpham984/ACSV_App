@@ -1,0 +1,70 @@
+﻿@model IEnumerable<testsignalr.Models.ModelData.DanhMucCongTy>
+
+@{
+    ViewBag.Title = "getEmployeeTracertSimple";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int stt = 0;
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>*@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<img id="loading" src="~/Image/loading.gif" style="display:none; position:fixed; top:50%; left:50%; width:250px; height:250px;" />
+<ul class="nav nav-tabs">
+
+    @foreach (var item in Model)
+    {
+        stt = stt + 1;
+        if (stt == 1)
+        {
+            <li class="active"><a data-toggle="tab" href="#@item.MaCongTy.Trim()">@item.MaCongTy.Trim()</a></li>
+        }
+        else
+        {
+            <li><a data-toggle="tab" href="#@item.MaCongTy.Trim()">@item.MaCongTy.Trim()</a></li>
+        }
+    }
+</ul>
+<div class="tab-content">
+    @foreach (var item in Model)
+    {
+        <div id="@item.MaCongTy.Trim()" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Loading...</p>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.nav-tabs a').on('show.bs.tab', function (e) {
+            var targetTab = $(e.target).attr("href"); // Get the target tab
+            var macongty = $(e.target).text();
+            if ($(targetTab).text().includes("Loading...")) { // Check if content is already loaded
+                $.ajax({
+                    url: '/Administrator/ChungChi/getDetailEmployeeTracertSimple',
+                    type: 'GET',
+                    data: { MaCongTy: macongty },
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+                    success: function (data) {
+                        $(targetTab).html(data);
+                        $("#loading").hide();
+                        $(targetTab).addClass("show");
+                        $(targetTab).addClass("active");
+                        $(targetTab).addClass("in");
+                    },
+                    error: function (xhr, status, error) {
+                        window.location = '/Login/Signin';
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+                });
+
+            }
+        });
+        $('.nav-tabs li.active a').trigger('show.bs.tab');
+    });
+</script>

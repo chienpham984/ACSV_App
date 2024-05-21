@@ -12,11 +12,16 @@ namespace testsignalr.Models.ModelView
         public string TenChucVu { get; set; }
         public string HoTen { get; set; }
         public string MaNhanVien { get; set; }
-        public DateTime? NgaySinh { get; set; }
+        public string NgaySinh { get; set; }
         public string TenChungChi { get; set; }
         public string MaChungChi { get; set; }
-        public DateTime? NgayCap { get; set; }
-        public DateTime? NgayHetHan { get; set; }
+        public string NgayCap { get; set; }
+        public string NgayHetHan { get; set; }
         public int TinhTrang { get; set; }
+        public string FirstDate { get; set; }
+        public string EndDate { get; set; }
+        //public string LastStartDate { get; set; }
+        //public string LastEndDate { get; set; }
+        public int NumberRows { get; set; }
     }
 }

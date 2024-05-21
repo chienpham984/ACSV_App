@@ -1,0 +1,280 @@
+﻿@model IEnumerable<testsignalr.Models.ModelData.DanhMucCongTy>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int stt = 0;
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+@*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">*@
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>*@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<link href="~/Content/popupStyle.css" rel="stylesheet" />
+<img id="loading" src="~/Image/loading.gif" style="display:none; position:fixed; top:50%; left:50%; width:250px; height:250px;" />
+<div style="height:100vh;">
+    <ul class="nav nav-tabs">
+
+        @foreach (var item in Model)
+        {
+            stt = stt + 1;
+            if (stt == 1)
+            {
+                <li class="active"><a data-toggle="tab" href="#@item.MaCongTy.Trim()">@item.MaCongTy.Trim()</a></li>
+            }
+            else
+            {
+                <li><a data-toggle="tab" href="#@item.MaCongTy.Trim()">@item.MaCongTy.Trim()</a></li>
+            }
+        }
+    </ul>
+    <div class="tab-content">
+        @foreach (var item in Model)
+        {
+            <div id="@item.MaCongTy.Trim()" class="tab-pane fade" style="height:calc(100vh-200px); overflow:scroll;">
+                <h3>Menu 1</h3>
+                <p>Loading...</p>
+            </div>
+        }
+    </div>
+    <div style="min-height:200px; border:solid 1px red;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#HopDong">Hợp đồng lao động</a></li>
+            <li><a data-toggle="tab" href="#TheLamViec">Thẻ làm việc</a></li>
+            <li><a data-toggle="tab" href="#LyLichTuPhap">Lý lịch tư pháp</a></li>
+            <li><a data-toggle="tab" href="#NguoiPhuThuoc">Người phụ thuộc</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="HopDong" class="tab-pane fade active in">
+                <table id="tableContainer" class="Table">
+                </table>
+            </div>
+            <div id="TheLamViec" class="tab-pane fade">
+                <table id="tableTheLamViec" class="Table">
+                </table>
+            </div>
+            <div id="LyLichTuPhap" class="tab-pane fade">
+                <table id="tableLyLichTuPhap" class="Table">
+                </table>
+            </div>
+            <div id="NguoiPhuThuoc" class="tab-pane fade">
+                <table id="tableLyLichTuPhap" class="Table">
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div id="overlay" class="overlay"></div>
+<div id="popup" class="popup">
+    <div class="popup-header">
+        Thong tin header
+        <span class="close">&times;</span>
+    </div>
+    <div class="popup-content">
+        <div class="row col-12">
+            <div class="col-10" style="border:solid 1px #ff6a00; float:left;">
+                <div class="col-6" style="float:left;">
+                    <p class="label">Họ tên:</p> <input class="textDisplay" type="text" readonly value="Pham Van Chien" style="border:solid 1px #ff6a00;" />
+                </div>
+                <div class="col-6" style="float:left;">
+                    <p class="label">Họ tên:</p>  <input class="textDisplay" type="text" readonly value="Pham Van Chien" style="border:solid 1px #ff6a00;" />
+                </div>
+                <div class="col-6" style="float:left;">
+                    <p class="label">Họ tên:</p>  <input class="textDisplay" type="text" readonly value="Pham Van Chien" style="border:solid 1px #ff6a00;" />
+                </div>
+                <div class="col-6" style="float:left;">
+                    <p class="label">Họ tên:</p>  <input class="textDisplay" type="text" readonly value="Pham Van Chien" style="border:solid 1px #ff6a00;" />
+                </div>
+            </div>
+            <div style="height:200px; border:solid 1px #ff6a00; float:left;" class="col-2">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.nav-tabs a').on('show.bs.tab', function (e) {
+            var targetTab = $(e.target).attr("href"); // Get the target tab
+            var macongty = $(e.target).text();
+            if ($(targetTab).text().includes("Loading...")) { // Check if content is already loaded
+                $.ajax({
+                    url: '/Administrator/NhanViens/getEmployeeByCompany',
+                    type: 'GET',
+                    data: { companyCode: macongty },
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+                    success: function (data) {
+                        $(targetTab).html(data);
+                        $("#loading").hide();
+                        $(targetTab).addClass("show");
+                        $(targetTab).addClass("active");
+                        $(targetTab).addClass("in");
+                    },
+                    error: function (xhr, status, error) {
+                        window.location = '/Login/Signin';
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+                });
+
+            }
+        });
+        $(document).on('click', '#example tbody tr', function () {
+            var manv = $(this).find('td:nth-child(2)').text();
+            $.ajax({
+                url: '/Administrator/NhanViens/getJsonData',
+                type: 'GET',
+                data: { MaNhanVien: manv },
+                contentType: 'application/html ; charset:utf-8',
+                dataType: 'json',
+                beforeSend: function () {
+                    $("#loading").show();
+                },
+                success: function (data) {
+                    var danhsachhopdong = data.danhSachHopDong;
+                    var stt = 0;
+                    var table = $('<table>').addClass('table');
+                    var thead = $('<thead>').appendTo(table);
+                    var tbody = $('<tbody>').appendTo(table);
+
+                    // Tạo header cho bảng
+                    var headerRow = $('<tr>').appendTo(thead);
+                    $('<th>').text('STT').appendTo(headerRow);
+                    $('<th>').text('Họ tên').appendTo(headerRow);
+                    $('<th>').text('Mã NV').appendTo(headerRow);
+                    $('<th>').text('Loại Hợp đồng').appendTo(headerRow);
+                    $('<th>').text('Ngày cấp').appendTo(headerRow);
+
+                    // Xóa toàn bộ nội dung trong tbody trước khi đổ dữ liệu mới
+                    tbody.empty();
+
+                    // Đổ dữ liệu vào bảng
+                    $.each(danhsachhopdong, function (index, item) {
+                        stt = stt + 1;
+                        var row = $('<tr>').appendTo(tbody);
+                        $('<td>').text(stt).appendTo(row);
+                        $('<td>').text(item.HoTen).appendTo(row);
+                        $('<td>').text(item.MaNhanVien).appendTo(row);
+                        $('<td>').text(item.TenLoaiHopDong).appendTo(row);
+                        $('<td>').text(item.NgayCap).appendTo(row);
+                    });
+
+                    // Thêm bảng vào container
+                    $('#tableContainer').empty().append(table);
+
+
+                    var danhsachTheLamViec = data.danhSachTheLamViec;
+                    stt = 0
+                    var table1 = $('<table>').addClass('table');
+                    var thead1 = $('<thead>').appendTo(table1);
+                    var tbody1 = $('<tbody>').appendTo(table1);
+
+                    // Tạo header cho bảng
+                    var headerRow1 = $('<tr>').appendTo(thead1);
+                    $('<th>').text('STT').appendTo(headerRow1);
+                    $('<th>').text('Họ tên').appendTo(headerRow1);
+                    $('<th>').text('Mã NV').appendTo(headerRow1);
+                    $('<th>').text('Ngày hết hạn').appendTo(headerRow1);
+
+                    // Xóa toàn bộ nội dung trong tbody trước khi đổ dữ liệu mới
+                    tbody1.empty();
+
+                    // Đổ dữ liệu vào bảng
+                    $.each(danhsachTheLamViec, function (index, item) {
+                        stt = stt + 1;
+                        var row1 = $('<tr>').appendTo(tbody1);
+                        $('<td>').text(stt).appendTo(row1);
+                        $('<td>').text(item.HoTen).appendTo(row1);
+                        $('<td>').text(item.MaNhanVien).appendTo(row1);
+                        $('<td>').text(item.HanSuDung).appendTo(row1);
+                    });
+
+                    // Thêm bảng vào container
+                    $('#tableTheLamViec').empty().append(table1);
+
+                    var danhSachLyLichTuPhap = data.danhSachLyLichTuPhap;
+                    stt = 0
+                    var table2 = $('<table>').addClass('table');
+                    var thead2 = $('<thead>').appendTo(table2);
+                    var tbody2 = $('<tbody>').appendTo(table2);
+
+                    // Tạo header cho bảng
+                    var headerRow2 = $('<tr>').appendTo(thead2);
+                    $('<th>').text('STT').appendTo(headerRow2);
+                    $('<th>').text('Họ tên').appendTo(headerRow2);
+                    $('<th>').text('Mã NV').appendTo(headerRow2);
+                    $('<th>').text('Ngày hết hạn').appendTo(headerRow2);
+
+                    // Xóa toàn bộ nội dung trong tbody trước khi đổ dữ liệu mới
+                    tbody2.empty();
+
+                    // Đổ dữ liệu vào bảng
+                    $.each(danhSachLyLichTuPhap, function (index, item) {
+                        stt = stt + 1;
+                        var row2 = $('<tr>').appendTo(tbody2);
+                        $('<td>').text(stt).appendTo(row2);
+                        $('<td>').text(item.HoTen).appendTo(row2);
+                        $('<td>').text(item.MaNhanVien).appendTo(row2);
+                        $('<td>').text(item.HanSuDung).appendTo(row2);
+                    });
+
+                    // Thêm bảng vào container
+                    $('#tableLyLichTuPhap').empty().append(table2);
+                },
+                error: function (xhr, status, error) {
+                    window.location = '/Login/Signin';
+                },
+                complete: function () {
+                    $("#loading").hide();
+                }
+            });
+        });
+        //$(document).keydown(function (event) {
+        //    // Kiểm tra xem có phải Ctrl và F đã được nhấn cùng một lúc không
+        //    if (event.ctrlKey && event.key === 'f') {
+        //        // Xử lý khi Ctrl + F được nhấn
+        //        event.preventDefault(); // Ngăn chặn hành động mặc định của trình duyệt (ví dụ: tìm kiếm trang)
+
+        //        // Thực hiện các hành động bạn muốn khi Ctrl + F được nhấn
+        //        alert('Bạn đã nhấn tổ hợp phím Ctrl + F');
+        //    }
+        //});
+        $('.nav-tabs li.active a').trigger('show.bs.tab');
+
+        $(document).on('dblclick', '#example tbody tr', function () {
+            var manv = $(this).find('td:eq(1)').text(); // Lấy giá trị của cột số 2 (index 1)
+            if (manv.trim() != "") {
+                showNewWindow();
+            }
+
+
+        });
+
+        var popup = document.getElementById("popup");
+        var closeButton = document.querySelector(".popup .close");
+        var overlay = document.getElementById("overlay");
+        closeButton.addEventListener("click", function () {
+            hidePopup();
+        });
+        document.getElementById("addButton").addEventListener("click", function () {
+            showNewWindow();
+        });
+
+    });
+    function showNewWindow() {
+        popup.style.display = "block";
+        overlay.style.display = "block";
+    }
+    function hidePopup() {
+        popup.style.display = "none";
+        overlay.style.display = "none";
+    }
+</script>
+

@@ -1,0 +1,47 @@
+﻿
+<table id="example" class="display">
+
+    <thead>
+        <tr>
+            <th>Tên công ty</th>
+            <th>Họ Tên</th>
+            <th>Mã NV</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+            <th>CCCD</th>
+            <th>Quê Quán</th>
+            <th>Nơi sinh</th>
+            <th>Địa chỉ thường trú</th>
+        </tr>
+    </thead>
+    <tbody class="group">
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+
+        // Lấy danh sách từ ViewBag
+        var originalList = @Html.Raw(Json.Encode(ViewBag.dsTracert));
+        const mytable =  $('#example').DataTable({
+            data: originalList,
+            paging: false,
+            ordering: false,
+            columns: [
+                { data: 'TenCongTy', visible: false},
+                { data: 'HoTen'},
+                { data: 'MaNhanVien' },
+                { data: 'NgaySinh'},
+                { data: 'GioiTinh'},
+                { data: 'CCCD'},
+                { data: 'QueQuan' },
+                { data: 'NoiSinh' },
+                { data: 'DiaChiThuongTru' },
+            ],
+            rowGroup: {
+                dataSrc: ['TenCongTy']
+            }
+        });
+    });
+
+</script>

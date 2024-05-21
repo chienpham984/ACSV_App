@@ -1,0 +1,83 @@
+﻿
+<table id="example" class="display">
+
+    <thead>
+        <tr>
+            <th>Tên Phòng</th>
+            <th>Chức vụ</th>
+            <th>Họ Tên</th>
+            <th>Mã NV</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+            <th>CCCD</th>
+            <th>Quê Quán</th>
+            <th>Lý lịch tư pháp</th>
+            <th>Thẻ làm việc</th>
+            <th>Loại hợp đồng</th>
+        </tr>
+    </thead>
+    <tbody class="group">
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+
+        // Lấy danh sách từ ViewBag
+        var originalList = @Html.Raw(Json.Encode(ViewBag.dsTracert));
+        const mytable =  $('#example').DataTable({
+            data: originalList,
+            paging: false,
+            ordering: false,
+            columns: [
+                { data: 'TenPhong', visible: false},
+                { data: 'TenChucVu', visible: false},
+                { data: 'HoTen'},
+                { data: 'MaNhanVien' },
+                { data: 'NgaySinh'},
+                { data: 'GioiTinh'},
+                { data: 'CCCD'},
+                { data: 'QueQuan' },
+                { data: 'HanLyLich' },
+                { data: 'HanTheLamViec'},
+                { data: 'LoaiHopDong'},
+                { data: 'TinhTrangLyLich', visible: false },
+                { data: 'TinhTrangTheLamViec', visible: false },
+                { data: 'TinhTrangHopDong', visible: false }
+            ],
+            rowGroup: {
+                dataSrc: ['TenPhong', 'TenChucVu']
+            }
+        });
+        mytable.rows().every(function () {
+            var rowData1 = this.data();
+            var cellValue = rowData1["TinhTrangLyLich"];
+            if (cellValue === 1 )
+                $(this.node()).find('td:eq(6)').addClass("hetHan");
+            else if (cellValue === 2 )
+                $(this.node()).find('td:eq(6)').addClass("sapHetHan15");
+            else if (cellValue === 3 )
+                $(this.node()).find('td:eq(6)').addClass("sapHetHan30");
+
+            var thelv = rowData1["TinhTrangTheLamViec"];
+            if (thelv === 1)
+                $(this.node()).find('td:eq(7)').addClass("hetHan");
+            else if (thelv === 2)
+                $(this.node()).find('td:eq(7)').addClass("sapHetHan15");
+            else if (thelv === 3)
+                $(this.node()).find('td:eq(7)').addClass("sapHetHan30");
+
+            var hd = rowData1["TinhTrangHopDong"];
+            if (hd === 1)
+                $(this.node()).find('td:eq(8)').addClass("hetHan");
+            else if (hd === 2)
+                $(this.node()).find('td:eq(8)').addClass("sapHetHan15");
+            else if (hd === 3)
+                $(this.node()).find('td:eq(8)').addClass("sapHetHan30");
+        });
+        
+
+      
+    });
+
+</script>

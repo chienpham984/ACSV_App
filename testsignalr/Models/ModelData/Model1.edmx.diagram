@@ -5,16 +5,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4494db3de11145fb97cb3c005061973a" Name="Diagram1">
-        <EntityTypeShape EntityType="HumanManagementModel.ChiTietTaiLieu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HumanManagementModel.DanhMucChucVu" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HumanManagementModel.DanhMucCongTy" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HumanManagementModel.DanhMucPhongBan" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HumanManagementModel.LoaiTaiLieu" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HumanManagementModel.ChungChiNhanVien" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="HumanManagementModel.DanhMucChungChi" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="HumanManagementModel.LoaiChungChi" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="HumanManagementModel.NhanVien" Width="1.5" PointX="7.75" PointY="3.75" />
-        <EntityTypeShape EntityType="HumanManagementModel.NhomCCTheoChucVu" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.ChiTietHopDong" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.ChiTietTaiLieu" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.ChungChiNhanVien" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.ChungChiNhanVienNgoai" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.CongTyThueNgoai" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.DanhMucChucVu" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.DanhMucChungChi" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.DanhMucChungChiTheoHang" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.DanhMucCongTy" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.DanhMucCongTyNgoai" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.DanhMucHangHangKhong" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.DanhMucPhongBan" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.LoaiChungChi" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.LoaiHopDong" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.LoaiQuanHe" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.LyLichTuPhap" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.LyLichTuPhapNgoai" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.NguoiPhuThuoc" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.NhanVien" Width="1.5" PointX="6.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.NhanVienThueNgoai" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.NhomCCTheoChucVu" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.NhomCCTheoHangHK" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.sysdiagram" Width="1.5" PointX="10.75" PointY="6.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.TheLamViec" Width="1.5" PointX="10.75" PointY="9.75" />
+        <EntityTypeShape EntityType="HumanManagementModel.LoaiTaiLieu" Width="1.5" PointX="12.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

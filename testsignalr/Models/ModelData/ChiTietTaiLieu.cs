@@ -17,7 +17,7 @@ namespace testsignalr.Models.ModelData
         public int Id { get; set; }
         public Nullable<int> IdLoaiTaiLieu { get; set; }
         public Nullable<int> IdNhanVien { get; set; }
-        public string DuongDan { get; set; }
+        public string Path { get; set; }
         public string LoaiFile { get; set; }
     }
 }

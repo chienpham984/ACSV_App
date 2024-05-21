@@ -3,6 +3,78 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
 }
-
+<link href="~/Content/popupStyle.css" rel="stylesheet" />
 <h2>Index</h2>
+<div id="overlay" class="overlay"></div>
+<div id="popup" class="popup">
+    <div class="popup-header">
+        Thong tin header
+        <span class="close">&times;</span>
+    </div>
+    <div class="popup-content">
+        <!-- Nội dung của popup ở đây -->
+    </div>
+</div>
 
+<button id="addButton">click here</button>
+<button id="alertFunction">alert</button>
+
+<script>
+    var popup = document.getElementById("popup");
+    var closeButton = document.querySelector(".popup .close");
+    var overlay = document.getElementById("overlay");
+
+    var isDragging = false;
+    var offsetX, offsetY;
+
+    // Hàm bắt đầu di chuyển
+    function startDrag(e) {
+    isDragging = true;
+    var boundingRect = popup.getBoundingClientRect();
+    offsetX = e.clientX - boundingRect.left;
+    offsetY = e.clientY - boundingRect.top;
+    }
+
+    // Hàm kết thúc di chuyển
+    function endDrag() {
+    isDragging = false;
+    }
+
+    // Hàm di chuyển popup
+    function movePopup(e) {
+    if (isDragging) {
+    var newX = e.clientX - offsetX;
+    var newY = e.clientY - offsetY;
+    popup.style.left = newX + "px";
+    popup.style.top = newY + "px";
+    }
+    }
+
+    // Thêm sự kiện khi click vào header để di chuyển popup
+    document.querySelector(".popup-header").addEventListener("mousedown", startDrag);
+    document.addEventListener("mouseup", endDrag);
+    document.addEventListener("mousemove", movePopup);
+
+    // Thêm sự kiện khi click vào nút close để ẩn popup
+    closeButton.addEventListener("click", function () {
+    popup.style.display = "none";
+    });
+    document.getElementById("addButton").addEventListener("click", function () {
+    showNewWindow();
+    });
+
+    document.getElementById("alertFunction").addEventListener("click", function () {
+        alert('hi');
+    });
+    closeButton.addEventListener("click", hidePopup);
+    function showNewWindow() {
+        popup.style.display = "block";
+        overlay.style.display = "block";
+    }
+    function hidePopup() {
+        overlay.style.display = "none";
+        popup.style.display = "none";
+
+    }
+   
+</script>

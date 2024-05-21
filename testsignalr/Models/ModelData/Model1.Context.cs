@@ -25,15 +25,30 @@ namespace testsignalr.Models.ModelData
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ChiTietHopDong> ChiTietHopDongs { get; set; }
         public virtual DbSet<ChiTietTaiLieu> ChiTietTaiLieux { get; set; }
-        public virtual DbSet<DanhMucChucVu> DanhMucChucVus { get; set; }
-        public virtual DbSet<DanhMucCongTy> DanhMucCongTies { get; set; }
-        public virtual DbSet<DanhMucPhongBan> DanhMucPhongBans { get; set; }
-        public virtual DbSet<LoaiTaiLieu> LoaiTaiLieux { get; set; }
         public virtual DbSet<ChungChiNhanVien> ChungChiNhanViens { get; set; }
+        public virtual DbSet<ChungChiNhanVienNgoai> ChungChiNhanVienNgoais { get; set; }
+        public virtual DbSet<CongTyThueNgoai> CongTyThueNgoais { get; set; }
+        public virtual DbSet<DanhMucChucVu> DanhMucChucVus { get; set; }
         public virtual DbSet<DanhMucChungChi> DanhMucChungChis { get; set; }
+        public virtual DbSet<DanhMucChungChiTheoHang> DanhMucChungChiTheoHangs { get; set; }
+        public virtual DbSet<DanhMucCongTy> DanhMucCongTies { get; set; }
+        public virtual DbSet<DanhMucCongTyNgoai> DanhMucCongTyNgoais { get; set; }
+        public virtual DbSet<DanhMucHangHangKhong> DanhMucHangHangKhongs { get; set; }
+        public virtual DbSet<DanhMucPhongBan> DanhMucPhongBans { get; set; }
         public virtual DbSet<LoaiChungChi> LoaiChungChis { get; set; }
+        public virtual DbSet<LoaiHopDong> LoaiHopDongs { get; set; }
+        public virtual DbSet<LoaiQuanHe> LoaiQuanHes { get; set; }
+        public virtual DbSet<LyLichTuPhap> LyLichTuPhaps { get; set; }
+        public virtual DbSet<LyLichTuPhapNgoai> LyLichTuPhapNgoais { get; set; }
+        public virtual DbSet<NguoiPhuThuoc> NguoiPhuThuocs { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
+        public virtual DbSet<NhanVienThueNgoai> NhanVienThueNgoais { get; set; }
         public virtual DbSet<NhomCCTheoChucVu> NhomCCTheoChucVus { get; set; }
+        public virtual DbSet<NhomCCTheoHangHK> NhomCCTheoHangHKs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<TheLamViec> TheLamViecs { get; set; }
+        public virtual DbSet<LoaiTaiLieu> LoaiTaiLieux { get; set; }
     }
 }

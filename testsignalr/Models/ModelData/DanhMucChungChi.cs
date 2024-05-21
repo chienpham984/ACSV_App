@@ -17,5 +17,6 @@ namespace testsignalr.Models.ModelData
         public int Id { get; set; }
         public string TenChungChi { get; set; }
         public string MaChungChi { get; set; }
+        public Nullable<int> IdHangHangKhong { get; set; }
     }
 }

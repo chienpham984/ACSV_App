@@ -1,0 +1,116 @@
+﻿
+<table id="example" class="display">
+
+    <thead>
+        <tr>
+            <th>Tên Phòng</th>
+            <th>Chức vụ</th>
+            <th>Họ Tên</th>
+            <th>Mã NV</th>
+            <th>Ngày sinh</th>
+            <th>Tên chứng chỉ</th>
+            <th>Mã chứng chỉ</th>
+            <th>Đào tạo lần đầu</th>
+            <th>Số lần ở giữa</th>
+            <th>Đào tạo lần cuối</th>
+            <th>TinhTrang</th>
+        </tr>
+    </thead>
+    <tbody class="group">
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+   
+        // Lấy danh sách từ ViewBag
+        var originalList = @Html.Raw(Json.Encode(ViewBag.dsTracert));
+        // Sử dụng hàm map để tạo List mới
+        
+        const newList = Object.values(originalList.reduce((acc, curr) => {
+            const key = `${curr.MaNhanVien}-${curr.MaChungChi}`;
+            if (!acc[key]) {
+                acc[key] = { ...curr, FirstDate: curr.NgayCap + ' - ' + curr.NgayHetHan, EndDate: curr.EndDate, NumberRows: 0 };
+            } else {
+                acc[key].EndDate = curr.NgayCap + ' - ' + curr.NgayHetHan;
+                acc[key].NumberRows++;
+                acc[key].TinhTrang = curr.TinhTrang;
+            }
+            if (acc[key].NumberRows === 0) {
+                acc[key].EndDate = "";
+            }
+            return acc;
+        }, {}));
+
+        const mytable =  $('#example').DataTable({
+            data: newList,
+            paging: false,
+            ordering: false,
+            columns: [
+                { data: 'TenPhong', visible: false},
+                { data: 'TenChucVu', visible: false},
+                { data: 'HoTen'},
+                { data: 'MaNhanVien' },
+                { data: 'NgaySinh'},
+                { data: 'TenChungChi'},
+                { data: 'MaChungChi'},
+                { data: 'FirstDate' },
+                {
+                    data: 'NumberRows',
+                    render: function (data, type, row, meta) {
+                            return data >= 1 ? data - 1 : data;
+                    }
+                },
+                { data: 'EndDate' },
+                { data: 'TinhTrang', visible: false }
+            ],
+            rowGroup: {
+                dataSrc: ['TenPhong', 'TenChucVu']
+            }
+        });
+        //mytable.rows().every(function () {
+        //    var rowData1 = this.data();
+        //    var cellValue = rowData1["TinhTrang"];
+        //    if (cellValue === 1 && rowData1["EndDate"] != "" )
+        //        $(this.node()).find('td:eq(7)').addClass("hetHan"); 
+        //    else if (cellValue === 1 && rowData1["EndDate"] == "")
+        //        $(this.node()).find('td:eq(5)').addClass("hetHan");
+        //    else if (cellValue === 2 && rowData1["EndDate"] != "")
+        //        $(this.node()).find('td:eq(7)').addClass("sapHetHan15");
+        //    else if (cellValue === 2 && rowData1["EndDate"] == "")
+        //        $(this.node()).find('td:eq(5)').addClass("sapHetHan15");
+        //    else if (cellValue === 3 && rowData1["EndDate"] != "")
+        //        $(this.node()).find('td:eq(7)').addClass("sapHetHan30"); 
+        //    else if (cellValue === 3 && rowData1["EndDate"] == "")
+        //        $(this.node()).find('td:eq(5)').addClass("sapHetHan30");
+        //});
+
+        $('#example tbody').on('dblclick', 'tr', function () {
+            var rowData = mytable.row(this).data(); 
+            var column2Value = rowData["MaNhanVien"]; 
+            var column3Value = rowData["MaChungChi"]; 
+        window.location = '/Administrator/ChungChi/showTracertDetailByEmployeeCode?MaNhanVien='+column2Value + '&MaChungChi=' + column3Value;
+        });
+        var groupedRows = {};
+
+        $('#example tbody tr').each(function () {
+            var key = $(this).find('td:eq(0)').text();
+            if (!groupedRows[key]) {
+                groupedRows[key] = [];
+            }
+            groupedRows[key].push($(this));
+        });
+
+        $.each(groupedRows, function (key, rows) {
+            if (rows.length > 1) {
+                var rowspan = rows.length;
+                $(rows[0]).find('td:eq(0)').attr('rowspan', rowspan);
+                for (var i = 1; i < rowspan; i++) {
+                    $(rows[i]).find('td:eq(0)').remove();
+                }
+            }
+        });
+
+    });
+
+</script>

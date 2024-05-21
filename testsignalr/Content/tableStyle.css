@@ -3,3 +3,28 @@
 .Active {
     border:2px solid #ff6a00;
 }
+.hetHan{
+    background-color:#ff6a00;
+    color:white;
+    font-weight:400;
+    border-radius:5px;
+}
+.sapHetHan15 {
+    background-color: #d5c860;
+    font-weight: 400;
+    border-radius: 5px;
+}
+.sapHetHan30 {
+    background-color: #61d580;
+    font-weight: 400;
+    border-radius: 5px;
+}
+
+.nav .active{
+    /*background-color: blue;
+    color: white;*/
+    border-bottom:2px solid #ff6a00;
+}
+table tr :hover{
+    border-bottom:solid 1px #ff6a00;
+}

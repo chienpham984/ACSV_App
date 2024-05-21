@@ -1,0 +1,68 @@
+﻿@model IEnumerable<testsignalr.Models.ModelView.EmpTracertItem>
+
+@{
+    ViewBag.Title = "showTracertDetailByEmployeeCode";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int stt = 0;
+}
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<h2>showTracertDetailByEmployeeCode</h2>
+<table id="example" class="display table">
+
+    <thead>
+        <tr>
+            <th>Stt</th>
+            <th>Tên Phòng</th>
+            <th>Chức vụ</th>
+            <th>Họ Tên</th>
+            <th>Mã NV</th>
+            <th>Ngày sinh</th>
+            <th>Mã chứng chỉ</th>
+            <th>Tên chứng chỉ</th>
+            <th>Ngày cấp</th>
+            <th>Ngày hết hạn</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            stt = stt + 1;
+            <tr>
+                <td>@stt.ToString()</td>
+                <td>@item.TenPhong</td>
+                <td>@item.TenChucVu</td>
+                <td>@item.HoTen</td>
+                <td>@item.MaNhanVien</td>
+                <td>@item.NgaySinh</td>
+                <td>@item.MaChungChi</td>
+                <td>@item.TenChungChi</td>
+                <td>@item.NgayCap</td>
+
+                @if (item.Equals(Model.Last()))
+                {
+                    if (item.TinhTrang == 1)
+                    {
+                        <td class="hetHan">@item.NgayHetHan</td>
+                    }
+                    else if (item.TinhTrang == 2)
+                    {
+                        <td class="sapHetHan15">@item.NgayHetHan</td>
+                    }
+                    else if (item.TinhTrang == 3)
+                    {
+                        <td class="sapHetHan30">@item.NgayHetHan</td>
+                    }
+                    else
+                    {
+                        <td>@item.NgayHetHan</td>
+                    }
+                }
+                else
+                {
+                    <td>@item.NgayHetHan</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

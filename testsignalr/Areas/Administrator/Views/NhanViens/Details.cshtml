@@ -1,0 +1,171 @@
+﻿@model testsignalr.Models.ModelData.NhanVien
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NhanVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChiThuongTru)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiThuongTru)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QueQuan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QueQuan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HonNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HonNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayVaoCongTy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayVaoCongTy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoDienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoDienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayVaoDang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayVaoDang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNhanVien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaNhanVien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CCCD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CCCD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiCap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiCap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiSinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiSinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCongTy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCongTy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdPhongBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdPhongBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdChucVu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdChucVu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayNghiViec)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayNghiViec)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

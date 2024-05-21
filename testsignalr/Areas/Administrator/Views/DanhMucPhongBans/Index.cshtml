@@ -1,0 +1,102 @@
+﻿@model IEnumerable<testsignalr.Models.ModelData.DanhMucPhongBan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+
+<h2 style="text-align:center;">Danh Mục Phòng Ban</h2>
+
+<table id="tableInformation" class="table" style="width:100%;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCongTy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenPhong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stt)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCongTy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenPhong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stt)
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        DataTable.ext.buttons.edit = {
+            action: function (e, dt, node, config) {
+                var Id = table.$('tr.selected').attr('id');
+                if (typeof Id !== "undefined") {
+                    location.href = '@Url.Action("Edit", "DanhMucPhongBans", new { id = "_REPLACE_ID_" })'.replace("_REPLACE_ID_", Id);
+                }
+        }};
+        DataTable.ext.buttons.delete = {
+            action: function (e, dt, node, config) {
+        table.row('.selected').remove().draw(false);
+        }};
+        DataTable.ext.buttons.create = {
+                action: function (e, dt, node, config) {
+        location.href = '@Url.Action("Create", "DanhMucPhongBans")';
+        }};
+        var table = $('#tableInformation').DataTable({
+            "ordering": true,
+            scrollX: true,
+            scrollCollapse: true,
+            stateSave: true,
+            layout: {
+                topStart: {
+                    buttons: [
+                        {
+                            extend: 'create',
+                            text: '',
+                            tag: 'span',
+                            className: 'fa-solid fa-plus'
+                        },
+                        {
+                            extend: 'edit',
+                            text: '',
+                            tag: 'span',
+                            className: 'fa-solid fa-pencil'
+                        },
+                        {
+                            extend: 'delete',
+                            text: '',
+                            tag: 'span',
+                            className: 'fa-solid fa-xmark'
+                        }
+                    ]
+                }
+            }
+        });
+
+        $('#tableInformation tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+    });
+
+</script>
