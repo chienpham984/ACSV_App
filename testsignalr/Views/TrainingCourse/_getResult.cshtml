@@ -1,0 +1,125 @@
+﻿@model List<testsignalr.Models.ModelView.ResultItem>
+@{ int i = 0;
+    int tontai = 0;
+}
+<div class="col-md-12">
+    <div class="row">
+
+
+        <table class="table table-bordered" style="width:100%;">
+            <thead>
+                <tr style="background-color:lightcyan;">
+                    <th>
+                        No.
+                    </th>
+                    <th>
+                        Hình thức thi
+                    </th>
+                    <th>
+                        Thời gian bắt đầu
+                    </th>
+                    <th>
+                        Thời gian kết thúc
+                    </th>
+                    <th>
+                        Điểm
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                    <th>
+                        Ghi chú
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                //if (!item.TrangThaiKhoaHoc) { 
+                if (item.TrangThaiThi == 1 || item.ThoiGianBatDau != "")
+                {
+                    i++;
+                    <tr>
+                        <td>
+                            @i.ToString()
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.ThoiGianBatDau
+                        </td>
+                        <td>
+                            @item.ThoiGianKetThuc
+                        </td>
+                        <td>
+                            @item.Diem /100
+                        </td>
+                        @if (item.Timeplaps > 0 && item.ThoiGianKetThuc.Trim() == "" && item.TrangThaiThi == 2)
+                        {
+                            <td>
+                                Bạn còn &nbsp; @item.Timeplaps &nbsp; Phút để làm bài.
+                            </td>
+                            <td>
+                                Bài thi của bạn chưa được nộp
+                            </td>
+                        }
+                        else if (item.Timeplaps == 0 && item.ThoiGianKetThuc.Trim() == "" && item.TrangThaiThi == 2)
+                        {
+                            <td>
+                                Bài thi của bạn chưa được nộp
+                            </td>
+                            <td>
+                                Bài thi của bạn chưa được nộp
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                            @((item.TrangThai == false) ? "Không vượt qua bài kiểm tra" : "Chúc mừng bạn hoàn thành bài kiểm tra")
+                            </td>
+                            <td>
+                            @((item.ThoiGianBatDau == "" && item.TrangThai == false) ? "Không làm bài" : "")
+                            </td>
+                        }
+
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+    <div class="row">
+        @if (ViewBag.ketthuc == true)
+        {
+            <h4>Chúc mừng bạn đã hoàn thành khóa học</h4>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                if (item.TrangThaiThi == 2 && item.Timeplaps > 0 && item.TrangThaiKhoaHoc == false)
+                {
+                    tontai = 1;
+                    <p style="color:black;">Đang diễn ra bài &nbsp; @item.Name.Trim() &nbsp; bắt đầu lúc &nbsp; @item.ThoiGianBatDauThi &nbsp; tới  @item.ThoiGianKetThucThi</p>
+                    @Html.ActionLink("Làm bài kiểm tra ngay", "GoToDoExam", "TrainingCourse", new { CourseId = ViewBag.CourseId, LanThi = item.Id }, new { @class = "btn btn-primary" })
+                }
+                if (item.ThoiGianBatDau != "" && item.ThoiGianKetThuc == "" && item.TrangThaiKhoaHoc == false && item.Timeplaps<0)
+                {
+                    @Html.ActionLink("Nộp bài " + item.Name, "NopBaiThi", "TrainingCourse", new { CourseId = ViewBag.CourseId, LanThi = item.Id }, new { @class = "btn btn-primary" })
+                }
+            }
+            if (tontai == 0)
+            {
+                foreach (var item in Model)
+                {
+                    if (item.TrangThaiThi == 3)
+                    {
+                        <h4 style="color:black;">Bạn lưu ý bài &nbsp; @item.Name.Trim() &nbsp; sẽ diễn ra vào &nbsp; @item.ThoiGianBatDauThi &nbsp; tới  @item.ThoiGianKetThucThi</h4>
+                    }
+                }
+
+            }
+        }
+    </div>
+</div>

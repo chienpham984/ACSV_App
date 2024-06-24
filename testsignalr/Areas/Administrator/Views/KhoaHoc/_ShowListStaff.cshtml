@@ -1,0 +1,94 @@
+﻿@model List<testsignalr.Models.ModelView.StaffItem>
+@{
+    int stt = 0;
+}
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
+<table class="table table-bordered" style="width:100%;">
+    <thead>
+        <tr style="background-color:lightcyan;">
+            <th>
+                No.
+            </th>
+            <th>
+                Tên nhân viên
+            </th>
+            <th>
+                Mã nhân viên
+            </th>
+            <th>
+                Ngày sinh
+            </th>
+            <th>
+                Nơi sinh
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Gửi mail
+            </th>
+            <th>
+                Tên công ty
+            </th>
+            <th>
+                Tên Phòng
+            </th>
+            <th>
+                Chức vụ
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        stt++;
+
+<tr>
+    <td>
+        <p>
+            <a href="#">
+                <span class="glyphicon glyphicon-grain"></span>
+            </a>
+            @stt
+        </p>
+    </td>
+    <td>
+        @item.HoTen
+    </td>
+    <td>
+        @item.MaNhanVien
+    </td>
+    <td>
+        @item.NgaySinh
+    </td>
+    <td>
+        @item.NoiSinh
+    </td>
+    <td>
+        @item.Email
+    </td>
+    <td>
+        @if (item.DaGuiMail == false)
+        {
+            <input type="checkbox" readonly />
+        }
+        else
+        { <input type="checkbox" checked readonly />}
+    </td>
+    <td>
+        @item.TenCongTy
+    </td>
+    <td>
+        @item.TenPhong
+    </td>
+    <td>
+        @item.TenChucVu
+    </td>
+    <td>
+        @Html.ActionLink("Xóa", "RemoteStaff", "KhoaHoc", new { EmployeeId = item.Id, CourseId = ViewBag.CourseId }, new { @class = "btn  btn-danger", onclick = "return confirm('Bạn có chắc muốn xóa?');" })
+    </td>
+</tr>
+    }
+</table>

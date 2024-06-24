@@ -1,0 +1,78 @@
+﻿@model List<testsignalr.Models.ModelData.NhiemVu>
+@{
+    int stt = 0;
+}
+<table id="tblUserrights" class="display">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên mục</th>
+            <th>Xem</th>
+            <th>Thêm</th>
+            <th>Sửa</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+    <tbody class="group">
+        @foreach (var item in Model)
+        {
+            stt++;
+        <tr>
+            <td>@stt.ToString()</td>
+            <td>@item.TenNhiemVu</td>
+            @if (ViewBag.NguoiDungChucNang.ListView.Contains(item.MaNhiemVu))
+            {
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <input type="checkbox">
+                </td>
+
+            }
+            @if (ViewBag.NguoiDungChucNang.ListInsert.Contains(item.MaNhiemVu))
+            {
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <input type="checkbox">
+                </td>
+
+            }
+            @if (ViewBag.NguoiDungChucNang.ListEdit.Contains(item.MaNhiemVu))
+            {
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <input type="checkbox">
+                </td>
+
+            }
+            @if (ViewBag.NguoiDungChucNang.ListDelete.Contains(item.MaNhiemVu))
+            {
+                <td>
+                    <input type="checkbox" checked>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <input type="checkbox">
+                </td>
+
+            }
+        </tr>
+        }
+    </tbody>
+</table>

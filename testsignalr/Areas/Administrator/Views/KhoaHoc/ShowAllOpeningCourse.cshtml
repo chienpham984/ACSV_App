@@ -1,0 +1,42 @@
+﻿@model List<testsignalr.Models.ModelView.KhoaHocModal>
+@{
+    ViewBag.Title = "ShowAllOpeningCourse";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int i = 0;
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+
+<table id="example" class="display" style="width:100%;" >
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Tên khóa học</th>
+            <th>Thời gian đào tạo</th>
+            <th>Giáo viên</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>
+                    <p>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-grain"></span>
+                        </a>
+                        @i
+                    </p>
+                </td>
+                <td>@item.TenKhoaHoc.Trim() </td>
+                <td>@item.ThoiGian</td>
+                <td>@item.TenGiaoVien.Trim()</td>
+                <td>@Html.ActionLink("Chi tiết", "EditCourse", "KhoaHoc", new { CourseId = item.Id }, new { @class = "btn btn-primary" }) </td>
+            </tr>
+        }
+    </tbody>
+</table>

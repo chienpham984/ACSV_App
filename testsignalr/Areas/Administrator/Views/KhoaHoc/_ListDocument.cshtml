@@ -1,0 +1,19 @@
+﻿@model List<testsignalr.Models.ModelData.TaiLieuKhoaHoc>
+@{ int i = 0;
+}
+
+<div class="col-md-12">
+    @Html.ActionLink("Thay đổi tài liệu", "EditListDocument", "KhoaHoc", new { CourseId = ViewBag.CourserId }, new { @class = "btn btn-primary" })
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            i++;
+            <div style="display:block; width:100%;">
+                <a class="linkfile" href="@Url.Action("OpenFile", "KhoaHoc",new {DocId= item.Id })" target="_blank" style="text-decoration:none;">
+                    <img src="~/Content/img/pdf.png" /><span> @i.ToString().  @item.TenTaiLieu</span>
+                </a>
+            </div>
+
+        }
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿@model List<testsignalr.Models.ModelView.ExamItem>
+@{
+    int i = 0;
+}
+<table class="col-dm-12 col-12 danhsachdethi">
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td>
+                <div>
+                    <div class="cauhoi">
+                        <span class="stt">Câu hỏi @i:</span>
+                        <span>
+                            @item.CauHoi
+                        </span>
+                    </div>
+                    @if (item.DuongDan != null && item.DuongDan!="")
+                    {
+                        <img src="@item.DuongDan.ToString().Replace("~","")" alt="Picture" class="alignCenter">
+                    }
+                <div class="dapan">
+                    @if (item.DapAn == "A")
+                    {
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="radioButton"  id="A" name="@item.Id" checked>
+                            <span>A. @item.TraLoiA</span>
+                        </div>
+                    }
+                    else
+                    {
+                        if (item.TraLoiA != "")
+                        {
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="radioButton" id="A" name="@item.Id">
+                                <span>A. @item.TraLoiA</span>
+                            </div>
+                        }
+                    }
+                    @if (item.DapAn == "B")
+                    {
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="radioButton" id="B" name="@item.Id" checked>
+                            <span>B. @item.TraLoiB</span>
+                        </div>
+                    }
+                    else
+                    {
+                        if (item.TraLoiB != "")
+                        {
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="radioButton" id="B" name="@item.Id">
+                                <span>B. @item.TraLoiB</span>
+                            </div>
+                        }
+                    }
+
+                    @if (item.DapAn == "C")
+                    {
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="radioButton" id="C" name="@item.Id" checked>
+                            <span>C. @item.TraLoiC</span>
+                        </div>
+                    }
+                    else
+                    {
+                        if (item.TraLoiC != "")
+                        {
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="radioButton" id="C" name="@item.Id">
+                                <span>C. @item.TraLoiC</span>
+                            </div>
+                        }
+                    }
+                    @if (item.DapAn == "D")
+                    {
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="radioButton" id="D" name="@item.Id" checked>
+                            <span>D. @item.TraLoiD</span>
+                        </div>
+                    }
+                    else
+                    {
+                        if (item.TraLoiD != "")
+                        {
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="radioButton" id="D" name="@item.Id">
+                                <span>D. @item.TraLoiD</span>
+                            </div>
+                        }
+                    }
+                    @if (item.DapAn == "E")
+                    {
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="radioButton" id="E" name="@item.Id" checked>
+                            <span>E. @item.TraLoiE</span>
+                        </div>
+                    }
+                    else
+                    {
+                        if (item.TraLoiE != "")
+                        {
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="radioButton" id="E" name="@item.Id">
+                                <span>E. @item.TraLoiE</span>
+                            </div>
+                        }
+                    }
+                </div>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

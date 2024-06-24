@@ -3,6 +3,7 @@
 
     <thead>
         <tr>
+            <th>STT</th>
             <th>Tên Phòng</th>
             <th>Chức vụ</th>
             <th>Họ Tên</th>
@@ -10,6 +11,7 @@
             <th>Ngày sinh</th>
             <th>Tên chứng chỉ</th>
             <th>Mã chứng chỉ</th>
+            <th>Airline</th>
             <th>Đào tạo lần đầu</th>
             <th>Số lần ở giữa</th>
             <th>Đào tạo lần cuối</th>
@@ -26,11 +28,13 @@
         // Lấy danh sách từ ViewBag
         var originalList = @Html.Raw(Json.Encode(ViewBag.dsTracert));
         // Sử dụng hàm map để tạo List mới
-        
+        var stt = 1;
         const newList = Object.values(originalList.reduce((acc, curr) => {
+
             const key = `${curr.MaNhanVien}-${curr.MaChungChi}`;
             if (!acc[key]) {
-                acc[key] = { ...curr, FirstDate: curr.NgayCap + ' - ' + curr.NgayHetHan, EndDate: curr.EndDate, NumberRows: 0 };
+                acc[key] = { ...curr, FirstDate: curr.NgayCap + ' - ' + curr.NgayHetHan, EndDate: curr.EndDate, NumberRows: 0, STT: stt };
+                stt++;
             } else {
                 acc[key].EndDate = curr.NgayCap + ' - ' + curr.NgayHetHan;
                 acc[key].NumberRows++;
@@ -47,13 +51,15 @@
             paging: false,
             ordering: false,
             columns: [
+                { data: 'STT'},
                 { data: 'TenPhong', visible: false},
                 { data: 'TenChucVu', visible: false},
                 { data: 'HoTen'},
                 { data: 'MaNhanVien' },
                 { data: 'NgaySinh'},
                 { data: 'TenChungChi'},
-                { data: 'MaChungChi'},
+                { data: 'MaChungChi' },
+                { data: 'TenHang' },
                 { data: 'FirstDate' },
                 {
                     data: 'NumberRows',
@@ -72,17 +78,17 @@
             var rowData1 = this.data();
             var cellValue = rowData1["TinhTrang"];
             if (cellValue === 1 && rowData1["EndDate"] != "" )
-                $(this.node()).find('td:eq(7)').addClass("hetHan"); 
+                $(this.node()).find('td:eq(9)').addClass("hetHan"); 
             else if (cellValue === 1 && rowData1["EndDate"] == "")
-                $(this.node()).find('td:eq(5)').addClass("hetHan");
+                $(this.node()).find('td:eq(7)').addClass("hetHan");
             else if (cellValue === 2 && rowData1["EndDate"] != "")
-                $(this.node()).find('td:eq(7)').addClass("sapHetHan15");
+                $(this.node()).find('td:eq(9)').addClass("sapHetHan15");
             else if (cellValue === 2 && rowData1["EndDate"] == "")
-                $(this.node()).find('td:eq(5)').addClass("sapHetHan15");
+                $(this.node()).find('td:eq(7)').addClass("sapHetHan15");
             else if (cellValue === 3 && rowData1["EndDate"] != "")
-                $(this.node()).find('td:eq(7)').addClass("sapHetHan30"); 
+                $(this.node()).find('td:eq(9)').addClass("sapHetHan30"); 
             else if (cellValue === 3 && rowData1["EndDate"] == "")
-                $(this.node()).find('td:eq(5)').addClass("sapHetHan30");
+                $(this.node()).find('td:eq(7)').addClass("sapHetHan30");
         });
 
         $('#example tbody').on('dblclick', 'tr', function () {
@@ -94,7 +100,7 @@
         var groupedRows = {};
 
         $('#example tbody tr').each(function () {
-            var key = $(this).find('td:eq(0)').text();
+            var key = $(this).find('td:eq(1)').text();
             if (!groupedRows[key]) {
                 groupedRows[key] = [];
             }
@@ -104,9 +110,9 @@
         $.each(groupedRows, function (key, rows) {
             if (rows.length > 1) {
                 var rowspan = rows.length;
-                $(rows[0]).find('td:eq(0)').attr('rowspan', rowspan);
+                $(rows[0]).find('td:eq(1)').attr('rowspan', rowspan);
                 for (var i = 1; i < rowspan; i++) {
-                    $(rows[i]).find('td:eq(0)').remove();
+                    $(rows[i]).find('td:eq(1)').remove();
                 }
             }
         });

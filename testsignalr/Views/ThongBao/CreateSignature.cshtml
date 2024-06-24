@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "CreateSignature";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+
+    <div class="row " style="margin-bottom:10px;">
+        <div class="col-md-3" style="text-align:left;">Signature</div>
+        <div class="col-md-9" style="text-align:left; padding:0px;">
+            <canvas id="signature-pad" class="signature-pad" width=400 height=200 style="border:solid 1px red; border-radius:3px;"></canvas>
+        </div>
+    </div>
+    <button type="button" id="savecavas" class="btn btn-success">Lưu chữ ký</button>
+
+
+<script src="~/Scripts/signature_pad.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+        var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            penColor: 'rgb(0,0,205)'
+        });
+
+        $('#savecavas').on('click', function () {
+            var signatureData = signaturePad.toDataURL();
+            if (!signaturePad.isEmpty()) {
+                $.post('/ThongBao/SaveSignatureOnWeb', { signatureData: signatureData }, function (response) {
+                    if (response.success) {
+                        alert("save successfully")
+                    } else {
+                        alert("saveSave was not successful")
+                    }
+                });
+            }
+            else {
+                alert('Please sign before saving.');
+            }
+        });
+    });
+</script>

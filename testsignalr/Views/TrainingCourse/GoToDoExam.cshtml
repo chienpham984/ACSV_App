@@ -1,0 +1,33 @@
+﻿@model testsignalr.Models.ModelView.RequiredExamItem
+@{
+    ViewBag.Title = "GoToDoExam";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div>
+    <div class="col-md-6">
+        <p> CÔNG TY CỔ PHẦN PHỤC VỤ MẶT ĐẤT HÀ NỘI</p>
+        <p><U>TRUNG TÂM ĐÀO TẠO</U></p>
+    </div>
+    <div class="col-md-6">
+        <p> BÀI THI TRẮC NGHIỆM TRỰC TUYẾN </p>
+        <p>@ViewBag.myCourse.TenKhoaHoc.Trim().ToUpper()</p>
+        <p>Thời gian làm bài: @Model.ThoiGianThi </p>
+        <p>Số lượng câu yêu cầu: @Model.SoLuongDapAnDung / @Model.SoLuongCauHoi</p>
+        <p>Thời gian thi trong khoảng: @ViewBag.lanthi.thoigianthi.ToString("dd/MM/yyyy HH:mm")  tới  @ViewBag.lanthi.thoigiankethuc.ToString("dd/MM/yyyy HH:mm") </p>
+    </div>
+
+</div>
+
+<div style="margin:0 auto; width:100%;">
+    @using (Html.BeginForm("StartExam", "TrainingCourse", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+    {
+        <input type="hidden" id="LanThiId" name="LanThiId" value="@ViewBag.lanthi.Id" />
+        <input type="hidden" id="CourseId" name="CourseId" value="@ViewBag.myCourse.Id" />
+        if (Model.MaHinhThucThi.Trim() == "CLASS")
+        {
+            <input type="text" name="OTP" id="OTP" required />
+        }
+        <input type="submit" class="btn btn-danger" value="THI NGAY" />
+    }
+</div>

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Document management system for Admin</title>
+    <title>Hệ thống quản lý nhân sự, đào tạo ACSV</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,6 @@
 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">*@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -43,6 +42,7 @@
     <script src="~/css/datatables.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <script src="~/Scripts/mainJquery.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
@@ -58,6 +58,7 @@
                 <div style="display:flex; justify-content:space-between; padding-top:10px;">
                     <div>
                         <div class="input-group searchArea" id="CompanyName">
+                            <span class="ContentTitle"> @ViewBag.TieuDeTrang</span>
                         </div>
                     </div>
                     <div class="menuIcon">
@@ -84,7 +85,7 @@
             <div class="sidebar" style="overflow:auto;">
                 <div class="sidebar-header1" style="padding-top:10px; padding-left:5px;">
                     <a class="header-brand" href="#" style="text-decoration:none;">
-                        <span class="text" style=" color: #2677b6; font-weight:bold; font-size:20px;">PHẠM VĂN CHIẾN</span>
+                        <span class="text" style=" color: #2677b6; font-weight:bold; font-size:20px;">@(Session["TenTaiKhoan"]==null?"":Session["TenTaiKhoan"].ToString())</span>
                     </a>
                     <button type="button" class="menu-nav-toggle" style="position: absolute; right: 5px; border-radius: 12px; border: solid 2px #2677b6; background-color: #2677b6;"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon" style="font-size: 18px; color: white;"></i></button>
                 </div>
@@ -95,54 +96,93 @@
                     </div>
 
                     <nav class="main-menu">
-                        <ul>
-                            <li><a href="@Url.Action("ThongBao", "Common")"><i class="fas fa-bell"></i>Thông báo</a></li>
-                            <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-user"></i> Thông tin nhân sự <i class="fas fa-caret-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href='@Url.Action("Index", "NhanViens")'><i class="fas fa-caret-right"></i>Hồ sơ cá nhân</a></li>
-                                    <li><a href='@Url.Action("Index", "NhanViens")'><i class="fas fa-caret-right"></i>Hợp đồng lao động</a></li>
-                                    
-                                </ul>
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-certificate"></i> Chứng chỉ <i class="fas fa-caret-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="/Administrator/ChungChi/getEmployeeTracertSimple"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên</a></li>
-                                    <li><a href="/Administrator/ChungChi/getEmployeeTracert"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên bản đủ</a></li>
-                                    <li><a href="/Administrator/ChungChi/getEmployeeTracert"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên ngoài</a></li>
-                                    <li><a href="/Administrator/ChungChi/getEmployeeTracert"><i class="fas fa-caret-right"></i>Danh sách nhân viên ngoài</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-graduation-cap"></i> Quản lý đào tạo <i class="fas fa-caret-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Mở lớp đào tạo</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp đang mở</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp hoàn thành</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách giáo viên</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-graduation-cap"></i> Danh mục <i class="fas fa-caret-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="@Url.Action("Index", "DanhMucCongTies")"><i class="fas fa-caret-right"></i>Danh mục công ty</a></li>
-                                    <li><a href="@Url.Action("Index", "DanhMucPhongBans")"><i class="fas fa-caret-right"></i>Danh mục Phòng ban</a></li>
-                                    <li><a href="@Url.Action("Index", "DanhMucChucVus")"><i class="fas fa-caret-right"></i>Danh mục Chức vụ</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục hợp đồng</a></li>
-                                    <li><a href="/Administrator/ChungChi/DanhsachChungChi"><i class="fas fa-caret-right"></i>Danh mục chứng chỉ</a></li>
-                                    <li><a href="/Administrator/ChungChi/NhomChungChiTheoChucVu"><i class="fas fa-caret-right"></i>Nhóm chứng chỉ</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#" class="toggle"><i class="fas fa-cogs"></i> Hồ sơ cá nhân <i class="fas fa-caret-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Thông tin cá nhân</a></li>
-                                    <li><a href="#"><i class="fas fa-caret-right"></i>Đổi mật khẩu</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/Administrator/Login/Logout"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a></li>
-                        </ul>
+                        @Html.Action("ondemain", "Common")
+                        @*<ul>
+            <li><a href="@Url.Action("ThongBao", "Common")"><i class="fas fa-bell"></i>Thông báo</a></li>
+            @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("HOSONHANVIEN"))
+            {
+                <li class="has-submenu">
+                    <a href="#" class="toggle"><i class="fas fa-user"></i> Thông tin nhân sự <i class="fas fa-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href='@Url.Action("Index", "NhanViens")'><i class="fas fa-caret-right"></i>Hồ sơ nhân viên</a></li>
+                        <li><a href='@Url.Action("OutSourceEmployee", "NhanViens")'><i class="fas fa-caret-right"></i>Hồ sơ nhân viên đào tạo ngoài</a></li>
+
+                    </ul>
+                </li>
+            }
+            @if (Session["ListView"] != null && (Session["ListView"].ToString().Contains("CHUNGCHISIMPLE") || Session["ListView"].ToString().Contains("CHUNGCHIFULL") || Session["ListView"].ToString().Contains("CHUNGCHINGOAI")))
+            {
+                <li class="has-submenu">
+                    <a href="#" class="toggle"><i class="fas fa-certificate"></i> Thông tin Chứng chỉ <i class="fas fa-caret-down"></i></a>
+                    <ul class="submenu">
+                        @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("CHUNGCHISIMPLE"))
+                        {
+                            <li><a href="/Administrator/ChungChi/getEmployeeTracertSimple"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên</a></li>
+                        }
+                        @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("CHUNGCHIFULL"))
+                        {
+                            <li><a href="/Administrator/ChungChi/getEmployeeTracert"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên bản đủ</a></li>
+                        }
+                        @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("CHUNGCHINGOAI"))
+                        {
+                            <li><a href="/Administrator/ChungChi/getOutSourceEmployeeTracert"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên ngoài</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+            @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("DAOTAO"))
+            {
+                <li class="has-submenu">
+                    <a href="#" class="toggle"><i class="fas fa-graduation-cap"></i> Quản lý đào tạo <i class="fas fa-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href='@Url.Action("TaoKhoaHocMoi", "KhoaHoc")'><i class="fas fa-caret-right"></i>Mở lớp đào tạo</a></li>
+                        <li><a href='@Url.Action("ShowAllOpeningCourse", "KhoaHoc")'><i class="fas fa-caret-right"></i>Danh sách lớp đang mở</a></li>
+                        <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp hoàn thành</a></li>
+                        <li><a href='@Url.Action("QuanLyDiemThi", "KhoaHoc")'><i class="fas fa-caret-right"></i>Quản lý điểm thi</a></li>
+                        <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách giáo viên</a></li>
+                        <li><a href='@Url.Action("Showall", "ThuVienCauHoi")'><i class="fas fa-caret-right"></i>Thư viện đề thi</a></li>
+                    </ul>
+                </li>
+            }
+            @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("DANHMUCNHANSU"))
+            {
+                <li class="has-submenu">
+                    <a href="#" class="toggle"><i class="fas fa-id-badge"></i> Danh mục nhân sự <i class="fas fa-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="@Url.Action("Index", "DanhMucCongTies")"><i class="fas fa-caret-right"></i>Danh mục công ty</a></li>
+                        <li><a href="@Url.Action("Index", "DanhMucPhongBans")"><i class="fas fa-caret-right"></i>Danh mục Phòng ban</a></li>
+                        <li><a href="@Url.Action("Index", "DanhMucChucVus")"><i class="fas fa-caret-right"></i>Danh mục Chức vụ</a></li>
+                        <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục hợp đồng</a></li>
+                    </ul>
+                </li>
+            }
+            @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("DANHMUCCHUNGCHI"))
+            {
+                <li class="has-submenu">
+                    <a href="#" class="toggle"><i class="far fa-id-card"></i> Danh mục chứng chỉ <i class="fas fa-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="/Administrator/ChungChi/DanhsachChungChi"><i class="fas fa-caret-right"></i>Danh mục chứng chỉ</a></li>
+                        <li><a href="/Administrator/ChungChi/NhomChungChiTheoChucVu"><i class="fas fa-caret-right"></i>Nhóm chứng chỉ</a></li>
+                    </ul>
+                </li>
+            }
+            @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("TAILIEU"))
+            {
+                <li><a href="/Administrator/GiaoTrinhDaoTao/ShowDoc"><i class="fas fa-boxes"></i>Quản lý giáo trình</a></li>
+            }
+            @if (Session["ListView"] != null && Session["ListView"].ToString().Contains("TAIKHOAN"))
+            {
+                <li><a href="@Url.Action("ShowAllUser", "TaiKhoanNguoiDung")"><i class="fas fa-users-cog"></i>Quản lý tài khoản</a></li>
+            }
+            <li class="has-submenu">
+                <a href="#" class="toggle"><i class="fas fa-info-circle"></i> Hồ sơ cá nhân <i class="fas fa-caret-down"></i></a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-caret-right"></i>Thông tin cá nhân</a></li>
+                    <li><a href="@Url.Action("DoiMatKhau", "Common")"><i class="fas fa-caret-right"></i>Đổi mật khẩu</a></li>
+                </ul>
+            </li>
+            <li><a href="/Administrator/Login/SignOut"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a></li>
+        </ul>*@
                     </nav>
 
                     <div class="nav-container">
@@ -167,6 +207,29 @@
         //get img va so luong
         $(".toggle").click(function () {
             $(this).toggleClass("active").next(".submenu").slideToggle("fast");
+        });
+        $('.toggle').on('click', function (e) {
+            var toggleId = e.currentTarget.id;
+            if (!sessionStorage.getItem(toggleId)) {
+                // Check if theres anything in sessionStorage already
+                sessionStorage.setItem(toggleId, "true");
+            } else {
+                if (sessionStorage.getItem(toggleId) === "true") {
+                    // toggle was on, turning it off
+                    sessionStorage.setItem(toggleId, "false");
+                }
+                else if (sessionStorage.getItem(toggleId) === "false") {
+                    // toggle was off, turning it on
+                    sessionStorage.setItem(toggleId, "true")
+                }
+            }
+        });
+        document.querySelectorAll('.toggle').forEach(function (e) {
+            var toggleId = e.id;
+            if (sessionStorage.getItem(toggleId) === "true") {
+                $(document.getElementById(toggleId)).toggleClass("active").next(".submenu").slideToggle("fast");
+
+            }
         });
     });
 

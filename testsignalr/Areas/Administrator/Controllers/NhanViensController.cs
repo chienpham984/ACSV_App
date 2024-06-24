@@ -23,6 +23,7 @@ namespace testsignalr.Areas.Administrator.Controllers
             {
                 dsCongTy = db.DanhMucCongTies.ToList();
             }
+            ViewBag.TieuDeTrang = "Hồ sơ nhân viên công ty";
             return View(dsCongTy);
         }
         public ActionResult getEmployeeByCompany(string companyCode)
@@ -40,6 +41,7 @@ namespace testsignalr.Areas.Administrator.Controllers
         }
         public ActionResult OutSourceEmployee()
         {
+            ViewBag.TieuDeTrang = "Hồ sơ nhân viên đào tạo ngoài công ty";
             return View();
         }
         public ActionResult getOutSourceEmployee()

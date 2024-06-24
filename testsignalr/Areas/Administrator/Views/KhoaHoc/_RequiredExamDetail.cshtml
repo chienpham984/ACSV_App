@@ -1,0 +1,100 @@
+﻿@model testsignalr.Models.ModelView.RequiredExamItem
+<h3>Thông tin khóa học</h3>
+@Html.ActionLink("Điều chỉnh yêu cầu", "EditRequest", "KhoaHoc", new { CourseId = ViewBag.CourseId }, new { @class = "btn btn-primary" })
+@if (Model != null)
+{
+
+    if (Model.TenHinhThucThi.Trim() != "Đọc tài liệu" && Model.TenHinhThucThi.Trim() != "Read And Sign")
+    {
+        <dl class="row" style="padding-left:15px;">
+            <div style="display:block; width:100%;">
+            <dt>
+                Thời gian làm bài:
+            </dt>
+
+            <dd>
+                @Model.ThoiGianThi Phút
+            </dd>
+            </div>
+            <div style="display:block; width:100%;">
+            <dt>
+                Số lượng câu hỏi:
+            </dt>
+            <dd>
+                @Model.SoLuongCauHoi
+            </dd>
+            <ul>
+                @foreach (var item in ViewBag.dsSoLuong)
+                {
+                    if (item.SoLuongCau != 0)
+                    {
+                        <li>
+                            Số lượng câu hỏi @item.TenMucDo :@item.SoLuongCau
+                        </li>
+
+                    }
+
+                }
+            </ul>
+            </div>
+            <div style="display:block; width:100%;">
+            <dt>
+                Số lượng đáp án đúng:
+            </dt>
+
+            <dd>
+                @Model.SoLuongDapAnDung
+            </dd>
+            </div>
+            @if (ViewBag.dsLanThi.Count > 0)
+            {
+                <div style="display:block; width:100%;">
+                <dt>
+                    Thời gian thi đi
+                </dt>
+
+                <dd>
+                    <span> Bắt đầu lúc</span>  <input type="datetime-local" value="@ViewBag.dsLanThi[0].thoigianthi.ToString("yyyy-MM-ddTHH:mm")" style="border-radius:5px;" disabled />
+                    <span>  Đến lúc </span>    <input type="datetime-local" value="@ViewBag.dsLanThi[0].thoigiankethuc.ToString("yyyy-MM-ddTHH:mm")" style="border-radius:5px;" disabled />
+                </dd>
+                </div>
+            }
+            @if (ViewBag.dsLanThi.Count > 1)
+            {
+                <div style="display:block; width:100%;">
+                <dt>
+                    Thời gian thi lại
+                </dt>
+
+                <dd>
+                    <span> Bắt đầu lúc</span>  <input type="datetime-local" value="@ViewBag.dsLanThi[1].thoigianthi.ToString("yyyy-MM-ddTHH:mm")" style="border-radius:5px;" disabled />
+                    <span>  Đến lúc </span>    <input type="datetime-local" value="@ViewBag.dsLanThi[1].thoigiankethuc.ToString("yyyy-MM-ddTHH:mm")" style="border-radius:5px;" disabled />
+                </dd>
+                </div>
+            }
+            <div style="display:block; width:100%;">
+            <dt>
+                Hình thức thi:
+            </dt>
+
+            <dd>
+                @Model.TenHinhThucThi
+            </dd>
+            </div>
+        </dl>
+    }
+    else
+    {
+        <dl class="row" style="padding-left:15px;">
+            <div style="display:block; width:100%;">
+            <dt>
+                Hình thức thi:
+            </dt>
+
+            <dd>
+                @Model.TenHinhThucThi
+            </dd>
+            </div>
+        </dl>
+    }
+}

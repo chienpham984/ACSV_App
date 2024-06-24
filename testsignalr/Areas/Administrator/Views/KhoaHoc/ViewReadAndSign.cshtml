@@ -1,0 +1,77 @@
+﻿@model IEnumerable<testsignalr.Models.ModelView.Exam>
+@{
+    ViewBag.Title = "ViewReadAndSign";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int i = 0;
+}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href="~/Content/examstyle.css" rel="stylesheet" />
+<div class="col-md-12 abcd">
+    <table class="danhsachdethi col-md-10 col-sm-12">
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>
+                    <div>
+                        <div class="cauhoi">
+                            <span class="stt">Câu hỏi @i :</span>
+                            <span>
+                                @item.CauHoi
+                            </span>
+                        </div>
+                        @if (item.DuongDan != null && item.DuongDan != "")
+                        {
+                            <img src="@item.DuongDan.Replace("~","")" alt="Picture" class="alignCenter">
+                        }
+                        <div class="dapan">
+                            @if (item.TraLoiA != null && item.TraLoiA != "")
+                            {
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="A" name="@item.Id">
+                                    <span>A. @item.TraLoiA</span>
+                                </div>
+                            }
+                            @if (item.TraLoiB != null && item.TraLoiB != "")
+                            {
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="BB" name="@item.Id">
+                                    <span>B. @item.TraLoiB</span>
+                                </div>
+                            }
+
+                            @if (item.TraLoiC != null && item.TraLoiC != "")
+                            {
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="C" name="@item.Id">
+                                    <span>C. @item.TraLoiC</span>
+                                </div>
+                            }
+                            @if (item.TraLoiD != null && item.TraLoiD != "")
+                            {
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="D" name="@item.Id">
+                                    <span>D. @item.TraLoiD</span>
+                                </div>
+                            }
+                            @if (item.TraLoiE != null && item.TraLoiE != "")
+                            {
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="E" name="@item.Id">
+                                    <span>D. @item.TraLoiD</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="col-md-12" style="margin:0 auto; left:50%;">
+    @Html.ActionLink("Quay lại", "EditCourse", "KhoaHoc", new { CourseId = ViewBag.CourseId }, new { @class = "btn btn-primary" })
+</div>
+

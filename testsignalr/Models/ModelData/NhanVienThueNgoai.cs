@@ -23,5 +23,9 @@ namespace testsignalr.Models.ModelData
         public string QueQuan { get; set; }
         public string CCCD { get; set; }
         public string DiaChiThuongTru { get; set; }
+        public Nullable<bool> GioiTinh { get; set; }
+        public string Email { get; set; }
+        public string SoDienThoai { get; set; }
+        public string MatKhau { get; set; }
     }
 }

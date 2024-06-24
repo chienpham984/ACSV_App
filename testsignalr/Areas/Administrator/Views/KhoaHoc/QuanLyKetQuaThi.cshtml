@@ -1,0 +1,48 @@
+﻿@model List<testsignalr.Models.ModelView.KetQuaThi>
+@{
+    ViewBag.Title = "KetQuaThi";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int i = 0;
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+
+<table id="example" class="display" style="width:100%;">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Tên khóa học</th>
+            <th>Thời gian đào tạo</th>
+            <th>Số lượng học viên</th>
+            <th>Hình thức thi</th>
+            <th>Đã đọc tài liệu</th>
+            <th>Đã thi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            i++;
+        <tr>
+            <td>
+                <p>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-grain"></span>
+                    </a>
+                    @i
+                </p>
+            </td>
+            <td>@item.TenKhoaHoc.Trim() </td>
+            <td>@item.ThoiGianDaoTao</td>
+            <td>@item.SoLuongHocVien</td>
+            <td>@item.HinhThucThi</td>
+            <td>@item.DaDocTaiLieu</td>
+            <td>@item.DaThi</td>
+            <td>@Html.ActionLink("Chi tiết", "ChiTIetKetQuaThi", "KhoaHoc", new { CourseId = item.Id }, new { @class = "btn btn-primary" }) </td>
+        </tr>
+        }
+    </tbody>
+</table>

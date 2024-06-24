@@ -17,7 +17,7 @@
             @foreach (var item in Model)
             {
                 stt = stt + 1;
-                <tr class="@item.IdChucVu">
+                <tr class="@item.Id">
                     <td>
                         @stt.ToString()
                     </td>
@@ -62,7 +62,6 @@ $(document).ready(function(){
         var classValue = $(this).attr('class');
         $('.mytable tbody tr').removeClass("Active");
         $(this).addClass("Active");
-        // In ra giá trị của class
         gettracert(classValue);
 
     });

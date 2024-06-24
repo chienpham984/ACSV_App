@@ -1,0 +1,45 @@
+﻿@model List<testsignalr.Models.ModelView.TracertExpired>
+@{
+    int i = 0;
+}
+<table class="table table-bordered liststaff" style="width:100%;">
+    <thead>
+        <tr style="background-color:lightcyan;">
+            <th>stt</th>
+            <th>Công ty</th>
+            @*<th>Phòng ban</th>*@
+            <th>Chức vụ</th>
+            <th>Họ tên</th>
+            <th>Ngày Sinh</th>
+            <th>Hạn CC</th>
+            <th>Trạng thái</th>
+            <th><input type="checkbox" id="checkall"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            i++;
+        <tr>
+            <td>
+                <p>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-grain"></span>
+                    </a>
+                    @i
+                </p>
+            </td>
+            <td>@item.MaCongTy</td>
+            @*<td>@item.TenPhong</td>*@
+            <td>@item.TenChucVu</td>
+            <td>@item.HoTen</td>
+            <td>@item.NgaySinh</td>
+            <td>@item.NgayHetHan</td>
+            <td>@item.TinhTrang</td>
+            <td>
+                <input type="checkbox" class="ModalListEmployee" id="@item.Id" />
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

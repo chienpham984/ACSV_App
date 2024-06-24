@@ -1,0 +1,142 @@
+﻿@model testsignalr.Models.ModelData.YeuCauThi
+@{
+    ViewBag.Title = "EditRequest";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+
+<div class="col-md-12 divHinhThucThi">
+    @using (Html.BeginForm("EditRNSRequest", "KhoaHoc", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+    {
+        <input type="hidden" id="Idcourse" name="Idcourse" value="@ViewBag.CourseId" />
+        <input type="hidden" id="maHinhThucRNS" name="maHinhThucRNS" />
+        <div class="row">
+            <div class="col-md-12" style="text-align:center;">
+                <hr>
+                <input type="submit" value="Lưu ngay" class="btn btn-primary" />
+                @Html.ActionLink("Quay lại", "EditCourse", "KhoaHoc", new { CourseId = ViewBag.CourseId, slidePosition = 3 }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>
+<div class="col-md-12 yeucau">
+    @using (Html.BeginForm("EditRequest", "KhoaHoc", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+    {
+        <input type="hidden" id="CourseId" name="CourseId" value="@ViewBag.CourseId" />
+        <input type="hidden" id="maHinhThucThi" name="maHinhThucThi" />
+        <div class="col-12">
+            <div class="row dandong">
+                <div class="col-md-2">
+                    Hình thức thi
+                </div>
+                <div class="col-md-10">
+                    @Html.DropDownList("ExamType", new SelectList(ViewBag.dsHinhThuc, "Id", "TenHinhThucThi", Model.IdHinhThucThi))
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row dandong">
+                    <div class="col-md-2">Thời gian làm bài thi</div>
+                    <div class="col-md-10">
+                        <input type="number" id="ThoiGianThi" name="ThoiGianThi" value="@Model.ThoiGianThi" required style="border-radius:5px;" /> Phút
+                    </div>
+                </div>
+                @foreach (var item in ViewBag.dsSoLuong)
+                {
+                    <div class="row dandong">
+                        <div class="col-md-2">
+                            Số lượng câu hỏi + @item.TenMucDo
+                        </div>
+                        <div class="col-md-10">
+                            <input type="number" name="SoLuongCauHoi" value="@item.SoLuongCau" required style="border-radius:5px;" />
+                            <input type="hidden" name="IdMucDoCauHoi" value="@item.Id" />
+                        </div>
+                    </div>
+                }
+                <div class="row dandong">
+                    <div class="col-md-2">
+                        Điểm sàn
+                    </div>
+                    <div class="col-md-10">
+                        <input type="number" id="SoLuongDung" name="SoLuongDung" value="@Model.SoLuongDapAnDung" required style="border-radius:5px;" />/100
+                    </div>
+
+                </div>
+                <div class="row dandong">
+                    <div class="col-md-2">
+                        Thi lần đầu
+                    </div>
+                    <div class="col-md-10">
+                        @if (ViewBag.dsLanThi.Count > 0)
+                        {
+                            <span> Thời gian bắt đầu làm bài </span> <input type="datetime-local" id="thoigianthi1" name="thoigianthi1" value="@ViewBag.dsLanThi[0].thoigianthi.ToString("yyyy-MM-ddTHH:mm")" required style="border-radius:5px;" />
+                            <span> Thời gian kết thúc làm bài </span> <input type="datetime-local" id="thoigiankethuc1" name="thoigiankethuc1" value="@ViewBag.dsLanThi[0].thoigiankethuc.ToString("yyyy-MM-ddTHH:mm")" required style="border-radius:5px;" />
+                        }
+                        else
+                        {
+                            <span> Thời gian bắt đầu làm bài </span> <input type="datetime-local" id="thoigianthi1" name="thoigianthi1" required style="border-radius:5px;" />
+                            <span> Thời gian kết thúc làm bài </span> <input type="datetime-local" id="thoigiankethuc1" name="thoigiankethuc1" required style="border-radius:5px;" />
+                        }
+                    </div>
+
+                </div>
+                <div class="row dandong">
+                    <div class="col-md-2">
+                        Thi lại
+                    </div>
+                    <div class="col-md-10">
+                        @if (ViewBag.dsLanThi.Count > 1)
+                        {
+                            <span> Thời gian bắt đầu làm bài </span> <input type="datetime-local" id="thoigianthi2" name="thoigianthi2" value="@ViewBag.dsLanThi[1].thoigianthi.ToString("yyyy-MM-ddTHH:mm")" required style="border-radius:5px;" />
+                            <span> Thời gian kết thúc làm bài </span> <input type="datetime-local" id="thoigiankethuc2" name="thoigiankethuc2" value="@ViewBag.dsLanThi[1].thoigiankethuc.ToString("yyyy-MM-ddTHH:mm")" required style="border-radius:5px;" />
+                        }
+                        else
+                        {
+                            <span> Thời gian bắt đầu làm bài </span> <input type="datetime-local" id="thoigianthi2" name="thoigianthi2" required style="border-radius:5px;" />
+                            <span> Thời gian kết thúc làm bài </span> <input type="datetime-local" id="thoigiankethuc2" name="thoigiankethuc2" required style="border-radius:5px;" />
+                        }
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12" style="text-align:center;">
+                        <hr>
+                        <input type="submit" value="Lưu ngay" class="btn btn-primary" />
+                        @Html.ActionLink("Quay lại", "EditCourse", "KhoaHoc", new { CourseId = ViewBag.CourseId, slidePosition = 3 }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ExamType').change(function () {
+            var selectedOption = $(this).children("option:selected").text();
+            var maHinhThucThi = $(this).children("option:selected").val();
+            $("#maHinhThucRNS").val(maHinhThucThi);
+            $("#maHinhThucThi").val(maHinhThucThi);
+            if (selectedOption === "Read And Sign" || selectedOption === "Đọc tài liệu") {
+                $(".yeucau").removeClass("ShowOn");
+                $(".yeucau").removeClass("TurnOff");
+                $(".yeucau").addClass("TurnOff");
+
+                $(".divHinhThucThi").removeClass("ShowOn");
+                $(".divHinhThucThi").removeClass("TurnOff");
+                $(".divHinhThucThi").addClass("ShowOn");
+            }
+            else {
+                $(".yeucau").removeClass("ShowOn");
+                $(".yeucau").removeClass("TurnOff");
+                $(".yeucau").addClass("ShowOn");
+
+                $(".divHinhThucThi").removeClass("ShowOn");
+                $(".divHinhThucThi").removeClass("TurnOff");
+                $(".divHinhThucThi").addClass("TurnOff");
+            }
+        });
+        $('#ExamType').trigger('change');
+    });
+</script>

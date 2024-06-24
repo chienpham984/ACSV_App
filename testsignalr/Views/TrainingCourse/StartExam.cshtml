@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "StartExam";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="~/Content/examstyle.css" rel="stylesheet" />
+<script src="~/Scripts/StartExam.js"></script>
+
+<input type="hidden" id="Times" value="@ViewBag.ExamTimes" />
+<input type="hidden" id="CourseId" value="@ViewBag.CourseId" />
+<div class="HeaderExam">
+    <div class="col-md-4 times">
+        <span id="phut">@ViewBag.phut</span>:<span id="giay" style="margin-right:10px;">@ViewBag.giay</span>
+        @Html.ActionLink("Nộp bài ngay", "FinishExam", "TrainingCourse", new { ExamTimes = ViewBag.ExamTimes, CourseId= ViewBag.CourseId }, new { id = "FinishExamId", @class = "btn btn-success", onclick = "return finishExam();" })
+    </div>
+    <div class="col-md-8" style="text-align:left; font-size:16px;">@ViewBag.tieude</div>
+</div>
+<div class="col-12" style="padding:0px; ">
+    <div class="col-xl-9 col-lg-9 col-md-9 .col-sm-12 col-12 dethi" style="float: left; padding-top:20px;">
+
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3 map" style="padding-left: 30px; float: left;">
+
+    </div>
+</div>
+
+

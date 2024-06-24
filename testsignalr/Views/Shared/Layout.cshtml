@@ -7,18 +7,18 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Document management system</title>
+    <title>Hệ thống quản lý nhân sự, đào tạo ACSV</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="~/Content/img/favicon.ico" type="image/x-icon" />
 
-    @*<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">*@
-    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">*@
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <link href="~/css/mainStyle.css" rel="stylesheet" />
     <link href="~/css/all.min.css" rel="stylesheet" />
     <link href="~/css/ionicons.min.css" rel="stylesheet" />
@@ -42,8 +42,12 @@
     <script src="~/css/datatables.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <script src="~/Scripts/mainJquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="~/assets/DataTables/datatables.min.css" />
-    <script type="text/javascript" src="~/assets/DataTables/datatables.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.js"></script>
 
 
 </head>
@@ -52,9 +56,9 @@
         <header class="header-top" header-theme="light">
             <div class="container-fluid headerPage">
                 <div style="display:flex; justify-content:space-between; padding-top:10px;">
-                    <div style="width:70%;">
-                        <div class="input-group searchArea" id="CompanyName" style="display: flex; justify-content: center; align-items: center;">
-                            <span class="ContentTitle"> @ViewBag.FlightTitle</span>
+                    <div>
+                        <div class="input-group searchArea" id="CompanyName">
+                            <span class="ContentTitle"> @ViewBag.TieuDeTrang</span>
                         </div>
                     </div>
                     <div class="menuIcon">
@@ -62,19 +66,12 @@
                     </div>
                     <div class="user-profile">
                         <span id="totalAlert"></span> <i class="fa-solid fa-bell chuong"></i>
-                        @if (Session["Avatar"]==null || Session["Avatar"].ToString() == "")
-                        {
-                            <img src="~/Content/img/user.jpg" class="rounded-circle" id="imgavatar" alt="Cinque Terre" width="30" height="30" style="border: solid 2px #2677b6; background-color: #2677b6; ">
-                        }
-                        else
-                        {
-                            <img src="@Session["Avatar"].ToString()" class="rounded-circle" id="imgavatar" alt="Cinque Terre" width="30" height="30" style="border: solid 2px #2677b6; background-color: #2677b6; ">
-                        }
+                        <img src="~/Content/img/user.jpg" class="rounded-circle" id="imgavatar" alt="Cinque Terre" width="30" height="30" style="border: solid 2px #2677b6; background-color: #2677b6; ">
                         <div class="profile-options" id="profile-options">
                             <ul>
-                                <li><i class="fas fa-user"></i><a href="/User/ViewProfile/">User Information</a></li>
-                                <li><i class="fas fa-unlock-alt"></i><a href="/User/ChangePassword">Change password</a></li>
-                                <li><a href="/LoginDocumenManagement/Logout/"><i class="fas fa-sign-out-alt"></i> <span>Sign out</span></a> </li>
+                                <li><i class="fas fa-user"></i><a href="/QuanLyNguoiDung/ThongTinNguoiDung/">Thông tin tài khoản</a></li>
+                                <li><i class="fas fa-unlock-alt"></i><a href="/QuanLyNguoiDung/CapNhatMatKhau/">Đổi mật khẩu</a></li>
+                                <li><a href="/QuanLyNguoiDung/DangXuat/"><i class="fas fa-sign-out-alt"></i> <span>Đăng xuất</span></a> </li>
                             </ul>
                         </div>
                     </div>
@@ -88,43 +85,33 @@
             <div class="sidebar" style="overflow:auto;">
                 <div class="sidebar-header1" style="padding-top:10px; padding-left:5px;">
                     <a class="header-brand" href="#" style="text-decoration:none;">
-                        @*<span class="text" style=" color: #2677b6; font-weight:bold; font-size:20px;">@Session["FullName"].ToString().ToUpper()</span>*@
+                        <span class="text" style=" color: #2677b6; font-weight:bold; font-size:20px;">@Session["HoTen"].ToString()</span>
                     </a>
                     <button type="button" class="menu-nav-toggle" style="position: absolute; right: 5px; border-radius: 12px; border: solid 2px #2677b6; background-color: #2677b6;"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon" style="font-size: 18px; color: white;"></i></button>
                 </div>
 
                 <div class="sidebar-content1">
                     <div class="companyLogo" style="text-align:center; display:block; margin-bottom:20px; margin-top:20px;">
-                        @*@if (Session["Avatar"].ToString() != "")
-                        {
-                            <img src="@Session["Avatar"].ToString()" class="rounded-circle" alt="Cinque Terre">
-                        }
-                        else
-                        {*@
-                            <img src="~/Content/img/user.jpg" class="rounded-circle" alt="Cinque Terre" width="150" height="150" style="border: solid 2px #2677b6; background-color: #2677b6; ">
-                        @*}*@
+                        <img src="~/Content/img/user.jpg" class="rounded-circle" alt="Cinque Terre" width="100" height="100" style="border: solid 2px #2677b6; background-color: #2677b6; ">
                     </div>
 
                     <nav class="main-menu">
                         <ul>
+                            <li><a href="@Url.Action("Index", "ThongBao")"><i class="fas fa-bell"></i>Thông báo</a></li>
+                            <li><a href='@Url.Action("ShowUserCategory", "TrainingCourse")'><i class="fas fa-certificate"></i></i>Khoa đào tạo đang mở</a></li>
+                            <li><a href='@Url.Action("ShowFinishedCategory", "TrainingCourse")'><i class="fas fa-certificate"></i></i>Khoa đào tạo đã kết thúc</a></li>
+                           
+
                             <li class="has-submenu">
-                                <a class="hyperlinkSubmenu" href="#"><i class="fa-solid fa-paper-plane"></i> FLIGHT INFORMATION</a>
+                                <a href="#" class="toggle"><i class="fas fa-graduation-cap"></i> Hồ sơ nhân viên <i class="fas fa-caret-down"></i></a>
                                 <ul class="submenu">
-
-                                    <li><a href="/DocumentManagement/ChangeFlightDate"><i class="fa-solid fa-calendar-check"></i>Change flight date</a></li>
-
-                                    <li><a href="/Administrator/Department/ShowAllDepartment"><i class="fa-solid fa-chart-simple"></i>Flight report</a></li>
+                                    <li><a href="@Url.Action("ChuKyNhanVien", "ThongBao")"><i class="fas fa-caret-right"></i>Chữ ký điện tử</a></li>
+                                    <li><a href="@Url.Action("Index", "DanhMucPhongBans")"><i class="fas fa-caret-right"></i>Thông tin cá nhân</a></li>
+                                    <li><a href="@Url.Action("Index", "DanhMucChucVus")"><i class="fas fa-caret-right"></i>Thay đổi mật khẩu</a></li>
+                                    <li><a href="#"><i class="fas fa-caret-right"></i>Thay đổi hình ảnh Avatar</a></li>
                                 </ul>
                             </li>
-                            <li class="has-submenu">
-                                <a class="hyperlinkSubmenu" href="#"><i class="fas fa-cogs"></i> USER INFORMATION</a>
-                                <ul class="submenu">
-                                    <li><a href="/User/ViewProfile"><i class="fa-solid fa-address-card"></i>Profile</a></li>
-                                    <li><a href="/User/ChangePassword"><i class="fa-solid fa-unlock-keyhole"></i>Change password</a></li>
-                                    <li><a href="/User/ChangeAvatar"><i class="fa-solid fa-camera-retro"></i>Change Avatar</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/LoginDocumenManagement/Logout/"><i class="fas fa-sign-out-alt"></i>Log out</a></li>
+                            <li><a href="/UserLogin/SignOut"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a></li>
                         </ul>
                     </nav>
 
@@ -138,14 +125,6 @@
                 @RenderBody()
             </div>
 
-
-
-            @*<footer class="footer">
-                    <div class="w-100 clearfix">
-                        <span class="text-center text-sm-left d-md-inline-block">Copyright © 2018 ThemeKit v2.0. All Rights Reserved.</span>
-                        <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://www.hgs.vn/" class="text-dark" style="font-weight:bold;" target="_blank">Phạm Văn Chiến - IT HGS</a></span>
-                    </div>
-                </footer>*@
         </div>
     </div>
 
@@ -156,24 +135,8 @@
 
     $(document).ready(function () {
         //get img va so luong
-        $.ajax({
-            type: 'GET',
-            url: "/Main/getInformation",
-            data: {},
-            async: false,
-            contentType: 'application/html ; charset:utf-8',
-            dataType: 'json',
-            success: function (Data) {
-                if (Data.filePath != "")
-                    $("#imgavatar").attr("src", Data.filePath);
-                if (Data.totalAlert != "")
-                    $("#totalAlert").html(Data.totalAlert);
-
-                $("#CompanyName").html("Chào mừng bạn đến với " + Data.companyName);
-            },
-            error: function () {
-
-            }
+        $(".toggle").click(function () {
+            $(this).toggleClass("active").next(".submenu").slideToggle("fast");
         });
     });
 

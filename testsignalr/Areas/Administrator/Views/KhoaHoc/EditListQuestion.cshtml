@@ -1,0 +1,321 @@
+﻿
+@{
+    ViewBag.Title = "EditListQuestion";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/Content/popupStyle.css" rel="stylesheet" />
+<head>
+    <style>
+        .popup-content {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        input, select, textarea {
+            max-width: 100%;
+        }
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+            border-bottom-color: blue;
+        }
+    </style>
+</head>
+<input type="hidden" value="@ViewBag.CourseId" id="CourseId" />
+
+<button class="btn btn-primary" onclick="addQuestion();"> Thêm từ CSDL</button>
+<button class="btn btn-primary" onclick="showWindow();"> Thêm từ File</button>
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="danhsachcauhoi" style="width:100%;">
+            </div>
+            <div class="col-md-12" style="left:50%;">
+                @Html.ActionLink("Quay lại", "EditCourse", "KhoaHoc", new { CourseId = ViewBag.CourseId, slidePosition = 4 }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AddExam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button onclick="getAllQuestion();">Get Data</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-body ViewListExam">
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12 col-xs-12 col-sm-12 text-center">
+                    <button type="button" class="btn btn-success" onclick="saveQuestionSelected();">Lưu ngay</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popup" class="popup" style="height:auto !important;">
+    <div class="popup-header">
+        <strong> Thêm câu hỏi</strong>
+        <span class="close">&times;</span>
+    </div>
+    <div class="popup-content">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#Single">Thêm từng câu</a></li>
+            <li><a data-toggle="tab" href="#Multiple">Thêm nhiều câu</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="Single" class="tab-pane fade active in">
+                @using (Html.BeginForm("AddNewQuestion", "KhoaHoc", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" id="CourseId" name="CourseId" value="@ViewBag.CourseId" />
+                    <table class="col-12 danhsachdethi" style="width:100%;">
+                        <tr>
+                            <td>
+                                <div>
+                                    @*vietanh add*@
+                                    <div class="cauhoi">
+                                        <textarea type="text" id="cauhoi_" name="cauhoi_" class="form-control" placeholder="Nhập câu hỏi..." style="resize: none; "></textarea>
+                                        <input type="file" class="form-control" id="QuestionfileUpload" name="QuestionfileUpload" accept="image/*" />
+                                    </div>
+
+
+                                    <div class="dapan">
+                                        <div class="input-group mb-3 mt-2">
+                                            <div class="input-group-prepend">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="A" name="AnswerPption">
+                                                    <label class="form-check-label" for="A">A</label>
+                                                </div>
+                                            </div>
+                                            <textarea type="text" class="form-control" id="traloia" name="traloia" placeholder="Nhập câu trả lời..."></textarea>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="B" name="AnswerPption">
+                                                    <label class="form-check-label" for="B">B</label>
+                                                </div>
+                                            </div>
+                                            <textarea type="text" class="form-control" id="traloib" name="traloib" placeholder="Nhập câu trả lời..."></textarea>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="C" name="AnswerPption">
+                                                    <label class="form-check-label" for="C">C</label>
+                                                </div>
+                                            </div>
+                                            <textarea type="text" class="form-control" id="traloic" name="traloic" placeholder="Nhập câu trả lời..."></textarea>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="D" name="AnswerPption">
+                                                    <label class="form-check-label" for="D">D</label>
+                                                </div>
+                                            </div>
+                                            <textarea type="text" class="form-control" id="traloid" name="traloid" placeholder="Nhập câu trả lời..."></textarea>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="E" name="AnswerPption">
+                                                    <label class="form-check-label" for="E">E</label>
+                                                </div>
+                                            </div>
+                                            <textarea type="text" class="form-control" id="traloie" name="traloie" placeholder="Nhập câu trả lời..."></textarea>
+                                        </div>
+
+
+                                        @*<div class="custom-control custom-radio" style="clear:left; padding-left:20px;">
+                                    <input type="radio" class="custom-control-input" id="A" name="AnswerPption" style="float: left; margin-left: 20px;">
+                                    <label class="custom-control-label" for="A" style="float:left;">A</label>
+                                    <textarea type="text" id="traloia" name="traloia" placeholder="Nhập câu trả lời..." style="margin-left: 10px; float: left; border: solid 1px #808080; width: 100%; background-color: white; height: auto; overflow: hidden; display: block; resize: none; "></textarea>
+                                </div>
+                                <div class="custom-control custom-radio " style="clear:left; padding-left:20px;">
+                                    <input type="radio" class="custom-control-input" id="B" name="AnswerPption" style="float:left; margin-left:20px;">
+                                    <label class="custom-control-label" for="B" style="float:left;">B</label>
+                                    <textarea type="text" id="traloib" name="traloib" placeholder="Nhập câu trả lời..." style="margin-left:10px;float: left; border: solid 1px #808080; width: 100%; background-color: white; height: auto; overflow: hidden; display: block; resize: none; "></textarea>
+                                </div>
+                                <div class="custom-control custom-radio " style="clear:left; padding-left:20px;">
+                                    <input type="radio" class="custom-control-input" id="C" name="AnswerPption" style="float: left; margin-left: 20px;">
+                                    <label class="custom-control-label" for="C" style="float:left;">C</label>
+                                    <textarea type="text" id="traloic" name="traloic" placeholder="Nhập câu trả lời..." style="margin-left: 10px; float: left; border: solid 1px #808080; width: 100%; background-color: white; height: auto; overflow: hidden; display: block; resize: none; "></textarea>
+                                </div>
+
+                                <div class="custom-control custom-radio " style="clear:left; padding-left:20px;">
+                                    <input type="radio" class="custom-control-input" id="D" name="AnswerPption" style="float: left; margin-left: 20px;">
+                                    <label class="custom-control-label" for="D" style="float:left;">D</label>
+                                    <textarea type="text" id="traloid" name="traloid" placeholder="Nhập câu trả lời..." style="margin-left: 10px; float: left; border: solid 1px #808080; width: 100%; background-color: white; height: auto; overflow: hidden; display: block; resize: none; "></textarea>
+                                </div>
+                                <div class="custom-control custom-radio " style="clear:left; padding-left:20px;">
+                                    <input type="radio" class="custom-control-input" id="E" name="AnswerPption" style="float: left; margin-left: 20px;">
+                                    <label class="custom-control-label" for="E" style="float:left;">E</label>
+                                    <textarea type="text" id="traloid" name="traloie" placeholder="Nhập câu trả lời..." style="margin-left: 10px; float: left; border: solid 1px #808080; width: 100%; background-color: white; height: auto; overflow: hidden; display: block; resize: none; "></textarea>
+                                </div>*@
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Mức độ</span>
+                                        </div>
+                                        @Html.DropDownList("ddlMucDo", new SelectList(ViewBag.dsMucDo, "Id", "TenMucDo"), new { @class = "form-control" })
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Đáp án đúng</span>
+                                        </div>
+                                        @Html.DropDownList("ddlDapAnDung", new SelectList(ViewBag.mylist, "Text", "Text"), new { @class = "form-control" })
+                                    </div>
+
+
+                                    @*<div style="clear:left; padding-left:25px; text-align:left;">
+                                Mức độ
+                                @Html.DropDownList("ddlMucDo", new SelectList(ViewBag.dsMucDo, "Id", "TenMucDo"), new { @class = "form-control" })
+                            </div>
+
+                            <div style="clear: left; padding-left: 25px; text-align: left;">
+                                Đáp án đúng
+                                @Html.DropDownList("ddlDapAnDung", new SelectList(ViewBag.mylist, "Text", "Text"), new { @class = "form-control" })
+                            </div>*@
+
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Lưu thông tin" class="btn btn-primary" />
+                }
+            </div>
+            <div id="Multiple" class="tab-pane fade">
+                @Html.ActionLink("Tải file mẫu", "DownloadQuestionTemplate", "KhoaHoc", new { CourseId = ViewBag.CourseId, slidePosition = 4 }, new { @class = "btn btn-primary" })
+                @using (Html.BeginForm("uploadQuizQuestion", "KhoaHoc", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        <input type="file" id="fileUpload" name="fileUpload" required accept="image/*" />
+                        <input type="submit" value="Upload file" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        ShowListExam();
+
+        var popup = document.getElementById("popup");
+        var closeButton = document.querySelector(".popup .close");
+        closeButton.addEventListener("click", function () {
+            hidePopup();
+        });
+    });
+    function showWindow() {
+        popup.style.display = "block";
+    }
+    function hidePopup() {
+        popup.style.display = "none";
+    }
+    function ShowListExam() {
+        var id_khoahoc = $("#CourseId").val();
+        $.ajax({
+            type: 'GET',
+            url: "/Administrator/KhoaHoc/ShowListQuestion",
+            data: { CourseId: id_khoahoc },
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'html',
+            success: function (result) {
+                if (result.toString().trim().length == 0) {
+                    $(".danhsachcauhoi").empty().append("");
+                }
+                else {
+
+                    $(".danhsachcauhoi").empty().append(result);
+                }
+            },
+            error: function () {
+                $(".danhsachcauhoi").empty().append('');
+            },
+            complete: function () {
+            }
+        });
+    }
+    function addQuestion() {
+        $('#AddExam').modal();
+    }
+    function getAllQuestion() {
+        var courseId = $("#CourseId").val();
+        $.ajax({
+            type: 'GET',
+            url: "/Administrator/KhoaHoc/getAllQuestionByTracertCode",
+            data: { CourseId: courseId },
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'html',
+            success: function (result) {
+                if (result.toString().trim().length == 0) {
+                    $(".ViewListExam").empty().append("");
+                }
+                else {
+
+                    $(".ViewListExam").empty().append(result);
+                }
+            },
+            error: function () {
+                $(".ViewListExam").empty().append('');
+            },
+            complete: function () {
+                $("#checkall").on("click", function () {
+                    $(".ckbQuestion").prop('checked', $(this).prop('checked'));
+                });
+            }
+        });
+    }
+    function saveQuestionSelected() {
+
+        var ListquestionId = "";
+        $("input.ckbQuestion:checkbox:checked").each(function () {
+            ListquestionId += "," + $(this).attr('id').toString();
+        });
+        var courseId = $("#CourseId").val();
+        $.ajax({
+            type: 'GET',
+            url: "/Administrator/KhoaHoc/AddQuestionToExam",
+            data: { ListquestionId: ListquestionId, CourseId: courseId },
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'html',
+            success: function (result) {
+                if (result.toString().trim().length == 0) {
+                    $(".danhsachcauhoi").empty().append("");
+                }
+                else {
+
+                    $(".danhsachcauhoi").empty().append(result);
+                }
+            },
+            error: function () {
+                $(".danhsachcauhoi").empty().append('');
+            },
+            complete: function () {
+            }
+        });
+        $("#AddExam").modal('toggle');
+    }
+</script>
+

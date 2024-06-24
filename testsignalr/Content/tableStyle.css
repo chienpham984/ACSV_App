@@ -19,12 +19,211 @@
     font-weight: 400;
     border-radius: 5px;
 }
-
-.nav .active{
+.input-custom {
+    color:black;
+}
+.nav .active {
     /*background-color: blue;
     color: white;*/
-    border-bottom:2px solid #ff6a00;
+    border-bottom: 2px solid #ff6a00;
 }
-table tr :hover{
-    border-bottom:solid 1px #ff6a00;
+
+.ContentTitle {
+    font-size: 16px !important;
+    text-align: center;
+    color: #2677B6 !important;
+    font-weight: bold;
 }
+#example thead th {
+    background-color: #2677B6; /* Màu header */
+    color: white; /* Màu chữ trong header */
+}
+#example tbody tr {
+    border:solid 1px #b1b1b1;
+}
+#example tbody tr:hover {
+    border: solid 1px #ff6a00;
+}
+    .textBoldhetHan {
+    font-weight: bold;
+    color: red;
+    font-size: 14px;
+}
+.textBoldsapHetHan15 {
+    font-weight: bold;
+    color: orangered;
+    font-size: 14px;
+}
+.textBoldsapHetHan30 {
+    font-weight: bold;
+    color: green;
+    font-size: 14px;
+}
+.HasData {
+    background-color: forestgreen;
+    color: white;
+}
+.ShowOn {
+    display:block;
+}
+.TurnOff {
+    display:none;
+}
+.Tabselected {
+    border-bottom: solid 4px #ffd800 !important;
+}
+
+.vi-header {
+    border-bottom: solid 1px #0056a8;
+    margin-bottom: 20px;
+}
+
+.vi-left-title {
+    width: auto;
+    background: #0056a8;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 18px;
+    position: relative;
+    margin: 0;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-left {
+    margin-left: 0 !important;
+}
+
+.vi-left-title a {
+    color: #fff;
+}
+
+.vi-left-title:after {
+    border: 17px solid transparent;
+    border-left-color: #0056a8;
+    border-bottom-color: #0056a8;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    content: "";
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-right {
+    margin-right: 0 !important;
+}
+
+.vi-right-link a:first-child {
+    margin-left: 0;
+}
+
+.vi-right-link a {
+    color: #555;
+    font-size: 14px;
+    margin-left: 15px;
+}
+
+    .vi-right-link a.vi-more, .vi-right-link a:hover {
+        color: #0056a8;
+    }
+
+        .vi-right-link a.vi-more:after {
+            content: "\f101";
+            font-family: FontAwesome;
+            margin-left: 4px;
+        }
+
+/* sangtaosacviet.com - code 2 */
+.vi-left-title-1:after {
+    border: 17px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    content: "";
+}
+
+.vi-left-title-1 {
+    width: auto;
+    background: #0056a8;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 18px;
+    position: relative;
+    margin: 0;
+}
+
+    .vi-left-title-1 a {
+        color: #fff;
+    }
+
+/* sangtaosacviet.com - code 3 */
+#stsv-02 h3.tde {
+    text-align: center;
+    margin: 45px 0;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+
+    #stsv-02 h3.tde span {
+        background: #8CC63F;
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 20px;
+        color: white;
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        z-index: 45;
+        border-radius: 10px 10px 0px 0px;
+        border: 1px solid #8bb54b;
+    }
+
+    #stsv-02 h3.tde :before, #stsv-02 h3.tde :after {
+        content: "";
+        background: url(https://sangtaosacviet.com/wp-content/uploads/2017/09/hd-stsv.png);
+        width: 87px;
+        height: 50px;
+        position: absolute;
+        top: 19px;
+        z-index: -1;
+    }
+
+    #stsv-02 h3.tde :before {
+        left: -44px;
+    }
+
+    #stsv-02 h3.tde :after {
+        transform: rotateY(180deg);
+        right: -44px !important;
+    }
+
+
+/* sangtaosacviet.com - code 4 */
+.vi-left-title-2:after {
+    border: 17px solid transparent;
+    border-left-color: #0056a8;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    content: "";
+}
+
+.vi-left-title-2 {
+    width: auto;
+    background: #0056a8;
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 18px;
+    position: relative;
+    margin: 0;
+}
+
+    .vi-left-title-2 a {
+        color: #fff;
+    }

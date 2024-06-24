@@ -33,6 +33,7 @@ namespace testsignalr.Areas.Administrator.Controllers
             }
             ViewBag.IdCongTy = IdCongTy;
             ViewBag.dsCongTy = dsCongTy;
+            ViewBag.TieuDeTrang = "Nhóm chứng chỉ theo chức vụ";
             return View(dsChucVu);
         }
 
@@ -55,10 +56,12 @@ namespace testsignalr.Areas.Administrator.Controllers
             {
                 dsCongTy = db.DanhMucCongTies.OrderBy(c => c.MaCongTy).ToList();
             }
+            ViewBag.TieuDeTrang = "Hồ sơ chứng chỉ nhân viên bản đầy đủ";
             return View(dsCongTy);
         }
         public ActionResult getOutSourceEmployeeTracert()
         {
+            ViewBag.TieuDeTrang = "Hồ sơ chứng chỉ nhân viên ngoài công ty";
             return View();
         }
         public ActionResult getEmployeeTracertSimple()
@@ -68,6 +71,7 @@ namespace testsignalr.Areas.Administrator.Controllers
             {
                 dsCongTy = db.DanhMucCongTies.OrderBy(c => c.MaCongTy).ToList();
             }
+            ViewBag.TieuDeTrang = "Hồ sơ chứng chỉ nhân viên công ty";
             return View(dsCongTy);
         }
         public ActionResult getDetailEmployeeTracert(string MaCongTy)
@@ -113,6 +117,7 @@ namespace testsignalr.Areas.Administrator.Controllers
             {
                 dsTracert = db.Database.SqlQuery<EmpTracertItem>("exec SPGetEmployeeTracertDetail '" + MaNhanVien.Trim() + "','" + MaChungChi.Trim() + "'").ToList();
             }
+            ViewBag.TieuDeTrang = "Chi tiết chứng chỉ nhân viên";
             return View(dsTracert);
         }
 

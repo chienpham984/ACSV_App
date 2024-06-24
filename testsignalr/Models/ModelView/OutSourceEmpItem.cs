@@ -7,6 +7,7 @@ namespace testsignalr.Models.ModelView
 {
     public class OutSourceEmpItem
     {
+        public Int64 STT { get; set; }
         public string TenCongTy { get; set; }
         public string MaNhanVien { get; set; }
         public string HoTen { get; set; }

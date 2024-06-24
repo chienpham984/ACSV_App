@@ -1,0 +1,93 @@
+﻿@model IEnumerable<testsignalr.Models.ModelView.NguoiDungItem>
+@{
+    ViewBag.Title = "ShowAllUser";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    string listview = Session["ListView"] == null ? "" : Session["ListView"].ToString();
+    string listinsert = Session["ListInsert"] == null ? "" : Session["ListInsert"].ToString();
+    string listedit = Session["ListEdit"] == null ? "" : Session["ListEdit"].ToString();
+    string listdelete = Session["ListDelete"] == null ? "" : Session["ListDelete"].ToString();
+    int stt = 0;
+}
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+
+@if (listinsert.Contains("TAIKHOAN"))
+{
+    @Html.ActionLink("Thêm người dùng", "AddUser", "TaiKhoanNguoiDung",null)
+}
+<div class="col-12" style="padding:0px; ">
+    <div class="col-xl-6 col-lg-6 col-md-6 .col-sm-12 col-12 " style="float: left; padding-top:20px;">
+
+        <table id="example" class="display" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Tên người dùng</th>
+                    <th>Email</th>
+                    <th>Phân quyền</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="group">
+                @foreach (var item in Model)
+                {
+                    stt++;
+                <tr class="table-row" id="@item.Id">
+                    <td>@stt.ToString()</td>
+                    <td>@item.TenTaiKhoan</td>
+                    <td>@item.TenDayDu</td>
+                    <td>@item.Email</td>
+                    <td>@item.TenQuyen</td>
+                    <td>
+                        @if (listedit.Contains("TAIKHOAN"))
+                        {
+                            @Html.ActionLink("Edit", "EditUser", "TaiKhoanNguoiDung", new { id = item.Id })
+                        }
+                        @if (listdelete.Contains("TAIKHOAN"))
+                        {
+                            @Html.ActionLink("Delete", "DeleteUser", "TaiKhoanNguoiDung", new { id = item.Id })
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6 Rights" style="padding-left: 30px; float: left;">
+        <div class="UserRights">
+
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+        $('.table-row').click(function () {
+            var selectedClass = $(this).attr('id');
+            getdata(selectedClass);
+        });
+        $('#example .table-row:first').trigger('click');
+    });
+    function getdata(idtaikhoan) {
+        $.ajax({
+            type: 'GET',
+            url: "/Administrator/TaiKhoanNguoiDung/getUserRights",
+            data: { IdTaiKhoan: idtaikhoan },
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'html',
+            success: function (result) {
+                if (result.toString().trim().length == 0) {
+                    $(".UserRights").empty().append("");
+                }
+                else {
+                    $(".UserRights").empty().append(result);
+                }
+            },
+            error: function () {
+                alert('Có lỗi trong quá trình tải dữ liệu. Liên hệ IT HGS');
+            },
+            complete: function () {
+            }
+        });
+    }
+</script>

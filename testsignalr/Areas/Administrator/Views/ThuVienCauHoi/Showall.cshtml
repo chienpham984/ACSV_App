@@ -1,0 +1,106 @@
+﻿@model IEnumerable<testsignalr.Models.ModelData.DanhMucChungChi>
+@{
+    ViewBag.Title = "Showall";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<link href="~/Content/examstyle.css" rel="stylesheet" />
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<select id="MaChungChi" name="MaChungChi" required>
+    <option value="" selected>---Chọn Chứng chỉ--- </option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.MaChungChi + " - " + @item.TenChungChi.Trim()</option>
+    }
+</select>
+<img id="loading" src="~/Image/loading.gif" style="display:none; position:fixed; top:50%; left:50%; width:250px; height:250px;" />
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Preview" role="tab" aria-controls="profile" aria-selected="false">Preview</a>
+    </li>
+
+</ul>
+
+
+<!-- JavaScript Bootstrap (Optional) -->
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <button value="Thêm mới" onclick="thecauhoimmoi();" class="btn btn-primary">Thêm mới</button>
+        <div id="Content">
+        </div>
+    </div>
+    <div class="tab-pane fade" id="Preview" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+</div>
+
+
+
+<script type="text/javascript">
+    var selectedTracert = 0;
+    $(document).ready(function () {
+        selectedTracert = 0;
+        $('#MaChungChi').change(function () {
+            // Lấy giá trị đã chọn
+            selectedTracert = $(this).val();
+            $.ajax({
+                url: '/Administrator/ThuVienCauHoi/getAllQuestionByTracert',
+                type: 'GET',
+                data: { TracertId: selectedTracert },
+                contentType: 'application/html ; charset:utf-8',
+                beforeSend: function () {
+                    $("#loading").show();
+                },
+                success: function (data) {
+                    $('#Content').empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    /*window.location = '/Login/Signin';*/
+                },
+                complete: function () {
+                    $("#loading").hide();
+                }
+            });
+        });
+        $('.nav-tabs a').on('show.bs.tab', function (e) {
+            var targetTab = $(e.target).attr("href"); // Get the target tab
+            if ($(targetTab).text().includes("Loading...")) { // Check if content is already loaded
+                $.ajax({
+                    url: '/Administrator/ThuVienCauHoi/PreviewAllQuestionByTracert',
+                    type: 'GET',
+                    data: { TracertId: selectedTracert },
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+                    success: function (data) {
+                        $(targetTab).html(data);
+                        $("#loading").hide();
+                        $(targetTab).addClass("show");
+                        $(targetTab).addClass("active");
+                        $(targetTab).addClass("in");
+                    },
+                    error: function (xhr, status, error) {
+                        window.location = '/Login/Signin';
+                    },
+                    complete: function () {
+                        $("#loading").hide();
+                    }
+                });
+
+            }
+        });
+    });
+    function thecauhoimmoi(){
+        //kiem tra da chon chung chi chua
+        if (selectedTracert == 0) {
+            alert('Bạn chọn chứng chỉ trước');
+            return false;
+            $("#MaChungChi").focus();
+        }
+        window.location = "/Administrator/ThuVienCauHoi/ThemMoiCauHoi?TracertId=" + selectedTracert.toString();
+    }
+
+</script>

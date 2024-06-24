@@ -1,0 +1,83 @@
+﻿@model List<testsignalr.Models.ModelView.DiemItem>
+@{
+    ViewBag.Title = "ListCourse";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int i = 0;
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href="~/Content/notification.css" rel="stylesheet" />
+@*<div class="clearfix vi-header">
+    <h3 class="vi-left-title pull-left">@ViewBag.TenKhoaHoc</h3>
+</div>*@
+<h4>Yêu cầu bài thi</h4>
+<ul>
+    <li>Số lượng câu hỏi: @ViewBag.yeucauthi.SoLuongCauHoi Câu</li>
+    <li>Số câu đúng tối thiểu: @ViewBag.yeucauthi.SoLuongDapAnDung Câu</li>
+    <li>Thời gian làm bài: @ViewBag.yeucauthi.ThoiGianThi Phút</li>
+    <li>Hình thức thi: @ViewBag.yeucauthi.TenHinhThucThi </li>
+</ul>
+<table class="table table-bordered" style="width:100%;">
+    <tr style="background-color:lightcyan;">
+        <th>No.</th>
+        <th>Tên học viên</th>
+        <th>Ngày sinh</th>
+        <th>Nơi sinh</th>
+        <th>CTy</th>
+        <th>Đơn vị</th>
+        <th>Chức vụ</th>
+        <th>Thời gian tham gia</th>
+        <th>Đã đọc tài liệu</th>
+        <th>Thời gian lần 1</th>
+        <th>Điểm lần 1</th>
+        <th>Thời gian lần 2</th>
+        <th>Điểm lần 2</th>
+        <th>Đạt/không đạt</th>
+        <th>Đã lưu chứng chỉ</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        i++;
+<tr>
+    <td>
+        <p>
+            <a href="#">
+                <span class="glyphicon glyphicon-grain"></span>
+            </a>
+            @i
+        </p>
+    </td>
+    <td>@item.HoTen</td>
+    <td>@item.NgaySinh</td>
+    <td>@item.NoiSinh</td>
+    <td>@item.MaCongTy</td>
+    <td>@item.TenPhong</td>
+    <td>@item.TenChucVu</td>
+    <td>@item.BatDauThamGia</td>
+    <td>
+        @if (item.DaDocTaiLieu == true)
+        {
+            <img src="~/Content/img/checked.png" />
+        }
+    </td>
+
+    <td>@item.LamBaiLan1</td>
+    <td>@item.DiemLan1</td>
+    <td>@item.LamBaiLan2</td>
+    <td>@item.DiemLan2</td>
+    <td>@item.DanhGia</td>
+    <td>
+        @if (item.DaLuuChungChi == true)
+        {
+            <img src="~/Content/img/checked.png" />
+        }
+    </td>
+
+</tr>
+
+    }
+</table>
+<div class="col-md-12" style="margin:0 auto; left:50%;">
+    @Html.ActionLink("In danh sách", "InDanhSach", "KhoaHoc", new { CourseId = ViewBag.CourseId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Quay lại", "ViewResultExam", "System", null, new { @class = "btn btn-primary" })
+</div>

@@ -1,0 +1,65 @@
+﻿@model List<testsignalr.Models.ModelView.ExamItem>
+@{
+    int i = 0;
+}
+<div class="subMap">
+    <table class="traloi">
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>@i.</td>
+                <td class="aaaa">
+                    @if (item.DapAn == "A")
+                    {
+
+                        <button class="button button2 a" style="background-color:green;color:white;">A</button>
+                    }
+                    else
+                    {
+                        <button class="button button2 a" style="background-color:white;color:black;">A</button>
+                    }
+                    @if (item.DapAn == "B")
+                    {
+
+                        <button class="button button2 b" style="background-color:green;color:white;">B</button>
+                    }
+                    else
+                    {
+                        <button class="button button2 b" style="background-color:white;color:black;">B</button>
+                    }
+
+                    @if (item.DapAn == "C")
+                    {
+
+                        <button class="button button2 c" style="background-color:green; color:white;">C</button>
+                    }
+                    else
+                    {
+                        <button class="button button2 c" style="background-color:white;color:black;">C</button>
+                    }
+
+                    @if (item.DapAn == "D")
+                    {
+
+                        <button class="button button2 d" style="background-color:green;color:white;">D</button>
+                    }
+                    else
+                    {
+                        <button class="button button2 d" style="background-color:white;color:black;">D</button>
+                    }
+                    @if (item.DapAn == "E")
+                    {
+
+                        <button class="button button2 e" style="background-color:green;color:white;">E</button>
+                    }
+                    else
+                    {
+                        <button class="button button2 e" style="background-color:white;color:black;">E</button>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

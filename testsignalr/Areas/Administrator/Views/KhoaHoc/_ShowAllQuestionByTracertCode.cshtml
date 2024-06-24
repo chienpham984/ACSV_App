@@ -1,0 +1,42 @@
+﻿@model List<testsignalr.Models.ModelView.cauhoi>
+@{
+    int i = 0;
+}
+<table class="table table-bordered liststaff" style="width:100%;">
+    <thead>
+        <tr style="background-color:lightcyan;">
+            <th>stt</th>
+            <th>Câu hỏi</th>
+            <th>Đính kèm ảnh</th>
+            <th>Mức độ</th>
+            <th>Đã chọn</th>
+            <th><input type="checkbox" id="checkall"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            i++;
+        <tr>
+            <td>@i</td>
+            <td>@item.CauHoi</td>
+            <td>
+                @if (item.DuongDan != null && item.DuongDan.Trim() != "")
+                {
+                    <img src="~/Content/img/checked.png" />
+                }
+            </td>
+            <td>@item.TenMucDo</td>
+            <td>
+                @if (item.DaChon !=0)
+                {
+                    <img src="~/Content/img/checked.png" />
+                }
+            </td>
+            <td>
+                <input type="checkbox" class="ckbQuestion" id="@item.Id" />
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

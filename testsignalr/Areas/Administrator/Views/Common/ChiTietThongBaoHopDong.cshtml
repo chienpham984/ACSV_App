@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "ChiTietThongBaoHopDong";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<table id="example" class="display">
+
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên Công ty</th>
+            <th>Tên Phòng</th>
+            <th>Chức vụ</th>
+            <th>Họ Tên</th>
+            <th>Mã NV</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+            <th>CCCD</th>
+            <th>Quê quán</th>
+            <th>Tên hợp đồng</th>
+            <th>Ngày cấp</th>
+            <th>TinhTrang</th>
+        </tr>
+    </thead>
+    <tbody class="group">
+    </tbody>
+</table>
+<div>
+    @Html.ActionLink("Quay lại", "ThongBao")
+</div>
+<script>
+    $(document).ready(function () {
+
+        // Lấy danh sách từ ViewBag
+        var originalList = @Html.Raw(Json.Encode(ViewBag.dsContract));
+        const mytable =  $('#example').DataTable({
+            data: originalList,
+            paging: false,
+            ordering: false,
+            columns: [
+                { data: 'STT' },
+                { data: 'TenCongTy', visible: false },
+                { data: 'TenPhong', visible: false},
+                { data: 'TenChucVu', visible: false},
+                { data: 'HoTen'},
+                { data: 'MaNhanVien' },
+                { data: 'NgaySinh'},
+                { data: 'GioiTinh'},
+                { data: 'CCCD' },
+                { data: 'QueQuan' },
+                { data: 'TenLoaiHopDong' },
+                { data: 'NgayCap' },
+                { data: 'TinhTrang', visible: false }
+            ],
+            rowGroup: {
+                dataSrc: ['TenCongTy','TenPhong', 'TenChucVu']
+            }
+        });
+        new $.fn.dataTable.FixedHeader(mytable);
+        mytable.rows().every(function () {
+            var rowData1 = this.data();
+            var cellValue = rowData1["TinhTrang"];
+            if (cellValue === 1 )
+                $(this.node()).find('td:eq(8)').addClass("hetHan");
+            else if (cellValue === 2 )
+                $(this.node()).find('td:eq(8)').addClass("sapHetHan15");
+            else if (cellValue === 3 && rowData1["NgayHetHan"] != "")
+                $(this.node()).find('td:eq(8)').addClass("sapHetHan30");
+        });
+
+        var groupedRows = {};
+        $('#example tbody tr').each(function () {
+            var key = $(this).find('td:eq(1)').text();
+            if (!groupedRows[key]) {
+                groupedRows[key] = [];
+            }
+            groupedRows[key].push($(this));
+        });
+        $.each(groupedRows, function (key, rows) {
+            if (rows.length > 1) {
+                var rowspan = rows.length;
+                $(rows[0]).find('td:eq(1)').attr('rowspan', rowspan);
+                for (var i = 1; i < rowspan; i++) {
+                    $(rows[i]).find('td:eq(1)').remove();
+                }
+            }
+        });
+
+    });
+
+</script>
+
+

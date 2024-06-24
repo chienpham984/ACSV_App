@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "ChuKyNhanVien";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+@Html.ActionLink("Tạo chữ ký", "CreateSignature", "ThongBao", new { CourseId = ViewBag.CourseId }, new { @class = "btn btn-primary" })
+@if (ViewBag.ChuKy != "")
+{
+    <img src="@ViewBag.ChuKy" alt="Image" style="width:400px; height:200px;"/>
+}
+else
+{
+    <img src="@ViewBag.ChuKy" alt="Image" style="width:400px; height:200px;"/>
+}

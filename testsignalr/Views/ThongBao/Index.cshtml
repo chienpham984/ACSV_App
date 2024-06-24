@@ -1,0 +1,47 @@
+﻿@model IEnumerable<testsignalr.Models.ModelView.EmpTracertItem>
+@{
+    ViewBag.Title = "ThongBao";
+    Layout = "~/Views/Shared/Layout.cshtml";
+    int stt = 0;
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+
+
+<div class="tab-content">
+    <h4 style="color:red;">Lưu ý:</h4>
+    @if (ViewBag.solonghethan > 0)
+    {
+        <h4>- Bạn có @ViewBag.solonghethan chứng chỉ sắp hết hạn:</h4>
+        <ul>
+
+            @foreach (var item in Model)
+            {
+                <li>
+                    @item.TenChungChi .     Hết hạn ngày @item.NgayHetHan
+                </li>
+            }
+        </ul>
+    }
+
+    @if (ViewBag.dsEmp != null)
+    {
+        <h4>- Hồ sơ giấy tờ:</h4>
+        <ul>
+            @if (ViewBag.dsEmp.TinhTrangLyLich < 4)
+            {
+                <li>Lý lịch hết hạn vào ngày: @ViewBag.dsEmp.HanLyLich</li>
+            }
+            @if (ViewBag.dsEmp.TinhTrangTheLamViec < 4)
+            {
+                <li>Thẻ làm việc hết hạn vào ngày: @ViewBag.dsEmp.HanTheLamViec</li>
+            }
+            @if (ViewBag.dsEmp.TinhTrangHopDong < 4)
+            {
+                <li>Hợp đồng @ViewBag.dsEmp.LoaiHopDong sắp hết hạn</li>
+            }
+        </ul>
+    }
+</div>

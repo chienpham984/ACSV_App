@@ -1,0 +1,39 @@
+﻿
+@model List<testsignalr.Models.ModelView.KhoaHocModal>
+@{
+    ViewBag.Title = "ShowAllClosedCourse";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int i = 0;
+}
+
+<div class="clearfix vi-header">
+    <h3 class="vi-left-title pull-left">Danh sách khóa học đã kết thúc</h3>
+</div>
+<table class="table table-bordered" style="width:100%;">
+    <tr style="background-color:lightcyan;">
+        <th>No.</th>
+        <th>Tên khóa học</th>
+        <th>Thời gian đào tạo</th>
+        <th>Giáo viên</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td>
+                <p>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-grain"></span>
+                    </a>
+                    @i
+                </p>
+            </td>
+            <td>@item.TenKhoaHoc.Trim() </td>
+            <td>@item.ThoiGian</td>
+            <td>@item.TenGiaoVien.Trim()</td>
+            <td>@Html.ActionLink("Chi tiết", "EditCourse", "KhoaHoc", new { CourseId = item.Id }, new { @class = "btn btn-primary" }) </td>
+        </tr>
+    }
+</table>
+

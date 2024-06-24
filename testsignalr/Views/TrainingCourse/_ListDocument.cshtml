@@ -1,0 +1,42 @@
+﻿
+@model List<testsignalr.Models.ModelData.TaiLieuKhoaHoc>
+@{ int i = 0;
+}
+
+<div class="col-md-12">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            i++;
+            <div style="display:block; width:100%;">
+                <a class="linkfile" href="@Url.Action("OpenFile", "KhoaHoc",new {DocId= item.Id })" target="_blank" style="text-decoration:none;">
+                    <img src="~/Content/img/pdf.png" /><span> @i.ToString().  @item.TenTaiLieu</span>
+                </a>
+            </div>
+        }
+    </div>
+    @if (ViewBag.dshocvien != null && ViewBag.dshocvien.DaDocTaiLieu == false)
+    {
+        if (ViewBag.soluongReadAndSign == 0)
+        {
+            <div class="row" style="margin-top:50px;">
+                <input type="checkbox" id="check" onclick="checkboxselected();" /> <label>Tôi đã đọc và nắm được nội dung tài liệu</label>
+                @Html.ActionLink("Xác nhận", "SaveHaveRead", "TrainingCourse", new { CourseId = ViewBag.CourserId }, new { @class = "btn btn-success" })
+            </div>
+        }
+        else
+        {
+            <div class="row" style="margin-top:50px;">
+                @Html.ActionLink("Xác nhận đọc hiểu", "QuickTest", "TrainingCourse", new { CourseId = ViewBag.CourserId }, new { @class = "btn btn-primary" })
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">
+            <h5>Bạn đã xác nhận đọc tài liệu lúc @ViewBag.dshocvien.ThoiGianXacNhan.ToString("dd/MM/yyyy HH:mm:ss")</h5>
+        </div>
+    }
+</div>
+
+

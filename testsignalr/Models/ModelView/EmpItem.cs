@@ -7,6 +7,7 @@ namespace testsignalr.Models.ModelView
 {
     public class EmpItem
     {
+        public Int64 STT { get; set; }
         public string TenPhong { get; set; }
         public string TenChucVu { get; set; }
         public int Id { get; set; }

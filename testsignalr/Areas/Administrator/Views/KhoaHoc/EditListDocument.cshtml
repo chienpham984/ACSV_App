@@ -1,0 +1,71 @@
+﻿@model List<testsignalr.Models.ModelData.TaiLieuKhoaHoc>
+@{
+    ViewBag.Title = "EditListDocument";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int i = 0;
+}
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @using (Html.BeginForm("AddDocument", "KhoaHoc", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group">
+                            <input type="hidden" id="CourseId" name="CourseId" value=@ViewBag.CourseId />
+                            <input type="file" id="fileUpload" name="fileUpload" required accept="video/*, application/pdf" />
+                            <input type="submit" value="Upload file" class="btn btn-primary" onclick="return kiemtratontaifile();" />
+                        </div>
+                    }
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="background-color:lightcyan;">
+                                <th>No.</th>
+                                <th>File Name</th>
+                                <th>File Type</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <td>
+                                    <p>
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-grain"></span>
+                                        </a>
+                                        @i
+                                    </p>
+                                </td>
+                                <td>
+                                    <a class="linkfile" href="@Url.Action("OpenFile", "KhoaHoc",new {DocId= item.Id })" target="_blank">
+                                        <img src="~/Content/img/pdf.png" /><span>   @item.TenTaiLieu</span>
+                                    </a>
+                                </td>
+
+                                <td>@item.LoaiFile</td>
+
+                                <td>
+                                    @Html.ActionLink("Xóa", "DeleleDocument", "KhoaHoc", new { Fileid = item.Id, CourseId = item.Id_DM_KhoaHoc }, new { @class = "btn  btn-danger", onclick = "return confirm('Bạn chắc chắn muốn xóa?');" })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                    
+                    <div class="col-md-12" style="left:50%;">
+                        @Html.ActionLink("Quay lại", "EditCourse", "KhoaHoc", new { CourseId = ViewBag.CourseId, slidePosition = 1 }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,104 @@
+﻿@model testsignalr.Models.ModelData.DanhMucKhoaHoc
+@{
+    ViewBag.Title = "EditCourseInfor";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+<link href="~/Content/course.css" rel="stylesheet" />
+<div class="panel panel-default">
+    @using (Html.BeginForm("SaveCourseInfor", "KhoaHoc", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+    {
+        <input type="hidden" value="@Model.Id" id="IdKhoaHoc" name="IdKhoaHoc" />
+        <div class="panel-body">
+            <div class="row dandong">
+                <div class="col-md-2">Tên khóa học</div>
+                <div class="col-md-10">
+                    <textarea type="text" style="border-radius:5px; width:100%;"
+                              required value="" id="TenKhoaHoc" name="TenKhoaHoc" placeholder="Nhập tên khóa học vào đây">@Model.TenKhoaHoc.Trim()
+                    </textarea>
+                </div>
+            </div>
+            <div class="row dandong">
+                <div class="col-md-2">
+                    Ngày bắt đầu
+                </div>
+                <div class="col-md-4" style="text-align:left;">
+                    <input type="date" style="border-radius:5px;" id="TuNgay" name="TuNgay" value=@Model.TuNgay.Value.ToString("yyyy-MM-dd") required />
+                </div>
+                <div class="col-md-2">
+                    Ngày kết thúc
+                </div>
+                <div class="col-md-4" style="text-align:left;">
+                    <input type="date" style="border-radius:5px;" id="DenNgay" name="DenNgay" value=@Model.DenNgay.Value.ToString("yyyy-MM-dd") required />
+                </div>
+            </div>
+            <div class="row dandong">
+                <div class="col-md-2">Mã Chứng chỉ</div>
+                <div class="col-md-10">
+                    @Html.DropDownList("ListTracert", new SelectList(ViewBag.Listcertificate, "Id", "TenChungChi", Model.MaChungChi))
+                </div>
+            </div>
+
+            <div class="row dandong">
+                <div class="col-md-2">
+                    Ngày cấp
+                </div>
+                <div class="col-md-4" style="text-align:left;">
+                    <input type="date" style="border-radius:5px;" id="NgayCap" name="NgayCap" value=@Model.NgayCap.Value.ToString("yyyy-MM-dd") required />
+                </div>
+                <div class="col-md-2">
+                    Ngày hết hạn
+                </div>
+                <div class="col-md-4" style="text-align:left;">
+                    <input type="date" style="border-radius:5px;" id="NgayHetHan" name="NgayHetHan" value=@Model.NgayHetHan.Value.ToString("yyyy-MM-dd") required />
+                </div>
+            </div>
+            <div class="row dandong">
+                <div class="col-md-2">Giáo viên giảng dạy</div>
+                <div class="col-md-10">
+                    @Html.DropDownList("ListTeacher", new SelectList(ViewBag.dsgiaovien, "id", "TenGiaoVien", Model.MaGiaoVien))
+                </div>
+            </div>
+            
+          
+            <div class="row dandong">
+                <div class="col-md-2">Trạng Thái</div>
+                <div class="col-md-10">
+                    <select id="trangthai" name="trangthai">
+                        @if (Model.TrangThai == true)
+                        {
+                            <option value="Closed" selected>Đã đóng</option>
+                        }
+                        else
+                        {
+                            <option value="Closed">Đã đóng</option>
+                        }
+                        @if (Model.TrangThai == false)
+                        {
+                            <option value="Open" selected>Đang mở</option>
+                        }
+                        else
+                        {
+                            <option value="Open">Đang mở</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="text-align:center;">
+                <hr>
+                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                @Html.ActionLink("Quay lại", "EditCourse", "KhoaHoc", new { CourseId = Model.Id }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+    }
+</div>
+
+<script type="text/javascript">
+    $('#TenKhoaHoc').on('input', function () {
+        this.style.height = 'auto';
+        this.style.height =
+            (this.scrollHeight) + 'px';
+    });
+</script>

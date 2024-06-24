@@ -1,0 +1,373 @@
+﻿
+@{
+    ViewBag.Title = "EditCourse";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<link href="~/Content/examstyle.css" rel="stylesheet" />
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<img id="loading" src="~/Image/loading.gif" style="display:none; position:fixed; top:50%; left:50%; width:250px; height:250px;" />
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active HasData Tabselected" id="home-tab" data-toggle="tab" href="#CourseInfor" role="tab" aria-controls="home" aria-selected="true">Thông tin khóa học</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Document" role="tab" aria-controls="profile" aria-selected="false">Tài liệu khóa học</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#ReadAndSign" role="tab" aria-controls="profile" aria-selected="false">Kiểm tra nhanh</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Student" role="tab" aria-controls="profile" aria-selected="false">Danh sách học viên</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Request" role="tab" aria-controls="profile" aria-selected="false">Yêu cầu bài thi</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#ExamLib" role="tab" aria-controls="profile" aria-selected="false">Thư viện câu hỏi</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Finish" role="tab" aria-controls="profile" aria-selected="false">Gửi mail</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="CourseInfor" role="tabpanel" aria-labelledby="CourseInfor-tab">
+        <h3>Thông tin khóa học</h3>
+        <dl class="row" style="padding-left:15px;">
+            <div style="display:block; width:100%;">
+            <dt>
+                Tên khóa học:
+            </dt>
+
+            <dd>
+                @ViewBag.myCourse.TenKhoaHoc
+            </dd>
+    </div>
+    <div style="display:block; width:100%;">
+
+        <dt>
+            Thời gian đào tạo:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.TuNgay.ToString("dd/MM/yyyy") -  @ViewBag.myCourse.DenNgay.ToString("dd/MM/yyyy")
+        </dd>
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Chứng chỉ cấp:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.TenChungChi
+        </dd>
+
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Thời hạn chứng chỉ:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.NgayCap.ToString("dd/MM/yyyy") -  @ViewBag.myCourse.NgayHetHan.ToString("dd/MM/yyyy")
+        </dd>
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Tên giáo viên:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.TenGiaoVien
+        </dd>
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Hình thức thi:
+        </dt>
+        <dd>
+            @ViewBag.loaihinhthi
+        </dd>
+    </div>
+
+    <div style="display:block; width:100%;">
+        <dt>
+            Trạng thái:
+        </dt>
+        <dd>
+            @if (ViewBag.myCourse.TrangThai == true)
+            {<span>Đã đóng</span>}
+            else
+            { <span> Đang mở</span>}
+        </dd>
+    </div>
+    </dl>
+    <div class="col-md-12" style="left:50%;">
+        @Html.ActionLink("Xóa khóa học", "DeleteCourse", "KhoaHoc", new { CourseId = ViewBag.myCourse.Id }, new
+        {
+            @class = "btn btn-primary",
+       onclick = "return confirm('Are sure wants to delete?');"
+        })
+        @Html.ActionLink("Thay đổi thông tin", "EditCourseInfor", "KhoaHoc", new { CourseId = ViewBag.myCourse.Id }, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div class="tab-pane fade" id="Document" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+<div class="tab-pane fade" id="ReadAndSign" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+<div class="tab-pane fade" id="Student" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+<div class="tab-pane fade" id="Request" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+<div class="tab-pane fade" id="ExamLib" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+<div class="tab-pane fade" id="Finish" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+<script>
+    $(document).ready(function () {
+        var _courseId = @Html.Raw(Json.Encode(ViewBag.CourseId));
+        $.ajax({
+            url: '/Administrator/KhoaHoc/checkHasData',
+            type: 'GET',
+            data: { CourserId: _courseId },
+            beforeSend: function () {
+                $("#loading").show();
+            },
+            success: function (data) {
+                if (data.document != "") {
+                    var doc = $('a.nav-link').filter(function () {
+                        return $(this).attr('href') === "#Document";
+                    });
+                    doc.addClass("HasData");
+                }
+                if (data.HocVien != "") {
+                    var student = $('a.nav-link').filter(function () {
+                        return $(this).attr('href') === "#Student";
+                    });
+                    student.addClass("HasData");
+                }
+                if (data.yeucau != "") {
+                    var yc = $('a.nav-link').filter(function () {
+                        return $(this).attr('href') === "#Request";
+                    });
+                    yc.addClass("HasData");
+                }
+                if (data.DeThi != "") {
+                    var dt = $('a.nav-link').filter(function () {
+                        return $(this).attr('href') === "#ExamLib";
+                    });
+                    dt.addClass("HasData");
+                }
+                if (data.GuiMail != "") {
+                    var dt = $('a.nav-link').filter(function () {
+                        return $(this).attr('href') === "#Finish";
+                    });
+                    dt.addClass("HasData");
+                }
+                if (data.GuiMail != "") {
+                    var dt = $('a.nav-link').filter(function () {
+                        return $(this).attr('href') === "#ReadAndSign";
+                    });
+                    dt.addClass("HasData");
+                }
+                //if (data.HinhThucThi != "") {
+                //    var dt = $('a.nav-link').filter(function () {
+                //        return $(this).attr('href') === "#ReadAndSign";
+                //    });
+                //    dt.parent().remove("TurnOff");
+                //    dt.parent().remove("ShowOn");
+                //    dt.parent().addClass("ShowOn");
+                //}
+                //else {
+                //    var dt = $('a.nav-link').filter(function () {
+                //        return $(this).attr('href') === "#ReadAndSign";
+                //    });
+                //    dt.parent().remove("TurnOff");
+                //    dt.parent().remove("ShowOn");
+                //    dt.parent().addClass("TurnOff");
+                //}
+            },
+            error: function (xhr, status, error) {
+                window.location = '/Login/Signin';
+            },
+            complete: function () {
+                $("#loading").hide();
+            }
+        });
+
+
+        $('.nav-tabs a').on('show.bs.tab', function (e) {
+            var targetTab = $(e.target).attr("href");
+            var macongty = $(e.target).text();
+            var courseId = @Html.Raw(Json.Encode(ViewBag.CourseId));
+
+            if (targetTab == "#Document") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+                if ($(targetTab).text().includes("Loading...") && targetTab == "#Document") {
+                    $.ajax({
+                        url: '/Administrator/KhoaHoc/getListDocument',
+                        type: 'GET',
+                        data: { CourserId: courseId },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (data) {
+
+                            $(targetTab).html(data);
+                            $("#loading").hide();
+                            $(targetTab).addClass("show");
+                            $(targetTab).addClass("active");
+                            $(targetTab).addClass("in");
+                        },
+                        error: function (xhr, status, error) {
+                            window.location = '/Login/Signin';
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        }
+                    });
+                }
+            }
+            else if (targetTab == "#Student") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+                if ($(targetTab).text().includes("Loading...") && targetTab == "#Student") {
+                    $.ajax({
+                        url: '/Administrator/KhoaHoc/getListStudent',
+                        type: 'GET',
+                        data: { CourserId: courseId },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (data) {
+
+                            $(targetTab).html(data);
+                            $("#loading").hide();
+                            $(targetTab).addClass("show");
+                            $(targetTab).addClass("active");
+                            $(targetTab).addClass("in");
+                        },
+                        error: function (xhr, status, error) {
+                            window.location = '/Login/Signin';
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        }
+                    });
+                }
+            }
+            else if (targetTab == "#Request") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+                if ($(targetTab).text().includes("Loading...") && targetTab == "#Request") {
+                    $.ajax({
+                        url: '/Administrator/KhoaHoc/getRequireExam',
+                        type: 'GET',
+                        data: { CourserId: courseId },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (data) {
+
+                            $(targetTab).html(data);
+                            $("#loading").hide();
+                            $(targetTab).addClass("show");
+                            $(targetTab).addClass("active");
+                            $(targetTab).addClass("in");
+                        },
+                        error: function (xhr, status, error) {
+                            window.location = '/Login/Signin';
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        }
+                    });
+                }
+            }
+            else if ( targetTab == "#ExamLib") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+                if ($(targetTab).text().includes("Loading...") && targetTab == "#ExamLib")
+                {
+                    $.ajax({
+                        url: '/Administrator/KhoaHoc/getListExam',
+                        type: 'GET',
+                        data: { CourserId: courseId },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (data) {
+                            $(targetTab).html(data);
+                            $("#loading").hide();
+                            $(targetTab).addClass("show");
+                            $(targetTab).addClass("active");
+                            $(targetTab).addClass("in");
+                        },
+                        error: function (xhr, status, error) {
+                            window.location = '/Login/Signin';
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        }
+                    });
+                }
+            }
+            else if (targetTab == "#ReadAndSign") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+                if ($(targetTab).text().includes("Loading...") && targetTab == "#ReadAndSign") {
+                    $.ajax({
+                        url: '/Administrator/KhoaHoc/getReadAndSign',
+                        type: 'GET',
+                        data: { CourserId: courseId },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (data) {
+                            $(targetTab).html(data);
+                            $("#loading").hide();
+                            $(targetTab).addClass("show");
+                            $(targetTab).addClass("active");
+                            $(targetTab).addClass("in");
+                        },
+                        error: function (xhr, status, error) {
+                            window.location = '/Login/Signin';
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        }
+                    });
+                }
+            }
+            else if (targetTab == "#Finish") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+                if ($(targetTab).text().includes("Loading...") && targetTab == "#Finish") {
+                    $.ajax({
+                        url: '/Administrator/KhoaHoc/FinishAndSendMail',
+                        type: 'GET',
+                        data: { CourseId: courseId },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (data) {
+                            $(targetTab).html(data);
+                            $("#loading").hide();
+                            $(targetTab).addClass("show");
+                            $(targetTab).addClass("active");
+                            $(targetTab).addClass("in");
+                        },
+                        error: function (xhr, status, error) {
+                            window.location = '/Login/Signin';
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        }
+                    });
+                }
+            }
+            else if (targetTab == "#CourseInfor") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+            }
+        });
+    });
+</script>

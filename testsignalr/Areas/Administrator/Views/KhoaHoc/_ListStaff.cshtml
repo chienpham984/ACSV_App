@@ -1,0 +1,90 @@
+﻿@model List<testsignalr.Models.ModelView.StaffItem>
+@Html.ActionLink("Thay đổi danh sách", "EditListEmplyee", "KhoaHoc", new { CourseId = ViewBag.CourseId }, new { @class = "btn btn-primary" })
+@Html.ActionLink("In danh sách", "downloadListStaff", "KhoaHoc", new { CourseId = ViewBag.CourseId }, new { @class = "btn btn-primary" })
+<table class="table table-bordered" style="width:100%;">
+    <thead>
+        <tr style="background-color:lightcyan;">
+            <th>
+                No.
+            </th>
+            <th>
+                Tên công ty
+            </th>
+            <th>
+                Phòng ban
+            </th>
+            <th>
+                chức vụ
+            </th>
+            <th>
+                Tên nhân viên
+            </th>
+            <th>
+                Mã nhân viên
+            </th>
+            <th>
+                Ngày sinh
+            </th>
+            <th>
+                Nơi sinh
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                OTP
+            </th>
+            <th>
+                Gửi mail
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.STT
+            </td>
+            <td>
+                @item.TenCongTy
+            </td>
+            <td>
+                @item.TenPhong
+            </td>
+            <td>
+                @item.TenChucVu
+            </td>
+            <td>
+                @item.HoTen
+            </td>
+            <td>
+                @item.MaNhanVien
+            </td>
+            <td>
+                @item.NgaySinh
+            </td>
+            <td>
+                @item.NoiSinh
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.OTP
+            </td>
+            <td>
+                @if (item.DaGuiMail == false)
+                {
+                    <input type="checkbox" disabled="disabled" />
+                }
+                else
+                { <input type="checkbox" checked disabled="disabled" />}
+            </td>
+
+        </tr>
+    }
+
+</table>
+<div class="col-md-12" style="left:50%;">
+    @Html.ActionLink("Quay lại", "EditCourse", "KhoaHoc", new { CourseId = ViewBag.CourseId }, new { @class = "btn btn-primary" })
+</div>

@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "EditListEmplyee";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<input type="hidden" value="@ViewBag.CourseId" id="IdKhoaHoc" />
+<button class="btn btn-primary" onclick="addStaff();"> Thêm từ Database</button>
+<div class="danhsachthisinh">
+
+
+</div>
+<div class="modal fade" id="AddStaff" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="width:auto !important;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ul class="nav nav-tabs col-12" role="tablist" style="clear:left;">
+                    <li id="Tracert" class="active">
+                        <a href="#FindByTracert" aria-controls="searchByCertificate" role="tab" data-toggle="tab">Tìm theo chứng chỉ hết hạn</a>
+                    </li>
+                    <li id="Name">
+                        <a href="#FindByName" aria-controls="searchByPosition" role="tab" data-toggle="tab">Tìm theo tên</a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="clear:left;">
+                    <div role="tabpanel" class="tab-pane active" id="FindByTracert" style="padding-left:10px;">
+                        <div class="col-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <button onclick="SearchByTracertName();">Tìm ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div role="tabpanel" class="tab-pane" id="FindByName" style="padding-left:10px;">
+                        <div class="col-12">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <input type="text" id="searchName" placeholder="Nhập tên nhân viên vào đây" /><button onclick="searchByName();">Tìm ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ViewListStaff"></div>
+            <div class="modal-footer">
+                <div class="col-md-12 col-xs-12 col-sm-12 text-center">
+                    <button type="button" class="btn btn-success" onclick="savenow();">Save now</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        ShowStaffExam();
+        $('#searchName').keypress(function (event) {
+            if (event.keyCode == 13) {
+                searchByName();
+            }
+        });
+    });
+    function ShowStaffExam() {
+        var courseId = $("#IdKhoaHoc").val();
+        $.ajax({
+            type: 'GET',
+            url: "/Administrator/KhoaHoc/ShowEmployeeToListExam",
+            data: { CourseId: courseId },
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'html',
+            success: function (result) {
+                if (result.toString().trim().length == 0) {
+                    $(".danhsachthisinh").empty().append("");
+                }
+                else {
+
+                    $(".danhsachthisinh").empty().append(result);
+                }
+            },
+            error: function () {
+                $(".danhsachthisinh").empty().append('');
+            },
+            complete: function () {
+            }
+        });
+    }
+    function addStaff() {
+        $('#AddStaff').modal();
+    }
+    function SearchByTracertName() {
+        var courseId = $("#IdKhoaHoc").val();
+        $.ajax({
+            type: 'GET',
+            url: "/Administrator/KhoaHoc/searchStaffByExpirationDate",
+            data: { CourseId: courseId },
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'html',
+            success: function (result) {
+                if (result.toString().trim().length == 0) {
+                    $(".ViewListStaff").empty().append("");
+                }
+                else {
+
+                    $(".ViewListStaff").empty().append(result);
+                }
+            },
+            error: function () {
+                $(".ViewListStaff").empty().append('');
+            },
+            complete: function () {
+                $("#checkall").on("click", function () {
+                    $(".liststaff tbody input[type=checkbox]").prop('checked', $(this).prop('checked'));
+                });
+            }
+        });
+    }
+
+    function searchByName() {
+        var name = $("#searchName").val();
+        $.ajax({
+            type: 'GET',
+            url: "/Administrator/KhoaHoc/searchStaffByName",
+            data: { Name: name },
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'html',
+            success: function (result) {
+                if (result.toString().trim().length == 0) {
+                    $(".ViewListStaff").empty().append("");
+                }
+                else {
+
+                    $(".ViewListStaff").empty().append(result);
+                }
+            },
+            error: function () {
+                $(".ViewListStaff").empty().append('');
+            },
+            complete: function () {
+                $("#checkall").on("click", function () {
+                    $(".liststaff tbody input[type=checkbox]").prop('checked', $(this).prop('checked'));
+                });
+            }
+        });
+    }
+
+    function savenow() {
+        var ListStaff = "";
+        $("input.ModalListEmployee:checkbox:checked").each(function () {
+            ListStaff += "," + $(this).attr('id').toString();
+        });
+        var courseId = $("#IdKhoaHoc").val();
+        $.ajax({
+            type: 'GET',
+            url: "/Administrator/KhoaHoc/AddStaffToList",
+            data: { listStaff: ListStaff, CourseId: courseId },
+            contentType: 'application/html ; charset:utf-8',
+            dataType: 'html',
+            success: function (result) {
+                if (result.toString().trim().length == 0) {
+                    $(".danhsachthisinh").empty().append("");
+                }
+                else {
+
+                    $(".danhsachthisinh").empty().append(result);
+                }
+            },
+            error: function () {
+                $(".danhsachthisinh").empty().append('');
+            },
+            complete: function () {
+            }
+        });
+        $("#AddStaff").modal('toggle');
+    }
+
+
+
+</script>
+

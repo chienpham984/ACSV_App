@@ -1,0 +1,94 @@
+﻿@model List<testsignalr.Models.ModelView.StaffItem>
+@{
+    int stt = 0;
+}
+<table class="table table-bordered" style="width:100%;">
+    <thead>
+        <tr style="background-color:lightcyan;">
+            <th>
+                No.
+            </th>
+            <th>
+                Tên công ty
+            </th>
+            <th>
+                Phòng ban
+            </th>
+            <th>
+                chức vụ
+            </th>
+            <th>
+                Tên nhân viên
+            </th>
+            <th>
+                Mã nhân viên
+            </th>
+            <th>
+                Ngày sinh
+            </th>
+            <th>
+                Nơi sinh
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Gửi mail
+            </th>
+            <th>
+                Thời gian gửi
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.STT
+            </td>
+            <td>
+                @item.TenCongTy
+            </td>
+            <td>
+                @item.TenPhong
+            </td>
+            <td>
+                @item.TenChucVu
+            </td>
+            <td>
+                @item.HoTen
+            </td>
+            <td>
+                @item.MaNhanVien
+            </td>
+            <td>
+                @item.NgaySinh
+            </td>
+            <td>
+                @item.NoiSinh
+            </td>
+            <td>
+                @item.Email
+            </td>
+
+            <td>
+                @if (item.DaGuiMail == false)
+                {
+
+                    <img src="~/Content/img/false.png" />
+                }
+                else
+                {
+                    <img src="~/Content/img/true.png" />
+                }
+            </td>
+            <td>
+                @item.ThoiGianGui
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="col-md-12" style="left:50%;">
+    @Html.ActionLink("Gửi mail và hoàn thành", "sendmailToStaff", "KhoaHoc", new { CourseId = ViewBag.CourseId}, new { @class = "btn btn-primary" })
+</div>

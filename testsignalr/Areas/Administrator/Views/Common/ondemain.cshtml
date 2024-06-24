@@ -1,0 +1,93 @@
+﻿
+@{
+    Layout = null;
+}
+<ul>
+    <li><a href="@Url.Action("ThongBao", "Common")"><i class="fas fa-bell"></i>Thông báo</a></li>
+    @if (ViewBag.ListView.Contains("HOSONHANVIEN"))
+    {
+        <li class="has-submenu">
+            <a href="#" class="toggle" id="toggleHOSONHANVIEN"><i class="fas fa-user"></i> Thông tin nhân sự <i class="fas fa-caret-down"></i></a>
+            <ul class="submenu">
+                <li><a href='@Url.Action("Index", "NhanViens")'><i class="fas fa-caret-right"></i>Hồ sơ nhân viên</a></li>
+                <li><a href='@Url.Action("OutSourceEmployee", "NhanViens")'><i class="fas fa-caret-right"></i>Hồ sơ nhân viên đào tạo ngoài</a></li>
+
+            </ul>
+        </li>
+    }
+    @if (ViewBag.ListView.Contains("CHUNGCHISIMPLE") || ViewBag.ListView.Contains("CHUNGCHIFULL") || ViewBag.ListView.Contains("CHUNGCHINGOAI"))
+    {
+        <li class="has-submenu">
+            <a href="#" class="toggle" id="toggleCHUNGCHI"><i class="fas fa-certificate"></i> Thông tin Chứng chỉ <i class="fas fa-caret-down"></i></a>
+            <ul class="submenu">
+                @if (ViewBag.ListView.Contains("CHUNGCHISIMPLE"))
+                {
+                    <li><a href="/Administrator/ChungChi/getEmployeeTracertSimple"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên</a></li>
+                }
+                @if (ViewBag.ListView.Contains("CHUNGCHIFULL"))
+                {
+                    <li><a href="/Administrator/ChungChi/getEmployeeTracert"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên bản đủ</a></li>
+                }
+                @if (ViewBag.ListView.Contains("CHUNGCHINGOAI"))
+                {
+                    <li><a href="/Administrator/ChungChi/getOutSourceEmployeeTracert"><i class="fas fa-caret-right"></i>Chứng chỉ nhân viên ngoài</a></li>
+                }
+            </ul>
+        </li>
+    }
+    @if (ViewBag.ListView.Contains("DAOTAO") || ViewBag.ListView.Contains("DIEMTHI"))
+    {
+        <li class="has-submenu">
+            <a href="#" class="toggle" id="toggleDAOTAO"><i class="fas fa-graduation-cap"></i> Quản lý đào tạo <i class="fas fa-caret-down"></i></a>
+            <ul class="submenu">
+                <li><a href='@Url.Action("TaoKhoaHocMoi", "KhoaHoc")'><i class="fas fa-caret-right"></i>Mở lớp đào tạo</a></li>
+                <li><a href='@Url.Action("ShowAllOpeningCourse", "KhoaHoc")'><i class="fas fa-caret-right"></i>Danh sách lớp đang mở</a></li>
+                <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách lớp hoàn thành</a></li>
+                @if (ViewBag.ListView.Contains("DIEMTHI"))
+                {
+                    <li><a href='@Url.Action("QuanLyKetQuaThi", "KhoaHoc")'><i class="fas fa-caret-right"></i>Quản lý điểm thi</a></li>
+                }
+                <li><a href="#"><i class="fas fa-caret-right"></i>Danh sách giáo viên</a></li>
+                <li><a href='@Url.Action("Showall", "ThuVienCauHoi")'><i class="fas fa-caret-right"></i>Thư viện đề thi</a></li>
+            </ul>
+        </li>
+    }
+    @if (ViewBag.ListView.Contains("DANHMUCNHANSU"))
+    {
+        <li class="has-submenu">
+            <a href="#" class="toggle" id="toggleNHANSU"><i class="fas fa-id-badge"></i> Danh mục nhân sự <i class="fas fa-caret-down"></i></a>
+            <ul class="submenu">
+                <li><a href="@Url.Action("Index", "DanhMucCongTies")"><i class="fas fa-caret-right"></i>Danh mục công ty</a></li>
+                <li><a href="@Url.Action("Index", "DanhMucPhongBans")"><i class="fas fa-caret-right"></i>Danh mục Phòng ban</a></li>
+                <li><a href="@Url.Action("Index", "DanhMucChucVus")"><i class="fas fa-caret-right"></i>Danh mục Chức vụ</a></li>
+                <li><a href="#"><i class="fas fa-caret-right"></i>Danh mục hợp đồng</a></li>
+            </ul>
+        </li>
+    }
+    @if (ViewBag.ListView.Contains("DANHMUCCHUNGCHI"))
+    {
+        <li class="has-submenu">
+            <a href="#" class="toggle" id="toggleDANHMUCCHUNGCHI"><i class="far fa-id-card"></i> Danh mục chứng chỉ <i class="fas fa-caret-down"></i></a>
+            <ul class="submenu">
+                <li><a href="/Administrator/ChungChi/DanhsachChungChi"><i class="fas fa-caret-right"></i>Danh mục chứng chỉ</a></li>
+                <li><a href="/Administrator/ChungChi/NhomChungChiTheoChucVu"><i class="fas fa-caret-right"></i>Nhóm chứng chỉ</a></li>
+            </ul>
+        </li>
+    }
+    @if (ViewBag.ListView.Contains("TAILIEU"))
+    {
+        <li><a href="/Administrator/GiaoTrinhDaoTao/ShowDoc"><i class="fas fa-boxes"></i>Quản lý giáo trình</a></li>
+    }
+    @if (ViewBag.ListView.Contains("TAIKHOAN"))
+    {
+        <li><a href="@Url.Action("ShowAllUser", "TaiKhoanNguoiDung")"><i class="fas fa-users-cog"></i>Quản lý tài khoản</a></li>
+    }
+    <li class="has-submenu">
+        <a href="#" class="toggle" id="toggleHOSOCANHAN"><i class="fas fa-info-circle"></i> Hồ sơ cá nhân <i class="fas fa-caret-down"></i></a>
+        <ul class="submenu">
+            <li><a href="#"><i class="fas fa-caret-right"></i>Thông tin cá nhân</a></li>
+            <li><a href="@Url.Action("DoiMatKhau", "Common")"><i class="fas fa-caret-right"></i>Đổi mật khẩu</a></li>
+        </ul>
+    </li>
+    <li><a href="/Administrator/Login/SignOut"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a></li>
+</ul>

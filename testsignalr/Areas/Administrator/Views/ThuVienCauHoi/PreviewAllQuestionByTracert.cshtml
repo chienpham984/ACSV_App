@@ -1,0 +1,60 @@
+﻿@model List<testsignalr.Models.ModelView.QuestionItem>
+@{
+    int i = 0;
+    string chuoi = "ABCDEF";
+    int j = 0;
+}
+<link href="~/Content/examstyle.css" rel="stylesheet" />
+<div class="col-md-12 abcd">
+    <table class="danhsachdethi col-md-10 col-sm-12">
+        @foreach (var item in Model)
+        {
+            i++;
+            j = 0;
+            <tr>
+                <td>
+                    <div>
+                        <div class="cauhoi">
+                            <span class="stt">Câu hỏi @i:</span>
+                            <span style="color:black;">
+                                @item.cauHoi
+                            </span>
+                        </div>
+                        @if (item.duongDan != null && item.duongDan.Trim() != "")
+                        {
+                            <img src="@item.duongDan.ToString().Replace("~","")" alt="Picture" class="alignCenter">
+                        }
+                        <div class="dapan">
+                            @foreach (var sub in item.dapAns)
+                            {
+                                j++;
+                                <div class="row" style="margin-left:10px;">
+                                    @if (sub.dapAnDung == true)
+                                    {
+                                        <input type="radio" id="@sub.answerId" name="options" readonly checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" id="@sub.answerId" name="options" readonly />
+                                    }
+                                    @if (sub.traLoi.Trim() != "")
+                                    {
+                                        <label for="@sub.answerId" style="text-align:left;"> @(chuoi[j - 1] + ".")  @sub.traLoi</label>
+                                    }
+                                    @if (sub.duongDan != null && sub.duongDan.Trim() != "")
+                                    {
+                                        @(chuoi[j - 1] + ".") <img src="@sub.duongDan.ToString().Replace("~","")" alt="Picture" class="alignCenter">
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="col-md-12" style="margin:0 auto; left:50%;">
+    @Html.ActionLink("Quay lại", "Listquestion", "System", null, new { @class = "btn btn-primary" })
+</div>

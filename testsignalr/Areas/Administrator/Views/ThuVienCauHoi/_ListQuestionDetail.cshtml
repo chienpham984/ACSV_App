@@ -1,0 +1,45 @@
+﻿@model List<testsignalr.Models.ModelView.QuestionItem>
+@{ int i = 0;
+}
+
+<table class="table table-bordered" style="width:100%;">
+    <tr style="background-color:lightcyan;">
+        <th>No.</th>
+        <th>Tên câu hỏi</th>
+        <th>Mức độ</th>
+        <th>
+            Có đính kèm ảnh
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        i++;
+<tr>
+    <td>
+        <p>
+            <a href="#">
+                <span class="glyphicon glyphicon-grain"></span>
+            </a>
+            @i
+        </p>
+    </td>
+
+    <td>@item.cauHoi</td>
+    <td>@item.tenMucDo</td>
+    <td>
+        @if (item.duongDan != null && item.duongDan.Trim() != "")
+        {
+            <input type="checkbox" checked disabled="disabled" />
+        }
+        else
+        { <input type="checkbox" disabled="disabled" />}
+    </td>
+    <td>
+        @Html.ActionLink("Chỉnh sửa", "EditQuestion", "System", new { questionId = item.questionId }, new { @class = "btn  btn-warning" })
+        @Html.ActionLink("Xóa", "deleteQuestion", "System", new {  questionId = item.questionId }, new { @class = "btn  btn-danger" })
+    </td>
+</tr>
+    }
+
+</table>

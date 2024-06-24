@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "JoinTheCourse";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<link href="~/Content/examstyle.css" rel="stylesheet" />
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<img id="loading" src="~/Image/loading.gif" style="display:none; position:fixed; top:50%; left:50%; width:250px; height:250px;" />
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active HasData Tabselected" id="_CourseInfor" data-toggle="tab" href="#CourseInfor" role="tab" aria-controls="home" aria-selected="true">Thông tin khóa học</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link HasData" id="_Document" data-toggle="tab" href="#Document" role="tab" aria-controls="profile" aria-selected="false">Tài liệu khóa học</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link HasData" id="_Result" data-toggle="tab" href="#Result" role="tab" aria-controls="profile" aria-selected="false">Kết quả thi</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="CourseInfor" role="tabpanel" aria-labelledby="CourseInfor-tab">
+        <h3>Thông tin khóa học</h3>
+        <dl class="row" style="padding-left:15px;">
+
+            <div style="display:block; width:100%;">
+            <dt>
+                Tên khóa học:
+            </dt>
+
+            <dd>
+                @ViewBag.myCourse.TenKhoaHoc
+            </dd>
+    </div>
+    <div style="display:block; width:100%;">
+
+        <dt>
+            Thời gian đào tạo:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.TuNgay.ToString("dd/MM/yyyy") -  @ViewBag.myCourse.DenNgay.ToString("dd/MM/yyyy")
+        </dd>
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Chứng chỉ cấp:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.TenChungChi
+        </dd>
+
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Thời hạn chứng chỉ:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.NgayCap.ToString("dd/MM/yyyy") -  @ViewBag.myCourse.NgayHetHan.ToString("dd/MM/yyyy")
+        </dd>
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Tên giáo viên:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.TenGiaoVien
+        </dd>
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Hình thức đào tạo:
+        </dt>
+
+        <dd>
+            @ViewBag.myCourse.HinhThucDaoTao
+        </dd>
+    </div>
+    <div style="display:block; width:100%;">
+        <dt>
+            Trạng thái:
+        </dt>
+        <dd>
+            @if (ViewBag.myCourse.TrangThai == true)
+            {<span>Đã đóng</span>}
+            else
+            { <span> Đang mở</span>}
+        </dd>
+    </div>
+    </dl>
+</div>
+<div class="tab-pane fade" id="Document" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+<div class="tab-pane fade" id="Result" role="tabpanel" aria-labelledby="profile-tab"><p>Loading...</p></div>
+ </div>
+<script>
+    $(document).ready(function () {
+        var _courseId = @Html.Raw(Json.Encode(ViewBag.CourseId));
+        var _dadoc = @Html.Raw(Json.Encode(ViewBag.dadoc));
+        var slideShow = @Html.Raw(Json.Encode(ViewBag.slideShow));
+        if (_dadoc) {
+            var dt = $('a.nav-link').filter(function () {
+                return $(this).attr('href') === "#Result";
+            });
+            dt.parent().remove("TurnOff");
+            dt.parent().remove("ShowOn");
+            dt.parent().addClass("ShowOn");
+        }
+        else {
+            var dt = $('a.nav-link').filter(function () {
+                return $(this).attr('href') === "#Result";
+            });
+            dt.parent().remove("TurnOff");
+            dt.parent().remove("ShowOn");
+            dt.parent().addClass("TurnOff");
+        }
+        
+        $('.nav-tabs a').on('show.bs.tab', function (e) {
+            var targetTab = $(e.target).attr("href");
+            var macongty = $(e.target).text();
+            var courseId = @Html.Raw(Json.Encode(ViewBag.CourseId));
+
+            if (targetTab == "#Document") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+                if ($(targetTab).text().includes("Loading...") && targetTab == "#Document") {
+                    $.ajax({
+                        url: '/TrainingCourse/getListDocument',
+                        type: 'GET',
+                        data: { CourserId: courseId },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (data) {
+
+                            $(targetTab).html(data);
+                            $("#loading").hide();
+                            $(targetTab).addClass("show");
+                            $(targetTab).addClass("active");
+                            $(targetTab).addClass("in");
+                        },
+                        error: function (xhr, status, error) {
+                            window.location = '/Login/Signin';
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        }
+                    });
+                }
+            }
+            else if (targetTab == "#Result") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+                if ($(targetTab).text().includes("Loading...") && targetTab == "#Result") {
+                    $.ajax({
+                        url: '/TrainingCourse/getResult',
+                        type: 'GET',
+                        data: { CourserId: courseId },
+                        beforeSend: function () {
+                            $("#loading").show();
+                        },
+                        success: function (data) {
+                            alert(data);
+                            $(targetTab).html(data);
+                            $("#loading").hide();
+                            $(targetTab).addClass("show");
+                            $(targetTab).addClass("active");
+                            $(targetTab).addClass("in");
+                        },
+                        error: function (xhr, status, error) {
+                            window.location = '/Login/Signin';
+                        },
+                        complete: function () {
+                            $("#loading").hide();
+                        }
+                    });
+                }
+            }
+            else if (targetTab == "#CourseInfor") {
+                $('.nav-link').removeClass('Tabselected');
+                $(e.target).addClass('Tabselected');
+            }
+        });
+
+        if (slideShow == 2) {
+            $('#_Document').tab('show');
+        } else if (slideShow == 3) {
+            $('#_Result').tab('show');
+        }
+    });
+</script>

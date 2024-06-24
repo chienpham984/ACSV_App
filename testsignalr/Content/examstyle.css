@@ -1,0 +1,219 @@
+﻿body {
+    font-size:16px;
+}
+.custom-control {
+display:block;
+margin-bottom:5px;
+}
+.checkboxFour {
+    width: 25px;
+    height: 25px;
+    background: #ddd;
+    float:left;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    border-radius: 100%;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+}
+.checkboxFourFalse {
+    color:white;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+    cursor: pointer;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    z-index: 1;
+    background-color:tomato;
+    -webkit-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+     box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+}
+.checkboxFourTrue {
+    color:white;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+    cursor: pointer;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    z-index: 1;
+    background-color:#26ca28;
+    -webkit-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+     box-shadow:inset 0px 1px 3px rgba(0,0,0,0.5);
+}
+.abcd {
+    margin-top:30px;
+    position:relative;
+}
+.danhsachdethi tr td{
+    padding:15px 10px;
+  background-color:#eee7e7;
+  width:100%;
+  /*border:1px solid #808080;*/
+  border-radius:25px;
+
+}
+table tr{
+padding-bottom:20px;
+}
+
+.cauhoi {
+    font-weight:bold;
+    margin-bottom:20px;
+}
+.stt {
+    color:red;
+    margin-right:5px;
+}
+
+.traloi td {
+    font-weight:bold;
+}
+.button{
+  background-color: blue; /* Green */
+  border: none;
+  color: white;
+  padding: 1px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 1px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius:10px;
+}
+ .button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+.selected {
+border: solid 1px red;
+border-radius:10px;
+}
+.subMap {
+    position:fixed;
+    right:0px;
+    height:600px; 
+    overflow:scroll;
+    padding: 40px 20px;
+}
+.times {
+    text-align:left; 
+    font-size:20px; 
+    color:white;
+    font-weight:bold;
+}
+.alignCenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-bottom:10px;
+  max-width:300px;
+}
+.HeaderExam {
+    position:fixed; 
+    background-color:blueviolet; 
+    color:white; top:60px; 
+    width:100%; z-index:10;
+     height:50px; 
+     padding-top:10px;
+}
+/*.radio-container {
+    display: block;
+    margin-right: 10px;
+}
+
+
+
+    .radio-container label {
+        display: block;
+        cursor: pointer;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .radio-container input[type="radio"]:checked + label {
+        background-color: #007bff;
+        color: #fff;
+    }*/
+.cauhoi {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+    .cauhoi span {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+.dapan{
+
+}
+span {
+    color:black;
+}
+@media only screen and (max-width: 768px) {
+    .HeaderExam {
+    position:fixed; 
+    background-color:blueviolet; 
+    color:white; top:60px; 
+    width:100%; z-index:10;
+     height:80px; 
+     padding-top:10px;
+     line-height: 15px;
+}
+.times {
+    text-align:left; 
+    font-size:20px; 
+    color:white;
+    font-weight:bold;
+}
+.abcd {
+    margin-top:60px;
+    position:relative;
+}
+
+}
+@media only screen and (max-width: 320px) {
+.HeaderExam {
+    position:fixed; 
+    background-color:blueviolet; 
+    color:white; top:60px; 
+    width:100%; z-index:10;
+     height:80px; 
+     padding-top:10px;
+     line-height: 15px;
+}
+.times {
+    text-align:left; 
+    font-size:20px; 
+    color:white;
+    font-weight:bold;
+}
+.abcd {
+    margin-top:60px;
+    position:relative;
+}
+
+}
+

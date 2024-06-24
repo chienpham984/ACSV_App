@@ -1,0 +1,54 @@
+﻿@model testsignalr.Models.ModelView.ChangePasswordModal
+@{
+    ViewBag.Title = "DoiMatKhau";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+@using (Html.BeginForm("DoiMatKhau", "Common", FormMethod.Post, new { @class = "form-horizontal", role = "form", onsubmit = "return validatePassword();" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.OldPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control input-custom", id = "OldPassword" })
+            @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NewPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control input-custom", id = "NewPassword" })
+            @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control input-custom" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Change Password" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<script>
+    function validatePassword() {
+        var newPassword = document.getElementById("NewPassword").value;
+        var hasUpperCase = /[A-Z]/.test(newPassword);
+        var hasNumber = /\d/.test(newPassword);
+        var minLength = newPassword.length >= 6;
+
+        if (!hasUpperCase || !hasNumber || !minLength) {
+            alert("Password must be at least 6 characters long and contain at least one uppercase letter and one number.");
+            return false;
+        }
+        return true;
+    }</script>

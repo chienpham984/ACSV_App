@@ -1,0 +1,51 @@
+﻿@model List<testsignalr.Models.ModelView.Exam>
+@{
+    int stt = 0;
+}
+<table class="table table-bordered" style="width:100%;">
+    <thead>
+        <tr style="background-color:lightcyan;">
+            <th>
+                No.
+            </th>
+            <th>
+                Câu hỏi
+            </th>
+            <th>
+                Có đính kèm ảnh
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        stt++;
+        <tr>
+            <td>
+                <p>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-grain"></span>
+                    </a>
+                    @stt
+                </p>
+            </td>
+            <td>
+                @item.CauHoi
+            </td>
+            <td>
+                @if (item.DuongDan != null && item.DuongDan.Trim() != "")
+                {
+                    <input type="checkbox" checked disabled="disabled" />
+                }
+                else
+                { <input type="checkbox" disabled="disabled" />}
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "EditSelectedReadAdnSign", "KhoaHoc", new { ExamId = item.Id, CourseId = ViewBag.CourseId }, new { @class = "btn  btn-danger" })
+                @Html.ActionLink("Xóa", "RemoteQuestion", "KhoaHoc", new { ExamId = item.Id, CourseId = ViewBag.CourseId }, new { @class = "btn  btn-danger" })
+            </td>
+
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,500 @@
+﻿@model IEnumerable<testsignalr.Models.ModelData.SiteMenu>
+
+@{
+    ViewBag.Title = "ShowDoc";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+    int menuid = ViewBag.MenuID;
+    bool isnew = false;
+    int i = 0;
+}
+@*vietanh add*@
+<head>
+    <style>
+        input, select, textarea {
+            max-width: 100%;
+        }
+
+        .popupCategory, .popupDocument {
+            /*width: auto !important;*/
+            height: auto !important;
+            text-align: center;
+            width: 500px !important;
+        }
+
+        .row {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
+            margin-bottom: 5px;
+        }
+
+        .form-control:focus {
+            color: #495057 !important;
+            background-color: #fff !important;
+            border-color: #80bdff !important;
+            box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25) !important;
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        input[type="file" i] {
+            appearance: none;
+            cursor: default;
+            align-items: baseline;
+            text-overflow: ellipsis;
+            text-align: start !important;
+            white-space: pre;
+            overflow: hidden !important;
+        }
+    </style>
+</head>
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<link href="~/Content/popupStyle.css" rel="stylesheet" />
+@functions{
+    public bool checkNewcategory(int id)
+    {
+        bool result = false;
+        DateTime dt;
+        foreach (var item in ViewBag.dsGiaoTrinh)
+        {
+            if (item.MenuId == id)
+            {
+                dt = DateTime.ParseExact(item.DateModified.Substring(0, 10), "dd/MM/yyyy", null);
+                dt = dt.AddDays(14);
+                if (dt >= DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null))
+                {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+    public bool checkNew(DateTime datetime)
+    {
+        bool result = false;
+        datetime = datetime.AddDays(14);
+        if (datetime >= DateTime.Now)
+        {
+            result = true;
+        }
+        return result;
+    }
+}
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width:100% !important; margin-bottom:10px;">
+    <p class="documentPath" style="border:solid 1px #808080;">@ViewBag.DuongDan</p>
+</div>
+
+@if (ViewBag.MenuID != 0)
+{
+    <button class="btn btn-primary" onclick="goBack()">Back</button>
+}
+<div style="width:100% !important; display:block !important;">
+
+
+    <div style="width:100%; display:block;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" 0>
+            <table class="table-hover" style="border:none; width:100%">
+                @foreach (var sm in Model)
+                {
+                    isnew = checkNewcategory(sm.Id);
+                    <tr>
+                        @if (isnew == true)
+                        {
+                            <td style="width:70%;">
+                                <a class="category" href="#" id='@sm.Id'>
+                                    @sm.MenuName
+                                </a>
+                                <img src="~/Content/img/new.gif" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="width: 70%; ">
+                                <a class="category" href="#" id='@sm.Id'>
+                                    @sm.MenuName
+                                </a>
+                            </td>
+                        }
+                        <td style="width:30%;">
+                            <a class="navbar-logo-wrap btnEditCategory" href="#" id="@sm.Id">
+                                <img class="navbar-logo-img fileFnc" src="~/Content/img/edit.png" alt="manage staff">
+                            </a>
+                            @Html.Label(" ")
+                            <a class="navbar-logo-wrap" style="text-decoration:none;" href="@Url.Action("Delete","Treeview", new { id = sm.Id})" onclick="return confirm('Bạn có chắc muốn xóa danh mục [@sm.MenuName]?')" ;>
+                                <img class="navbar-logo-img fileFnc" src="~/Content/img/delete.png" alt="manage staff">
+                            </a>
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+</div>
+<hr />
+<div style="display:block; clear:both; margin-top:10px;">
+    <div>
+        <a class="navbar-logo-wrap " style="text-decoration:none;" href="#" id="AddDocument">
+            <img class="navbar-logo-img " style="height:25px;" src="~/Content/img/addfile.png" alt="add new file" title="Add File">
+        </a>
+
+        <a class="navbar-logo-wrap " style="text-decoration:none; " href="#" id="AddCategory">
+            <img class="navbar-logo-img" style="height:25px;" src="~/Content/img/Newfolder.png" alt="manage staff" title="Add Category">
+        </a>
+    </div>
+    <br />
+
+
+    <table class="table-hover" id="example" style="border:none; width:100%">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th class="text-left">Tên tài liệu/ Title</th>
+                <th class="text-left">Mô tả/ Description</th>
+                <th class="text-center">Lần ban hành/ Revision</th>
+                <th class="text-center">Ngày hiệu lực/ Effective date</th>
+                <th class="text-center">Ngày chỉnh sửa/ Date modified</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (testsignalr.Models.ModelData.GiaoTrinhDaoTao item in ViewBag.dsGiaoTrinh)
+            {
+                isnew = checkNew(item.NgayTao.Value);
+                i++;
+                <tr style="border-top:1px solid gray;">
+                    <td>@i.ToString()</td>
+                    @if (item.FileType.ToUpper().Contains("PDF"))
+                    {
+                        if (isnew == true)
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp;<img src="~/Content/img/file.png" class="fileFnc" /> @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                                <img src="~/Content/img/new.gif" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp;<img src="~/Content/img/file.png" class="fileFnc" />  @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                            </td>
+                        }
+                    }
+                    else if (item.FileType.ToUpper().Contains("TXT"))
+                    {
+                        if (isnew == true)
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp;<img src="~/Content/img/txt.png" class="fileFnc" />  @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                                <img src="~/Content/img/new.gif" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp; <img src="~/Content/img/txt.png" class="fileFnc" />  @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                            </td>
+                        }
+                    }
+                    else if (item.FileType.ToUpper().Contains("PPTX") || item.FileType.ToUpper().Contains(".PPT"))
+                    {
+                        if (isnew == true)
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp;<img src="~/Content/img/PowerPoint.png" class="fileFnc" /> @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                                <img src="~/Content/img/new.gif" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id">  &nbsp; <img src="~/Content/img/PowerPoint.png" class="fileFnc" />  @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                            </td>
+                        }
+                    }
+                    else if (item.FileType.ToUpper().Contains("JPG") || item.FileType.ToUpper().Contains(".PNG") || item.FileType.ToUpper().Contains(".JPEG"))
+                    {
+                        if (isnew == true)
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id">  &nbsp; <img src="~/Content/img/img.png" class="fileFnc" />@Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                                <img src="~/Content/img/new.gif" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp; <img src="~/Content/img/img.png" class="fileFnc" />  @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                            </td>
+                        }
+                    }
+                    else if (item.FileType.ToUpper().Contains("RAR"))
+                    {
+                        if (isnew == true)
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp;  <img src="~/Content/img/winrar.png" class="fileFnc" />  @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                                <img src="~/Content/img/new.gif" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp; <img src="~/Content/img/winrar.png" class="fileFnc" />@Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                            </td>
+                        }
+                    }
+
+                    else if (item.FileType.ToUpper().Contains("XLS") || item.FileType.ToUpper().Contains(".XLSX"))
+                    {
+                        if (isnew == true)
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp;<img src="~/Content/img/Excel2.png" class="fileFnc" /> @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                                <img src="~/Content/img/new.gif" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp;  <img src="~/Content/img/Excel2.png" class="fileFnc" /> @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                            </td>
+                        }
+                    }
+                    else if (item.FileType.ToUpper().Contains("DOC") || item.FileType.ToUpper().Contains(".DOCX"))
+                    {
+                        if (isnew == true)
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp;  <img src="~/Content/img/wordfile.png" class="fileFnc" /> @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                                <img src="~/Content/img/new.gif" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-left">
+                                <a style="text-decoration:none;" class="displaydocument" href="#" id="@item.Id"> &nbsp; <img src="~/Content/img/wordfile.png" class="fileFnc" />  @Html.DisplayFor(modelItem => item.TenTaiLieu)</a>
+                            </td>
+                        }
+                    }
+                    <td class="text-left"> @item.MoTa </td>
+                    <td class="text-center"> @item.LanBanHanh </td>
+                    <td class="text-center">
+                        @item.NgayBanHanh
+                    </td>
+                    <td class="text-center">
+                        @item.NgayTao
+                    </td>
+                    <td>
+
+
+                        @Html.Label(" ")
+                        <a class="navbar-logo-wrap" style="text-decoration:none;" href="download-Document-@item.Id">
+                            <img class="navbar-logo-img fileFnc" src="~/Content/img/downloadfile.png" title="download file">
+                        </a>
+                        @if (item.LinkId != null)
+                        {
+                            <a class="navbar-logo-wrap btnHistory" style="text-decoration:none;" href="#" id="@item.Id">
+                                <img class="navbar-logo-img fileFnc" src="~/Content/img/history.png" title="History">
+                            </a>
+                        }
+
+                        @Html.Label(" ")
+                        <a class="navbar-logo-wrap btnEditDocument" style="text-decoration:none;" href="#" id="@item.Id">
+                            <img class="navbar-logo-img fileFnc" src="~/Content/img/edit.png" title="edit file">
+                        </a>
+                        @Html.Label(" ")
+                        <a class="navbar-logo-wrap" style="text-decoration:none;" href="Delete-Document-from-route-@item.Id" onclick="return confirm('Bạn có chắc muốn xóa tài liệu [@item.TenTaiLieu]?')" ;>
+                            <img class="navbar-logo-img fileFnc" src="~/Content/img/delete.png" title="delete file">
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div id="overlay" class="overlay"></div>
+@*vietanh add*@
+<div id="popupCategory" class="popupCategory">
+    <div class="popup-header">
+        <strong> THÊM MỤC MỚI</strong>
+        <span class="close">&times;</span>
+    </div>
+    <div class="popup-content">
+
+        @using (Html.BeginForm("SaveNewCategory", "GiaoTrinhDaoTao", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group row">
+                    <label for="MenuName" style="padding-right: 2px;" class="col-sm-3 col-form-label">Tên mục tài liệu</label>
+                    <div class="col-sm-9">
+                        <input type="text" required class="form-control" name="MenuName" id="MenuName" placeholder="Nhập tên mục tài liệu tại đây..." />
+                    </div>
+                </div>
+                <input type="hidden" id="ParentId" name="ParentId" value="@ViewBag.MenuID" />
+                <div class="col-12">
+                    <input type="submit" value="Thêm ngay" class="btn btn-success" style="height:25px; line-height:5px;font-size:13px;" onclick="return checkCategoryInput()" />
+
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+@*vietanh add*@
+<div id="popupDocument" class="popupDocument">
+    <div class="popup-header">
+        <strong> THÊM MỤC MỚI</strong>
+        <span class="close">&times;</span>
+    </div>
+    <div class="popup-content">
+        @*<div class="row col-12">*@
+        @using (Html.BeginForm("SaveNewDocument", "GiaoTrinhDaoTao", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="form-group row">
+                    <label for="TenTaiLieu" class="col-sm-3 col-form-label">Tên tài liệu/ Title:</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="TenTaiLieu" class="form-control" name="TenTaiLieu" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="MoTa" class="col-sm-3 col-form-label">Mô tả/ Description:</label>
+                    <div class="col-sm-9" style="float:left;">
+                        <input type="text" id="MoTa" class="form-control" name="MoTa" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="LanBanHanh" class="col-sm-3 col-form-label">Lần ban hành/ Revision:</label>
+                    <div class="col-9" style="float:left;">
+                        <input type="number" id="LanBanHanh" class="form-control" name="LanBanHanh" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="NgayBanHanh" class="col-sm-3 col-form-label">Ngày hiệu lực/ Effective date:</label>
+                    <div class="col-9" style="float:left;">
+                        <input type="date" id="NgayBanHanh" class="form-control" name="NgayBanHanh" value="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                    </div>
+                </div>
+
+                <input type="hidden" id="MenuId" name="MenuId" value="@ViewBag.MenuID" />
+
+                <div class="form-group row">
+                    <label for="fileUpload" class="col-sm-3 col-form-label">File tài liệu:</label>
+                    <div class="col-9" style="float:left;">
+                        <input type="file" id="fileUpload" name="fileUpload" accept="application/msword,application/pdf" class="form-control" required="required">
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <input type="submit" value="Thêm Ngay" class="btn btn-success" onclick="return checkInput()" />
+                </div>
+            </div>
+        }
+
+        @*</div>*@
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        /* var popup = document.getElementById("popupCategory");*/
+        var closeButton = document.querySelector(".popupCategory .close");
+        var closeButtonDoc = document.querySelector(".popupDocument .close"); //@*vietanh add*@
+
+        closeButton.addEventListener("click", function () {
+            hidePopup();
+        });
+        closeButtonDoc.addEventListener("click", function () {
+            hideDocument();
+        });
+        $("#AddCategory").on('click', function () {
+            showNewWindow();
+        });
+        $("#AddDocument").on('click', function () {
+            showNewDocument();
+        });
+
+        $('.category').on('dblclick', function () {
+            var CategoryId = $(this).attr('id');
+            window.location = '/Administrator/GiaoTrinhDaoTao/ShowDoc?ParentId=' + CategoryId;
+        });
+        $('.displaydocument').on('dblclick', function () {
+            var fileId = $(this).attr('id');
+            /*            window.location = '/Administrator/GiaoTrinhDaoTao/OpenFile?fileId=' + fileId;*/
+            window.open('/Administrator/GiaoTrinhDaoTao/OpenFile?fileId=' + fileId, '_blank');
+        });
+
+    });
+
+    function showNewWindow() {
+        var popup = document.getElementById("popupCategory");
+        var overlay = document.getElementById("overlay");
+        popup.style.display = "inline-block";
+        overlay.style.display = "block";
+    }
+    function showNewDocument() {
+        var popup = document.getElementById("popupDocument");
+        var overlay = document.getElementById("overlay");
+        popup.style.display = "inline-block";
+        overlay.style.display = "block";
+    }
+    function hideDocument() {
+        var popup = document.getElementById("popupDocument");
+        var overlay = document.getElementById("overlay");
+        popup.style.display = "none";
+        overlay.style.display = "none";
+    }
+    function hidePopup() {
+        var popup = document.getElementById("popupCategory");
+        var overlay = document.getElementById("overlay");
+        popup.style.display = "none";
+        overlay.style.display = "none";
+    }
+    function checkCategoryInput() {
+        var ParentMenuID = $('#ParentId').val();
+        var MenuName = $("[name='MenuName']").val();
+        $.getJSON("/GiaoTrinhDaoTao/checkCategoryExisted", { ParentMenuID: ParentMenuID, MenuName: MenuName }, function (mydata) {
+            if (mydata != null) {
+                if (mydata.giatri != "") {
+                    alert("Tên danh mục đã tồn tại trong hệ thống");
+                    return false;
+                }
+            }
+            else {
+                alert("Tên danh mục đã tồn tại trong hệ thống");
+                return false;
+            }
+        });
+        return true;
+    }
+    function goBack() {
+        window.history.back(); // Sử dụng window.history để quay lại trang trước đó
+    }
+    function openPdfInNewTab(pdfUrl) {
+        window.open(pdfUrl, '_blank');
+    }
+</script>

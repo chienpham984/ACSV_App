@@ -1,0 +1,213 @@
+﻿@model List<testsignalr.Models.ModelData.ReadAndSign>
+@{
+    ViewBag.Title = "QuickTest";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="~/Content/tableStyle.css" rel="stylesheet" />
+<div class="row justify-content-md-center" style="padding-top:20px;">
+    <div class="col-8">
+        <div id="progress-bar-container" style="width: 100%; background-color: #f2f2f2;">
+            <div id="progress-bar" style=" width: 100%; height: 10px; background-color: #4caf50; position:relative"></div><span style="color:red; font-weight:bold; position:absolute; right:-5px; top:-5px;" id="progress"></span>
+        </div>
+    </div>
+</div>
+<div class="col-12" style="padding-top:50px;">
+    <div style="width:100%;  min-height:100px;">
+        <div style="width: 100%; padding: 10px 10px;">
+            <span class="QuestionNumber" style="font-weight:bold;color:red;">:</span> &nbsp;<span class="Question" style="color:black; font-weight:bold;"></span>
+        </div>
+        <div></div>
+        @*<img style="height:150px; width:200px;" />*@
+    </div>
+    <div style="width:100%;  min-height:50px; margin-top:10px;">
+        <div style="width: 100%; padding: 10px 10px;">
+            <input type="radio" name="group" id="RDOA" value="A" />
+            <label for="RDOA" style="color:black; font-weight:bold;"> A:</label> &nbsp;<span class="TraLoiA" style="color:black;"></span>
+        </div>
+    </div>
+    <div style="width:100%;  min-height:50px; margin-top:10px;">
+        <div style="width: 100%; padding: 10px 10px;">
+            <input type="radio" name="group" id="RDOB" value="B" />
+            <label for="RDOB" style="color:black; font-weight:bold;"> B:</label> &nbsp;<span class="TraLoiB" style="color:black;"></span>
+        </div>
+    </div>
+    <div style="width:100%;  min-height:50px; margin-top:10px;">
+        <div style="width: 100%; padding: 10px 10px;">
+            <input type="radio" name="group" id="RDOC" value="C" />
+            <label for="RDOC" style="color:black; font-weight:bold;"> C:</label> &nbsp;<span class="TraLoiC" style="color:black;"></span>
+        </div>
+    </div>
+    <div style="width:100%;  min-height:50px; margin-top:10px;">
+        <div style="width: 100%; padding: 10px 10px;">
+            <input type="radio" name="group" id="RDOD" value="D" />
+            <label for="RDOD" style="color:black; font-weight:bold;"> D:</label> &nbsp;<span class="TraLoiD" style="color:black;"></span>
+        </div>
+    </div>
+    <div style="width:100%;  min-height:50px; margin-top:10px;">
+        <div style="width: 100%; padding: 10px 10px;">
+            <input type="radio" name="group" id="RDOE" value="E" />
+            <label for="RDOE" style="color:black; font-weight:bold;"> E:</label> &nbsp;<span class="TraLoiE" style="color:black;"></span>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <button class="btn btn-primary" id="Previos">Quay lại</button>
+            <button class="btn btn-primary" id="Next">Next</button>
+            <button class="btn btn-primary" id="Finish">Kết thúc</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $(document).on("keydown", function (event) {
+            if (event.which === 116) { // Check if F5 key is pressed (key code 116)
+                event.preventDefault(); // Prevent default F5 behavior (page refresh)
+                alert("Mọi dữ liệu chưa lưu sẽ bị mất nếu làm mới trang");
+            }
+        });
+
+        // Khởi tạo danh sách để lưu các đáp án được chọn
+        var currentDate = new Date();
+        var formattedDate = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate();
+        var formattedTime = currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + currentDate.getSeconds();
+        var formattedDateTime = formattedDate + ' ' + formattedTime;
+        var vitri = 0;
+        var DanhSachCauHoi = @Html.Raw(Json.Encode(Model));
+        var soluongcauhoi = @Html.Raw(Json.Encode(ViewBag.soluongcauhoi));
+        var courseId = @Html.Raw(Json.Encode(ViewBag.CourseId));
+       
+        var selectedAnswers = new Array(soluongcauhoi);
+        var selectedQuestionId = new Array(soluongcauhoi);
+        var progress = 100 / soluongcauhoi;
+        $('#Next').click(function () {
+            if (vitri < soluongcauhoi -1) {
+                vitri++;
+                dichuyendenvitri(vitri);
+            }
+        });
+        $('#Previos').click(function () {
+            if (vitri > 0) {
+            vitri--;
+                dichuyendenvitri(vitri);
+            }
+        });
+        $('#Finish').click(function () {
+            $.ajax({
+                url: '/TrainingCourse/FinishQuickTest',
+                type: 'POST',
+                data: { ListAnswer: selectedAnswers, ListQuestionId: selectedQuestionId, CourseId: courseId, TimeStart: formattedDateTime },
+                success: function (data) {
+                    if (data.Status == "Pass") {
+                        alert("Bạn đã vượt qua bài thi Quicktest xác nhận đọc và hiểu tài liệu");
+                        window.location = '/TrainingCourse/JoinTheCourse?CourseId=' + courseId + '&slideShow=3';
+                    }
+                    else {
+                        alert("Bạn không vượt qua  được bài thi Quicktest. kết quả đạt " + data.Status + " điểm.");
+                        window.location = '/TrainingCourse/JoinTheCourse?CourseId=' + courseId +'&slideShow=2';
+                    }
+                },
+                error: function (xhr, status, error) {
+                    window.location = '/Login/Signin';
+                },
+                complete: function () {
+                  
+                }
+            });
+           
+        });
+        $('input[type="radio"]').change(function () {
+            var selectedAnswer = $(this).val();
+            selectedAnswers[vitri] = selectedAnswer;
+            selectedQuestionId[vitri] = DanhSachCauHoi[vitri].Id;
+        });
+
+
+
+        dichuyendenvitri(0);
+
+
+        function updateProgressBar() {
+            $('#progress-bar').css('width', progress + '%');
+        }
+        function dichuyendenvitri(pos) {
+            progress = 100 / soluongcauhoi * (pos + 1);
+            updateProgressBar();
+            $('#progress').html((pos + 1) + '/' + soluongcauhoi );
+            $('input[type="radio"][name="group"]').prop('checked', false);
+            $('span').parent().parent().removeClass('TurnOff');
+            $(".QuestionNumber").html("Câu " + (pos + 1) + " : ");
+            $(".Question").html(DanhSachCauHoi[pos].CauHoi);
+            $(".TraLoiA").html(DanhSachCauHoi[pos].TraLoiA);
+            $(".TraLoiB").html(DanhSachCauHoi[pos].TraLoiB);
+            if (DanhSachCauHoi[pos].TraLoiC != "") {
+                $(".TraLoiC").html(DanhSachCauHoi[pos].TraLoiC);
+            }
+            else {
+                $(".TraLoiC").parent().parent().addClass("TurnOff");
+            }
+            if (DanhSachCauHoi[pos].TraLoiD != "") {
+                $(".TraLoiD").html(DanhSachCauHoi[pos].TraLoiD);
+            }
+            else {
+                $(".TraLoiD").parent().parent().addClass("TurnOff");
+            }
+            if (DanhSachCauHoi[pos].TraLoiE != "") {
+                $(".TraLoiE").html(DanhSachCauHoi[pos].TraLoiE);
+            }
+            else {
+                $(".TraLoiE").parent().parent().addClass("TurnOff");
+            }
+
+            if (pos == 0) {
+                if (!$('#Previos').hasClass('TurnOff')) {
+                    $('#Previos').addClass("TurnOff")
+                }
+                if (!$('#Finish').hasClass('TurnOff')) {
+                    $('#Finish').addClass("TurnOff")
+                }
+            } else if (pos == soluongcauhoi - 1) {
+                if (!$('#Next').hasClass('TurnOff')) {
+                    $('#Next').addClass("TurnOff")
+                }
+                if ($('#Finish').hasClass('TurnOff')) {
+                    $('#Finish').removeClass("TurnOff")
+                }
+            }
+            else {
+                if (!$('#Finish').hasClass('TurnOff')) {
+                    $('#Finish').addClass("TurnOff")
+                }
+                if ($('#Next').hasClass('TurnOff')) {
+                    $('#Next').removeClass("TurnOff")
+                }
+                if ($('#Previos').hasClass('TurnOff')) {
+                    $('#Previos').removeClass("TurnOff")
+                }
+            }
+
+            if (selectedAnswers[pos] !== undefined) {
+                if (selectedAnswers[pos] == "A") {
+                    $('#RDOA').prop('checked', true);
+                } else if (selectedAnswers[pos] == "B") {
+                    $('#RDOB').prop('checked', true);
+                }
+                else if (selectedAnswers[pos] == "C") {
+                    $('#RDOC').prop('checked', true);
+                }
+                else if (selectedAnswers[pos] == "D") {
+                    $('#RDOD').prop('checked', true);
+                } else if (selectedAnswers[pos] == "E") {
+                    $('#RDOE').prop('checked', true);
+                }
+            }
+        }
+    });
+
+
+
+</script>
+

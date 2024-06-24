@@ -7,7 +7,7 @@ namespace testsignalr.Models.ModelView
 {
     public class EmpTracertItem
     {
-
+        public Int64 STT { get; set; }
         public string TenPhong { get; set; }
         public string TenChucVu { get; set; }
         public string HoTen { get; set; }
@@ -20,8 +20,7 @@ namespace testsignalr.Models.ModelView
         public int TinhTrang { get; set; }
         public string FirstDate { get; set; }
         public string EndDate { get; set; }
-        //public string LastStartDate { get; set; }
-        //public string LastEndDate { get; set; }
+        public string TenHang { get; set; }
         public int NumberRows { get; set; }
     }
 }

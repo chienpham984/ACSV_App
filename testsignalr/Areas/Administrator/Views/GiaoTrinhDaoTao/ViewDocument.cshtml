@@ -1,0 +1,102 @@
+﻿@model IEnumerable<NhatMinhCompany.Models.FolderDoc>
+@{
+    ViewBag.Title = "ViewDocument";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<link href="~/Content/DocStyle.css" rel="stylesheet" />
+<script src="~/Scripts/DocJs.js"></script>
+
+<div class="ViewDocument">
+    <input type="hidden" id="parentId" value="@ViewBag.folderParentId" />
+    <fieldset>
+        <legend> @ViewBag.legendName</legend>
+        <div class="folder-explorer" id="folderExplorer" oncontextmenu="return false;">
+            @foreach (var folderName in Model)
+            {
+                @Html.Partial("_FolderPartial", folderName);
+            }
+            @foreach (NhatMinhCompany.Models.FileDoc fileItem in ViewBag.listFile)
+            {
+                @Html.Partial("_FilePartial", fileItem);
+            }
+        </div>
+    </fieldset>
+
+
+
+    <div id="contextNew" style="display: none;">
+        <div>
+            <a href="#" class="CreateFolder"><i class="fas fa-folder docIcon"></i>Create New folder</a>
+        </div>
+        <div>
+            <a href="#" class="CreateFile"><i class="fas fa-file docIcon"></i>Create New file</a>
+        </div>
+        <div>
+            <a href="#" class="RefreshPage"><i class="fas fa-sync-alt docIcon"></i>Refresh</a>
+        </div>
+    </div>
+    <div id="contextFolder" style="display: none;">
+        <div>
+            <a href="#" class="DeleteFolder"><i class="fas fa-trash-alt docIcon"></i> Delete Folder</a>
+        </div>
+        <div>
+            <a href="#" class="RenameFolder"><i class="fas fa-file-signature docIcon"></i>Rename Folder</a>
+        </div>
+    </div>
+    <div id="contextFile" style="display: none; ">
+        <div>
+            <a href="#" class="DeleteFile"><i class="fas fa-trash-alt docIcon"></i>Delete</a>
+        </div>
+        <div>
+            <a href="#" class="RenameFile"><i class="fas fa-file-signature docIcon"></i>Rename</a>
+        </div>
+        <div>
+            <a href="#" class="DownloadFile"><i class="fas fa-download docIcon"></i>Download</a>
+        </div>
+    </div>
+
+    <div id="RenameFolder" style="display: none; ">
+        @using (Html.BeginForm("RenameFolder", "Document", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+        {<h3 id="renameFolderTitile"></h3>
+            <input type="text" name="FolderName" />
+            <input hidden name="FolderId" id="FolderId" />
+            <input type="submit" value="Save" />
+
+        }
+        <button onclick="closeDiv();">Close</button>
+    </div>
+    <div id="CreateNewFolder" style="display: none; ">
+        @using (Html.BeginForm("CreateNewFolder", "Document", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+        {<h3 id="renameFolderTitile"></h3>
+            <input type="text" name="FolderName" />
+            <input type="submit" value="Save" />
+            <input type="hidden" id="folderParentId" name="folderParentId" />
+        }
+        <button onclick="closeDiv();">Close</button>
+    </div>
+    <div id="CreateNewFile" style="display: none; ">
+        @using (Html.BeginForm("CreateNewFile", "Document", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+        {<h3 id="renameFolderTitile"></h3>
+            <input type="file" id="fileUpload" name="fileUpload" accept=".doc, .docx, .pdf, .ppt, .pptx, .xls, .xlsx, .mp4, .avi, .mov" class="form-control" required="required" style="border-radius:5px;">
+            <input type="submit" value="Save" />
+            <input type="hidden" id="folderParentIdofFile" name="folderParentIdofFile" />
+        }
+        <button onclick="closeDiv();">Close</button>
+    </div>
+    <img class="imgBtnPrev" src="/Content/img/prev.png" style="display:none;" />
+</div>
+
+<div class="modal viewFilemodal" id="modalViewFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog custom-modal" role="document" >
+        <div class="modal-content">
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12 col-xs-12 col-sm-12 text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@
 
     <thead>
         <tr>
+            <th>STT</th>
             <th>Tên Phòng</th>
             <th>Chức vụ</th>
             <th>Họ Tên</th>
@@ -26,11 +27,12 @@
         // Lấy danh sách từ ViewBag
         var originalList = @Html.Raw(Json.Encode(ViewBag.dsTracert));
         // Sử dụng hàm map để tạo List mới
-        
+        var stt = 1;
         const newList = Object.values(originalList.reduce((acc, curr) => {
             const key = `${curr.MaNhanVien}-${curr.MaChungChi}`;
             if (!acc[key]) {
-                acc[key] = { ...curr, FirstDate: curr.NgayCap + ' - ' + curr.NgayHetHan, EndDate: curr.EndDate, NumberRows: 0 };
+                acc[key] = { ...curr, FirstDate: curr.NgayCap + ' - ' + curr.NgayHetHan, EndDate: curr.EndDate, NumberRows: 0, STT: stt };
+                stt++;
             } else {
                 acc[key].EndDate = curr.NgayCap + ' - ' + curr.NgayHetHan;
                 acc[key].NumberRows++;
@@ -47,6 +49,7 @@
             paging: false,
             ordering: false,
             columns: [
+                { data: 'STT' },
                 { data: 'TenPhong', visible: false},
                 { data: 'TenChucVu', visible: false},
                 { data: 'HoTen'},
@@ -94,7 +97,7 @@
         var groupedRows = {};
 
         $('#example tbody tr').each(function () {
-            var key = $(this).find('td:eq(0)').text();
+            var key = $(this).find('td:eq(1)').text();
             if (!groupedRows[key]) {
                 groupedRows[key] = [];
             }
@@ -104,9 +107,9 @@
         $.each(groupedRows, function (key, rows) {
             if (rows.length > 1) {
                 var rowspan = rows.length;
-                $(rows[0]).find('td:eq(0)').attr('rowspan', rowspan);
+                $(rows[0]).find('td:eq(1)').attr('rowspan', rowspan);
                 for (var i = 1; i < rowspan; i++) {
-                    $(rows[i]).find('td:eq(0)').remove();
+                    $(rows[i]).find('td:eq(1)').remove();
                 }
             }
         });

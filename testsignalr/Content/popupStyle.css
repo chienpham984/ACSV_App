@@ -21,12 +21,49 @@
     z-index: 10000;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     width:1000px;
-    height:800px;
+    height:600px;
 }
 .popup-content {
     text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow:auto;
 }
-
+.popupCategory {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 10000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 600px;
+    height: 400px;
+}
+.popupDocument {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 10000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 1000px;
+    height: 800px;
+    overflow:auto;
+}
+.popup-content {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow: auto;
+}
 .close {
     color: #aaa;
     float: right;
@@ -50,12 +87,29 @@
 }
 
 .label {
-    text-align:left;
-    float:left;
-    color:black;
-    font-size:12px;
+    text-align: left;
+    float: left;
+    color: black;
+    font-size: 13px;
+    font-weight:200;
+    padding-left: 0px;
+    margin-left:10px;
+}
+.labelbold {
+    text-align: left;
+    float: left;
+    color: black;
+    font-size: 13px;
+    font-weight: 600;
+    padding-left: 0px;
+    margin-left: 10px;
 }
 .textDisplay {
     width:200px;
     float:right;
+}
+.StaffPicture {
+    width: 100%;
+    height: auto;
+    display: block;
 }

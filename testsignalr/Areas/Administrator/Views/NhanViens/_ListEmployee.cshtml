@@ -3,6 +3,7 @@
 
     <thead>
         <tr>
+            <th>STT</th>
             <th>Tên Phòng</th>
             <th>Chức vụ</th>
             <th>Họ Tên</th>
@@ -30,6 +31,7 @@
             paging: false,
             ordering: false,
             columns: [
+                { data: 'STT'},
                 { data: 'TenPhong', visible: false},
                 { data: 'TenChucVu', visible: false},
                 { data: 'HoTen'},
@@ -53,27 +55,27 @@
             var rowData1 = this.data();
             var cellValue = rowData1["TinhTrangLyLich"];
             if (cellValue === 1 )
-                $(this.node()).find('td:eq(6)').addClass("hetHan");
+                $(this.node()).find('td:eq(7)').addClass("hetHan");
             else if (cellValue === 2 )
-                $(this.node()).find('td:eq(6)').addClass("sapHetHan15");
+                $(this.node()).find('td:eq(7)').addClass("sapHetHan15");
             else if (cellValue === 3 )
-                $(this.node()).find('td:eq(6)').addClass("sapHetHan30");
+                $(this.node()).find('td:eq(7)').addClass("sapHetHan30");
 
             var thelv = rowData1["TinhTrangTheLamViec"];
             if (thelv === 1)
-                $(this.node()).find('td:eq(7)').addClass("hetHan");
+                $(this.node()).find('td:eq(8)').addClass("hetHan");
             else if (thelv === 2)
-                $(this.node()).find('td:eq(7)').addClass("sapHetHan15");
+                $(this.node()).find('td:eq(8)').addClass("sapHetHan15");
             else if (thelv === 3)
-                $(this.node()).find('td:eq(7)').addClass("sapHetHan30");
+                $(this.node()).find('td:eq(8)').addClass("sapHetHan30");
 
             var hd = rowData1["TinhTrangHopDong"];
             if (hd === 1)
-                $(this.node()).find('td:eq(8)').addClass("hetHan");
+                $(this.node()).find('td:eq(9)').addClass("hetHan");
             else if (hd === 2)
-                $(this.node()).find('td:eq(8)').addClass("sapHetHan15");
+                $(this.node()).find('td:eq(9)').addClass("sapHetHan15");
             else if (hd === 3)
-                $(this.node()).find('td:eq(8)').addClass("sapHetHan30");
+                $(this.node()).find('td:eq(9)').addClass("sapHetHan30");
         });
         
 

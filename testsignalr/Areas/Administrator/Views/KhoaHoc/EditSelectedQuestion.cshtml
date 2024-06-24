@@ -1,0 +1,118 @@
+﻿@model testsignalr.Models.ModelData.DeThi
+@{
+    ViewBag.Title = "EditSelectedQuestion";
+    Layout = "~/Areas/Administrator/Views/Shared/Layout.cshtml";
+}
+<link href="~/Content/examstyle.css" rel="stylesheet" />
+@using (Html.BeginForm("uploadPictureQuestion", "KhoaHoc", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        <input type="hidden" id="fileId" name="fileId" value="@Model.Id" />
+        <input type="file" id="fileUpload" name="fileUpload" required accept="image/*" />
+        <input type="submit" value="Upload file" class="btn btn-primary" onclick="return kiemtratontaifile();" />
+    </div>
+}
+@using (Html.BeginForm("SaveSelectedQuestion", "KhoaHoc", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+{
+    <input type="hidden" id="ExamId" name="ExamId" value="@Model.Id" />
+    <input type="hidden" id="CourseId" name="CourseId" value="@ViewBag.CourseId"/>
+    <table class="col-xl-6 col-md-8 col-sm-10 danhsachdethi" style="width:100%;">
+        <tr>
+            <td>
+                <div>
+                    <div class="cauhoi">
+                        <textarea type="text" id="cauhoi_" name="cauhoi_" placeholder="Nhập câu hỏi..." style="border:none;width:100%;background-color:white; height:auto; overflow:hidden; display:block; resize: none; ">@Model.CauHoi.Trim()
+                        </textarea>
+                    </div>
+                    @if (Model.DuongDan != null && Model.DuongDan.Trim() != "")
+                    {
+                        <img src="@Model.DuongDan" alt="Picture" class="alignCenter">
+                    }
+
+                    <div class="dapan">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="A" name="@Model.Id">
+                            <label class="custom-control-label" for="A">A</label>
+                            <textarea type="text" id="traloia" name="traloia" placeholder="Nhập câu trả lời..." style=" border:none;width:100%;background-color:white; height:auto; overflow:hidden; display:block; resize: none; "> @(Model.TraLoiA == null ? "" : Model.TraLoiA.Trim())
+                                </textarea>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="B" name="@Model.Id">
+                            <label class="custom-control-label" for="BB">B</label>
+                            <textarea type="text" id="traloib" name="traloib" placeholder="Nhập câu trả lời..." style="border: none; width: 100%; background-color: white; height: auto; overflow: hidden; display: block; resize: none; ">@(Model.TraLoiB==null?"": Model.TraLoiB.Trim())
+                                    </textarea>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="C" name="@Model.Id">
+                            <label class="custom-control-label" for="C">C</label>
+                            <textarea type="text" id="traloic" name="traloic" placeholder="Nhập câu trả lời..." style="border:none;width:100%;background-color:white; height:auto; overflow:hidden; display:block; resize: none; "> @(Model.TraLoiC==null?"": Model.TraLoiC.Trim())
+                                        </textarea>
+                        </div>
+
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="D" name="@Model.Id">
+                            <label class="custom-control-label" for="D">D</label>
+                            <textarea type="text" id="traloid" name="traloid" placeholder="Nhập câu trả lời..." style="border:none;width:100%;background-color:white; height:auto; overflow:hidden; display:block; resize: none; ">@(Model.TraLoiD==null?"": Model.TraLoiD.Trim())
+                                            </textarea>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="E" name="@Model.Id">
+                            <label class="custom-control-label" for="E">E</label>
+                            <textarea type="text" id="traloid" name="traloie" placeholder="Nhập câu trả lời..." style="border:none;width:100%;background-color:white; height:auto; overflow:hidden; display:block; resize: none; ">@(Model.TraLoiE==null?"": Model.TraLoiE.Trim())
+                                            </textarea>
+                        </div>
+                    </div>
+                    <div class="custom-control custom-radio">
+                       Mức độ
+                        @Html.DropDownList("ddlMucDo", new SelectList(ViewBag.dsMucDo, "Id", "TenMucDo", Model.IdMucDo))
+                    </div>
+                  
+                    <div class="custom-control custom-radio">
+                        Đáp án đúng
+                        @Html.DropDownList("ddlDapAnDung", new SelectList(ViewBag.mylist, "Text", "Text", Model.DapAn.Trim()))
+                    </div>
+                   
+                </div>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Lưu thông tin" class="btn btn-primary" />
+}
+@Html.ActionLink("Quay lại", "EditListQuestion", "KhoaHoc", new { CourseId = ViewBag.CourseId }, new { @class = "btn btn-primary" })
+
+<script type="text/javascript">
+    $('#cauhoi_').on('input', function () {
+        this.style.height = 'auto';
+
+        this.style.height =
+            (this.scrollHeight) + 'px';
+    });
+    $('#traloia').on('input', function () {
+        this.style.height = 'auto';
+
+        this.style.height =
+            (this.scrollHeight) + 'px';
+    });
+    $('#traloib').on('input', function () {
+        this.style.height = 'auto';
+
+        this.style.height =
+            (this.scrollHeight) + 'px';
+    });
+    $('#traloic').on('input', function () {
+        this.style.height = 'auto';
+
+        this.style.height =
+            (this.scrollHeight) + 'px';
+    });
+    $('#traloid').on('input', function () {
+        this.style.height = 'auto';
+
+        this.style.height =
+            (this.scrollHeight) + 'px';
+    });
+</script>
+

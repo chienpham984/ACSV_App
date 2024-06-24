@@ -1,0 +1,51 @@
+﻿@model List<testsignalr.Models.ModelView.Exam>
+@{ int i = 0;
+}
+@Html.ActionLink("Thay đổi câu hỏi", "EditListQuestion", "KhoaHoc", new { CourseId = ViewBag.CourserId }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Preview", "ViewListQuestion", "KhoaHoc", new { CourseId = ViewBag.CourserId }, new { @class = "btn btn-primary" })
+<table class="table table-bordered" style="width:100%;">
+    <thead>
+        <tr style="background-color:lightcyan;">
+            <th>
+                No.
+            </th>
+            <th>
+                Câu hỏi
+            </th>
+            <th>
+                Có đính kèm ảnh
+            </th>
+            <th>
+                Mức độ
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        i++;
+
+<tr>
+    <td>
+        <p>
+            <a href="#">
+                <span class="glyphicon glyphicon-grain"></span>
+            </a>
+            @i.ToString()
+        </p>
+    </td>
+    <td>
+        @item.CauHoi
+    </td>
+    <td>
+        @if (item.DuongDan != null && item.DuongDan.Trim() != "")
+        {
+            <img src="~/Content/img/checked.png" />
+        }
+    </td>
+    <td>
+        @item.TenMucDo
+    </td>
+</tr>
+    }
+</table>

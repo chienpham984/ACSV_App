@@ -6,6 +6,8 @@
 .mainwrapper {
     width: 100% !important;
     padding: 0px !important;
+    position:absolute;
+    top:0px !important;
 }
 
 .menuIcon {
@@ -134,8 +136,9 @@
 .main-menu li a:hover {
     display: block;
     height: 25px;
-    width: 200px;
+    width: 250px;
     border-radius: 5px;
+    text-decoration:none;
     /*    border: solid 1px #2677b6;*/
     background-image: url('/Content/img/menuItem.jpg');
     background-size: cover;
@@ -316,4 +319,73 @@
     .menubar {
         display: block !important;
     }
+}
+/*VIETANH CSS*/
+
+#btnToggle {
+    position: absolute;
+    right: 5px;
+    border: transparent;
+    background-color: transparent;
+    font-size: 20px;
+    padding: 0px;
+}
+
+    #btnToggle i {
+        font-size: 28px !important;
+        background-color: transparent;
+        color: #2677b6 !important;
+        padding: 0px;
+    }
+
+/*.input-group {
+    margin-bottom: 0px !important;
+}
+
+.headerPage {
+    margin-left: 0 auto;
+    border: solid 1px #2677b6;
+}*/
+
+th {
+    background-color: #2677B6;
+    color: white;
+}
+
+th, td {
+    white-space: nowrap;
+}
+
+div.dt-container {
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: scroll;
+}
+
+table.dataTable tr.dtrg-group th {
+    background-color: #D0D0D0 !important;
+    text-align: left;
+    color: #333333;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #2677b6 !important;
+    border-color: #2677b6 !important;
+    /*box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db!important;*/
+    -webkit-transition: all 150ms ease-in-out !important;
+    transition: all 150ms ease-in-out !important;
+}
+
+    .btn-primary:hover {
+        /*filter: brightness(130%);*/
+        box-shadow: 0 0 2px 0 #3498db inset, 0 0 2px 2px #3498db;
+    }
+.close {
+    color: red !important;
+    opacity: 0.9 !important;
+}
+.popup-header {
+    background-color: #2677b6 !important;
 }
